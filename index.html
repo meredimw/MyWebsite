@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website Title</title>
 </head>
-<body>
-    <h1>Welcome to My Website</h1>
-    <h2>About Me</h2>
-    <p>This is a paragraph of text about my website.</p>
-    <p>Photos, Kayak, Birdwatching, Songs, Ms Games, Short Stories, Philsophy, Dead Air.</p>
-<a href="https://www.google.com">Here is a Link</a>
 
 
 
+****CENTER FRAME***
+
+<div class="main-content">
+  <h1>Main Page Content</h1>
+  <p>This is where your main page content goes.</p>
 
 <iframe 
   width="560" 
@@ -25,17 +24,69 @@
   allowfullscreen>
 </iframe>
 
-    <p> Technical Infor </p>
-<iframe 
-  width="560" 
-  height="315" 
-  src="https://www.youtube.com/embed/p1QU3kLFPdg" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+<body>
+    <h1>Welcome to My Website</h1>
+    <h2>About Me</h2>
+    <p>This is a paragraph of text about my website.</p>
+    <p>Photos, Kayak, Birdwatching, Songs, Ms Games, Short Stories, Philsophy, Dead Air.</p>
+<a href="https://www.google.com">Here is a Link</a>
+
+
+
+</div>
+
+
+****SIDEBAR***
+
+
+<!-- Always-visible Sidebar -->
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    color: #f1f1f1;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .sidebar a {
+    display: block;
+    padding: 12px 16px;
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .sidebar a:hover {
+    background-color: #575757;
+  }
+
+  /* Push main content to the right */
+  .main-content {
+    margin-left: 250px;
+    padding: 16px;
+  }
+</style>
+
+****THINGS IN THE SIDEBAR***
+
+<div class="sidebar">
+  <a href="#">MurdenCove.com</a>
+  <a href="#">Test</a>
+
+</div>
+
+
+
 </body>
 
 </html>
-
