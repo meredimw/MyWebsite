@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Murden Cove Kayak Log</title>
+  <style>
+    :root { --max: 980px; --gap: 1rem; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif; background:#f7f7f8; color:#0f172a; }
+    header { padding: 2rem 1rem 1rem; text-align: center; }
+    header h1 { margin: 0 0 .25rem; font-size: 1.8rem; }
+    header p { margin: 0; color:#475569; }
+    main { max-width: var(--max); margin: 0 auto; padding: 1rem; }
+
+    /* Day card */
+    .day { background: white; border-radius: 14px; padding: 1rem; margin: 0 auto 1rem; box-shadow: 0 6px 18px rgba(2,6,23,.06); }
+    .day h2 { margin: 0 0 .25rem; font-size: 1.2rem; }
+    .meta { font-size: .9rem; color:#64748b; margin-bottom: .75rem; }
+
+    /* Image grid */
+    .grid { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+    @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+    figure { margin: 0; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fafafa; }
+    img { display: block; width: 100%; height: auto; }
+    figcaption { padding: .6rem .8rem; font-size: .9rem; color:#475569; background: #fff; border-top: 1px solid #eef2f7; }
+
+    /* Footer/help */
+    details { margin-top: .75rem; }
+    summary { cursor: pointer; color:#2563eb; }
+    code { background:#f1f5f9; padding: .15rem .35rem; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Murden Cove Kayak Log</h1>
+    <p>Daily snapshots: the cove view + my GPS path</p>
+  </header>
+
+  <main>
+
+    <!-- ===== Day entry template (copy & paste to add more) =====
+    <article class="day" id="YYYY-MM-DD">
+      <h2>YYYY-MM-DD</h2>
+      <div class="meta">Weather/notes: …</div>
+      <div class="grid">
+        <figure>
+          <img src="(cove image filename)" alt="Murden Cove on YYYY-MM-DD" loading="lazy" />
+          <figcaption>Cove view</figcaption>
+        </figure>
+        <figure>
+          <img src="(path image filename)" alt="Kayak path on YYYY-MM-DD" loading="lazy" />
+          <figcaption>GPS path</figcaption>
+        </figure>
+      </div>
+    </article>
+    ===== End template ===== -->
+
+    <!-- First day (your provided images) -->
+    <article class="day" id="2025-10-24">
+      <h2>2025-10-24</h2>
+      <div class="meta">Notes: first tracked paddle for Season 6-5.</div>
+      <div class="grid">
+        <figure>
+          <img src="Screenshot 2025-10-24 230609.png" alt="Murden Cove on 2025-10-24" />
+          <figcaption>Cove view</figcaption>
+        </figure>
+        <figure>
+          <img src="Screenshot 2025-10-24 230717.png" alt="Kayak path on 2025-10-24" />
+          <figcaption>GPS path</figcaption>
+        </figure>
+      </div>
+      <details>
+        <summary>How to add another day</summary>
+        <div>
+          <p>Copy the template above, paste it under this entry, and change the date + filenames. Keep the image files in the same folder as this HTML file. For example:</p>
+          <pre><code>&lt;article class="day" id="2025-10-25"&gt;
+  &lt;h2&gt;2025-10-25&lt;/h2&gt;
+  &lt;div class="meta"&gt;Notes: breezy afternoon paddle.&lt;/div&gt;
+  &lt;div class="grid"&gt;
+    &lt;figure&gt;
+      &lt;img src="Screenshot 2025-10-25 120101.png" alt="Murden Cove on 2025-10-25" loading="lazy" /&gt;
+      &lt;figcaption&gt;Cove view&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure&gt;
+      &lt;img src="Screenshot 2025-10-25 120202.png" alt="Kayak path on 2025-10-25" loading="lazy" /&gt;
+      &lt;figcaption&gt;GPS path&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+        </div>
+      </details>
+    </article>
+
+  </main>
+</body>
+</html>
