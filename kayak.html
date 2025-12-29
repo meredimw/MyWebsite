@@ -14,7 +14,7 @@
     /* Sidebar */
     .sidebar {
       position: fixed;
-      inset: 0 auto 0 0;        /* top:0; right:auto; bottom:0; left:0 */
+      inset: 0 auto 0 0;
       width: var(--sidebar);
       background: #111;
       color: #f1f1f1;
@@ -32,16 +32,13 @@
     }
     .sidebar a:hover { background: #575757; }
 
-    /* Content offset (prevents overlap) */
     .content { margin-left: var(--sidebar); }
 
-    /* Header & main */
     header { padding: 2rem 1rem 1rem; text-align: center; }
     header h1 { margin: 0 0 .25rem; font-size: 1.8rem; }
     header p { margin: 0; color:#475569; }
     main { max-width: var(--max); margin: 0 auto; padding: 1rem; }
 
-    /* Card */
     .day { background: white; border-radius: 14px; padding: 1rem; margin: 0 auto 1rem; box-shadow: 0 6px 18px rgba(2,6,23,.06); text-align: center; }
     .day h2 { margin: 0 0 .5rem; font-size: 1.2rem; }
     .meta { font-size: .95rem; margin-bottom: 1rem; color:#475569; }
@@ -51,13 +48,8 @@
     a.route-link { display:inline-block; margin-top:.75rem; font-size:.95rem; color:#2563eb; text-decoration:none; }
     a.route-link:hover { text-decoration:underline; }
 
-    /* Responsive: stack sidebar on small screens */
     @media (max-width: 720px) {
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-      }
+      .sidebar { position: static; width: 100%; height: auto; }
       .content { margin-left: 0; }
       header { padding-top: 1rem; }
     }
@@ -65,36 +57,44 @@
 </head>
 <body>
 
-  <!-- Always-visible Sidebar -->
   <nav class="sidebar">
     <a href="index.html">MurdenCove.com</a>
-    <!-- <a href="deadair.html">Dead Air</a> -->
     <a href="kayak.html">Paddle Log</a>
   </nav>
 
-  <!-- Page Content -->
   <div class="content">
     <header>
       <h1>Murden Cove Kayak Log</h1>
-      <!-- <p>Daily snapshot of my kayak adventures</p> -->
     </header>
-<div class="main-content">
 
-    <main>
-      <article class="day" id="2025-10-11">
-        <h2>10/11/25 Paddle</h2>
-        <!-- <div class="meta">Beautiful paddle today — calm water and great visibility.</div> -->
+    <div class="main-content">
+      <main>
 
-        <figure>
-          <img src="IMG_6949.jpg" alt="10/11/25 Paddle — Cove Photo">
-        </figure>
+        <!-- NEW 12/27/25 ENTRY -->
+        <article class="day" id="2025-12-27">
+          <h2>12/27/25 Paddle</h2>
 
-        <a class="route-link" href="Screenshot%202025-10-24%20230717.png" target="_blank" rel="noopener">Route</a>
-      </article>
-    </main>
+          <figure>
+            <img src="1227Pic.jpg" alt="12/27/25 Paddle — Cove Photo">
+          </figure>
+
+          <a class="route-link" href="1217Map.png" target="_blank" rel="noopener">Route</a>
+        </article>
+
+        <!-- Existing 10/11/25 Entry -->
+        <article class="day" id="2025-10-11">
+          <h2>10/11/25 Paddle</h2>
+
+          <figure>
+            <img src="IMG_6949.jpg" alt="10/11/25 Paddle — Cove Photo">
+          </figure>
+
+          <a class="route-link" href="Screenshot%202025-10-24%20230717.png" target="_blank" rel="noopener">Route</a>
+        </article>
+
+      </main>
+    </div>
+
   </div>
-
 </body>
 </html>
-
-
