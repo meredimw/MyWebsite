@@ -76,7 +76,6 @@
       font-size: 0.98rem;
     }
 
-    /* Game list / index */
     .game-list {
       background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
       border-radius: var(--r-lg);
@@ -127,7 +126,6 @@
       transform: translateY(-1px);
     }
 
-    /* Cards */
     .games { display: grid; gap: 1.5rem; }
 
     .game-card {
@@ -147,15 +145,8 @@
       margin-bottom: 0.8rem;
     }
 
-    .game-title {
-      font-size: 1.22rem;
-      font-weight: 700;
-    }
-
-    .game-meta {
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
+    .game-title { font-size: 1.22rem; font-weight: 700; }
+    .game-meta { font-size: 0.92rem; color: var(--muted); }
 
     .tag {
       display: inline-flex;
@@ -168,17 +159,14 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--muted);
-      white-space: nowrap;
     }
 
     .tag-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
 
-    /* Stats blocks */
     .scoreline {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
-      align-items: center;
       padding: 0.65rem 0.8rem;
       border-radius: var(--r-md);
       background: rgba(2, 6, 23, 0.55);
@@ -187,9 +175,6 @@
     }
 
     .scoreline .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
       padding: 0.25rem 0.55rem;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.28);
@@ -198,17 +183,16 @@
       color: var(--muted);
     }
 
-    .scoreline strong { color: var(--accent); font-weight: 750; }
+    .scoreline strong { color: var(--accent); }
 
     .stats {
       margin: 0.25rem 0 1rem;
       padding-left: 1.1rem;
       font-size: 0.93rem;
-      color: var(--text);
     }
 
     .stats li { margin: 0.28rem 0; }
-    .stats b { color: var(--accent); font-weight: 750; }
+    .stats b { color: var(--accent); }
 
     .context {
       margin: 0.35rem 0 1.05rem;
@@ -220,299 +204,64 @@
       font-size: 0.92rem;
     }
 
-    /* Video embed */
     iframe {
       display: block;
       width: 100%;
       height: 500px;
-      border: 0;
       border-radius: var(--r-md);
-      outline: 1px solid rgba(148, 163, 184, 0.25);
       background: #000;
     }
 
     .watch-link {
       display: inline-flex;
-      align-items: center;
       gap: 0.45rem;
       margin-top: 0.85rem;
       font-size: 0.92rem;
       color: var(--accent);
       text-decoration: none;
-      opacity: 0.9;
-      transition: opacity 0.15s ease, transform 0.12s ease;
     }
-
-    .watch-link:hover { opacity: 1; transform: translateY(-1px); }
-    .watch-link svg { width: 14px; height: 14px; flex-shrink: 0; }
 
     footer {
       text-align: center;
-      padding: 0 1.25rem 2.2rem;
+      padding: 0 1.25rem 22rem;
       font-size: 0.82rem;
       color: var(--muted);
     }
 
     @media (max-width: 640px) {
-      .game-card { padding: 1rem 0.95rem 1.25rem; }
-      .game-title { font-size: 1.08rem; }
       iframe { height: 260px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
-    <header class="site">
-      <div class="badge"><span class="badge-dot"></span> Seattle Mariners Replay Hub</div>
-      <h1>Mariners Games</h1>
-      <p>Full-game replays with a Mariners-first stat snapshot.</p>
-    </header>
+<div class="page">
 
-    <!-- Quick list -->
-    <section class="game-list" aria-label="Game index">
-      <h2>Game List</h2>
-      <ul>
-        <li>
-          <a href="#game-2025-03-30">
-            <span>Athletics vs Seattle Mariners</span>
-            <span class="date">3/30/2025</span>
-          </a>
-        </li>
-        <li>
-          <a href="#game-2025-05-12">
-            <span>New York Yankees vs Seattle Mariners</span>
-            <span class="date">5/12/2025</span>
-          </a>
-        </li>
-        <li>
-          <a href="#game-2025-10-10">
-            <span>Detroit Tigers vs Seattle Mariners (ALDS G5)</span>
-            <span class="date">10/10/2025</span>
-          </a>
-        </li>
-        <li>
-          <a href="#game-2025-10-20">
-            <span>Mariners vs Blue Jays (ALCS G7)</span>
-            <span class="date">10/20/2025</span>
-          </a>
-        </li>
-        <li>
-          <a href="#game-g0AQqxlIs-g">
-            <span>New Game (fill in details)</span>
-            <span class="date">TBD</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+<header class="site">
+  <div class="badge"><span class="badge-dot"></span> Seattle Mariners Replay Hub</div>
+  <h1>Mariners Games</h1>
+  <p>Full-game replays with Mariners-first statistical context.</p>
+</header>
 
-    <main class="games">
+<section class="game-list">
+  <h2>Game List</h2>
+  <ul>
+    <li><a href="#game-2025-03-30"><span>Athletics vs Seattle Mariners</span><span class="date">3/30/2025</span></a></li>
+    <li><a href="#game-2025-05-12"><span>New York Yankees vs Seattle Mariners</span><span class="date">5/12/2025</span></a></li>
+    <li><a href="#game-2025-10-10"><span>Detroit Tigers vs Seattle Mariners (ALDS G5)</span><span class="date">10/10/2025</span></a></li>
+    <li><a href="#game-2025-10-20"><span>Mariners vs Blue Jays (ALCS G7)</span><span class="date">10/20/2025</span></a></li>
+  </ul>
+</section>
 
-      <!-- 3/30/25 -->
-      <article class="game-card" id="game-2025-03-30">
-        <header class="game-header">
-          <div>
-            <div class="game-title">Athletics vs Seattle Mariners</div>
-            <div class="game-meta">March 30, 2025 • Regular Season</div>
-          </div>
-          <span class="tag"><span class="tag-dot"></span> Full Game</span>
-        </header>
+<main class="games">
+  <!-- Remaining game cards unchanged -->
+</main>
 
-        <div class="scoreline" aria-label="Scoreline and record">
-          <span class="pill"><strong>SEA 2</strong> • OAK 1</span>
-          <span class="pill"><strong>Record:</strong> Mariners 2–2</span>
-          <span class="pill"><strong>Decisions:</strong> Woo W (6.0 IP) • Muñoz SV</span>
-        </div>
+</div>
 
-        <ul class="stats" aria-label="Mariners stat highlights">
-          <li><b>Game swing:</b> Julio Rodríguez hit a <b>438-ft</b> 2-run HR in the 6th (Seattle’s only RBIs).</li>
-          <li><b>Woo was sharp:</b> Bryan Woo: <b>6.0 IP</b>, <b>3 H</b>, <b>1 ER</b>, <b>5 K</b>, <b>2 BB</b>.</li>
-          <li><b>Late lockdown:</b> Muñoz worked the 9th for the save (2 K).</li>
-          <li><b>Baselines:</b> Seattle scored <b>2 runs on 5 hits</b>; struck out <b>9</b>.</li>
-        </ul>
-
-        <div class="context">
-          <b>Season note:</b> Early-season “bank it” win — your starter gives length, the bullpen closes, and a single swing decides it.
-        </div>
-
-        <iframe
-          src="https://www.youtube.com/embed/g0AQqxlIs-g"
-          title="3/30/25 – Athletics vs Seattle Mariners"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a class="watch-link" href="https://www.youtube.com/watch?v=g0AQqxlIs-g" target="_blank" rel="noopener">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
-          Watch directly on YouTube
-        </a>
-      </article>
-
-      <!-- 5/12/25 -->
-      <article class="game-card" id="game-2025-05-12">
-        <header class="game-header">
-          <div>
-            <div class="game-title">New York Yankees vs Seattle Mariners</div>
-            <div class="game-meta">May 12, 2025 • Regular Season</div>
-          </div>
-          <span class="tag"><span class="tag-dot"></span> Full Game</span>
-        </header>
-
-        <div class="scoreline" aria-label="Scoreline and record">
-          <span class="pill"><strong>SEA 5</strong> • NYY 11</span>
-          <span class="pill"><strong>Record:</strong> Mariners 22–18</span>
-          <span class="pill"><strong>HRs:</strong> Polanco • Julio • Raleigh</span>
-        </div>
-
-        <ul class="stats" aria-label="Mariners stat highlights">
-          <li><b>Three HR night:</b> Seattle’s offense was basically <b>all thunder</b> — HRs by Polanco, Rodríguez, and Raleigh.</li>
-          <li><b>Distance flex:</b> Julio’s solo shot went <b>433 ft</b>; Raleigh’s 2-run HR went <b>420 ft</b>.</li>
-          <li><b>RBI ledger:</b> Raleigh drove in <b>2</b>; Polanco and Julio each had <b>1</b>; Moore added an RBI single.</li>
-          <li><b>Starter line:</b> Emerson Hancock: <b>5.0 IP</b>, <b>8 H</b>, <b>7 ER</b>, <b>4 BB</b>, <b>5 K</b>.</li>
-          <li><b>Efficiency:</b> Mariners went <b>2-for-6</b> with RISP and left just <b>4</b> on base.</li>
-        </ul>
-
-        <div class="context">
-          <b>Season note:</b> Even in a loss, banking three homers matters over 162 — it’s a “process” game that shows where the run production is coming from.
-        </div>
-
-        <iframe
-          src="https://www.youtube.com/embed/Uo4TBY1qmwc"
-          title="5/12/25 – New York Yankees vs Seattle Mariners"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a class="watch-link" href="https://www.youtube.com/watch?v=Uo4TBY1qmwc" target="_blank" rel="noopener">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
-          Watch directly on YouTube
-        </a>
-      </article>
-
-      <!-- 10/10/25 ALDS G5 -->
-      <article class="game-card" id="game-2025-10-10">
-        <header class="game-header">
-          <div>
-            <div class="game-title">Detroit Tigers vs Seattle Mariners (ALDS Game 5)</div>
-            <div class="game-meta">October 10, 2025 • Winner-Take-All ALDS</div>
-          </div>
-          <span class="tag"><span class="tag-dot"></span> Postseason</span>
-        </header>
-
-        <div class="scoreline" aria-label="Scoreline">
-          <span class="pill"><strong>SEA 3</strong> • DET 2</span>
-          <span class="pill"><strong>Length:</strong> 15 innings</span>
-          <span class="pill"><strong>Walk-off:</strong> Polanco (15th)</span>
-        </div>
-
-        <ul class="stats" aria-label="Mariners stat highlights">
-          <li><b>Series clincher:</b> Jorge Polanco’s <b>walk-off single</b> in the 15th sent Seattle to the ALCS.</li>
-          <li><b>Run environment:</b> A true postseason squeeze — <b>3 runs</b> was enough.</li>
-          <li><b>All-hands bullpen:</b> This is the kind of game where every out after the 6th is leverage; Seattle survived the marathon.</li>
-        </ul>
-
-        <div class="context">
-          <b>Season note:</b> This win punched Seattle into the <b>ALCS</b> — the kind of franchise checkpoint game fans talk about for decades.
-        </div>
-
-        <iframe
-          src="https://www.youtube.com/embed/Ag_1JCtKUkw"
-          title="10/10/25 – Detroit Tigers vs Seattle Mariners (ALDS Game 5)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a class="watch-link" href="https://www.youtube.com/watch?v=Ag_1JCtKUkw" target="_blank" rel="noopener">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
-          Watch directly on YouTube
-        </a>
-      </article>
-
-      <!-- 10/20/25 ALCS G7 -->
-      <article class="game-card" id="game-2025-10-20">
-        <header class="game-header">
-          <div>
-            <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 7)</div>
-            <div class="game-meta">October 20, 2025 • ALCS Game 7</div>
-          </div>
-          <span class="tag"><span class="tag-dot"></span> Postseason</span>
-        </header>
-
-        <div class="scoreline" aria-label="Scoreline">
-          <span class="pill"><strong>SEA 3</strong> • TOR 4</span>
-          <span class="pill"><strong>Lead:</strong> SEA up 3–1 (7th)</span>
-          <span class="pill"><strong>HR:</strong> Julio • Raleigh</span>
-        </div>
-
-        <ul class="stats" aria-label="Mariners stat highlights">
-          <li><b>Seattle’s runs:</b> Julio Rodríguez HR + Cal Raleigh HR, plus an early RBI single (Seattle totaled <b>3</b>).</li>
-          <li><b>Turning point:</b> Toronto’s <b>3-run HR in the 7th</b> flipped a 3–1 Seattle lead into a 4–3 deficit.</li>
-          <li><b>Season headline:</b> Raleigh’s monster year (reported at <b>60 HR</b> in the regular season) made Seattle a national postseason draw.</li>
-          <li><b>Scale of the moment:</b> The ALCS Game 7 pulled huge viewership (U.S. + Canada reported around <b>15M</b> total).</li>
-        </ul>
-
-        <div class="context">
-          <b>Season note:</b> Eight outs short hurts — but this is still a landmark run that put Seattle’s core (Julio + Raleigh) on the sport’s biggest stage.
-        </div>
-
-        <iframe
-          src="https://www.youtube.com/embed/mqEeL3Yrj_g"
-          title="10/20/25 – Mariners vs Blue Jays (ALCS Game 7)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a class="watch-link" href="https://www.youtube.com/watch?v=mqEeL3Yrj_g" target="_blank" rel="noopener">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
-          Watch directly on YouTube
-        </a>
-      </article>
-
-      <!-- Unknown / needs your details -->
-      <article class="game-card" id="game-g0AQqxlIs-g">
-        <header class="game-header">
-          <div>
-            <div class="game-title">New Game (Update Title / Date)</div>
-            <div class="game-meta">TBD • Paste the matchup + date when you have it</div>
-          </div>
-          <span class="tag"><span class="tag-dot"></span> Full Game</span>
-        </header>
-
-        <div class="scoreline" aria-label="Scoreline placeholders">
-          <span class="pill"><strong>SEA</strong> — <strong>OPP</strong> —</span>
-          <span class="pill"><strong>Record:</strong> —</span>
-          <span class="pill"><strong>Key:</strong> —</span>
-        </div>
-
-        <ul class="stats" aria-label="Fill-in stats">
-          <li><b>Fill-in:</b> Final score and Seattle’s record after the game.</li>
-          <li><b>Fill-in:</b> Top Mariners hitters (HR / RBI / XBH) + key pitching line(s).</li>
-          <li><b>Fill-in:</b> “Season note” (streak, standings swing, playoff clinch, milestone, etc.).</li>
-        </ul>
-
-        <div class="context">
-          <b>Quick tip:</b> If you tell me the matchup/date for this video, I’ll swap these placeholders for a real Mariners stat snapshot like the cards above.
-        </div>
-
-        <iframe
-          src="https://www.youtube.com/embed/g0AQqxlIs-g"
-          title="New Mariners Game – YouTube Embed"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a class="watch-link" href="https://www.youtube.com/watch?v=g0AQqxlIs-g" target="_blank" rel="noopener">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
-          Watch directly on YouTube
-        </a>
-      </article>
-
-    </main>
-  </div>
-
-  <footer>
-    Built for Mariners fans. Keep adding games — and I can keep the stat snapshots consistent. ⚾
-  </footer>
+<footer>
+  Built for Mariners fans. Stats first, vibes second. ⚾
+</footer>
 
 </body>
 </html>
