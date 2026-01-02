@@ -6,65 +6,303 @@
 
   <title>Murden Cove Kayak Log</title>
   <style>
-    :root { --max: 980px; --gap: 1rem; --sidebar: 250px; }
+    :root {
+      --max: 980px;
+      --gap: 1rem;
+      --sidebar: 250px;
+
+      --bg-top: #e0f2fe;          /* light sky */
+      --bg-bottom: #0f172a;       /* deep water */
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0ea5e9;          /* light blue */
+      --accent-soft: rgba(14,165,233,0.12);
+      --accent-strong: #0f766e;   /* teal */
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius-lg: 18px;
+      --radius-md: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
 
     /* Base */
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif; background:#f7f7f8; color:#0f172a; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(to bottom, var(--bg-top), #e2f3ff 30%, #c7e0ff 55%, #9ca3af 70%, var(--bg-bottom) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
 
     /* Sidebar */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
       width: var(--sidebar);
-      background: #111;
-      color: #f1f1f1;
+      background: rgba(15, 23, 42, 0.98);
+      color: #f9fafb;
       overflow-y: auto;
-      padding-top: 20px;
-      box-shadow: 2px 0 12px rgba(0,0,0,.15);
+      padding: 1.5rem 1rem;
+      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
       z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-badge {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+    }
+
+    .sidebar-nav {
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding-top: 0.75rem;
+    }
+
     .sidebar a {
       display: block;
-      padding: 12px 16px;
-      color: #f1f1f1;
+      padding: 10px 12px;
+      color: #e5e7eb;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 0.98rem;
+      border-radius: 10px;
+      transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
     }
-    .sidebar a:hover { background: #575757; }
 
-    .content { margin-left: var(--sidebar); }
+    .sidebar a:hover {
+      background: rgba(148, 163, 184, 0.18);
+      transform: translateX(1px);
+      color: #f9fafb;
+    }
 
-    header { padding: 2rem 1rem 1rem; text-align: center; }
-    header h1 { margin: 0 0 .25rem; font-size: 1.8rem; }
-    header p { margin: 0; color:#475569; }
-    main { max-width: var(--max); margin: 0 auto; padding: 1rem; }
+    .sidebar a.current {
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(74, 222, 128, 0.35);
+    }
 
-    .day { background: white; border-radius: 14px; padding: 1rem; margin: 0 auto 1rem; box-shadow: 0 6px 18px rgba(2,6,23,.06); text-align: center; }
-    .day h2 { margin: 0 0 .5rem; font-size: 1.2rem; }
-    .meta { font-size: .95rem; margin-bottom: 1rem; color:#475569; }
+    /* Content offset */
+    .content {
+      margin-left: var(--sidebar);
+    }
 
-    figure { margin: 0; }
-    img { display: block; max-width: 90%; height: auto; margin: 0 auto; border-radius: 12px; }
-    a.route-link { display:inline-block; margin-top:.75rem; font-size:.95rem; color:#2563eb; text-decoration:none; }
-    a.route-link:hover { text-decoration:underline; }
+    /* Header & main */
+    header {
+      padding: 2rem 1.25rem 0.75rem;
+      text-align: center;
+    }
 
+    header h1 {
+      margin: 0 0 .25rem;
+      font-size: clamp(1.9rem, 3vw + 1rem, 2.4rem);
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.25rem 2.5rem;
+    }
+
+    /* Day cards */
+    .day {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.25rem 1.4rem;
+      margin: 0 auto 1.25rem;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .day h2 {
+      margin: 0 0 .35rem;
+      font-size: 1.2rem;
+    }
+
+    .meta {
+      font-size: .9rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .location-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .location-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+    }
+
+    figure {
+      margin: 0.75rem 0 0.5rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22);
+    }
+
+    .route-actions {
+      margin-top: 0.9rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    a.route-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      font-size: .9rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-strong), #0ea5e9);
+      border-radius: 999px;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0 10px 25px rgba(14, 148, 136, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+      white-space: nowrap;
+    }
+
+    a.route-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15, 118, 110, 0.45);
+      filter: brightness(1.03);
+    }
+
+    .route-link-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .conditions {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
     @media (max-width: 720px) {
-      .sidebar { position: static; width: 100%; height: auto; }
-      .content { margin-left: 0; }
-      header { padding-top: 1rem; }
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-radius: 0 0 16px 16px;
+      }
+
+      .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .sidebar-subtitle {
+        display: none;
+      }
+
+      .sidebar-nav {
+        border-top: none;
+        padding-top: 0;
+        display: flex;
+        gap: 0.35rem;
+      }
+
+      .sidebar a {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      header {
+        padding-top: 1.3rem;
+      }
+
+      main {
+        padding-bottom: 2rem;
+      }
+
+      .day {
+        padding: 1rem 0.9rem 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar -->
   <nav class="sidebar">
-    <a href="index.html">MurdenCove.com</a>
-    <a href="kayak.html">Paddle Log</a>
+    <div class="sidebar-content">
+      <div class="sidebar-title">
+        <span class="sidebar-badge"></span>
+        Murden Cove
+      </div>
+      <div class="sidebar-subtitle">Kayaking off Bainbridge Island</div>
+    </div>
+    <div class="sidebar-nav">
+      <a href="index.html">MurdenCove.com</a>
+      <a href="kayak.html" class="current">Paddle Log</a>
+    </div>
   </nav>
 
+  <!-- Page Content -->
   <div class="content">
     <header>
       <h1>Murden Cove Kayak Log</h1>
+      <p>Snapshots and routes from paddles around Murden Cove and Bainbridge Island’s beautiful shoreline.</p>
     </header>
 
     <div class="main-content">
@@ -74,31 +312,98 @@
         <article class="day" id="2025-12-27">
           <h2>12/27/25 Paddle</h2>
 
+          <div class="location-pill">
+            <span class="location-pill-dot"></span>
+            Murden Cove • Bainbridge Island
+          </div>
+
+          <div class="meta">
+            Late-December paddle — cool air, calm water, and winter light on the cove.
+          </div>
+
           <figure>
-            <img src="1227Pic.jpg" alt="12/27/25 Paddle — Cove Photo">
+            <img src="1227Pic.jpg" alt="12/27/25 kayak paddle in Murden Cove">
           </figure>
 
-          <a class="route-link" href="1217Map.PNG" target="_blank" rel="noopener">Route</a>
+          <div class="route-actions">
+            <a class="route-link" href="1217Map.PNG" target="_blank" rel="noopener">
+              <svg class="route-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 3l4-1 4 1 4-1v13l-4 1-4-1-4 1V3zm4 0v11l4 1V4l-4-1z"/>
+              </svg>
+              View Route Map
+            </a>
+          </div>
+
+          <div class="conditions">
+            Route opens in a new tab as an image so you can zoom in on the full track.
+          </div>
         </article>
 
-        <!-- NEW 11/28/25 ENTRY -->
+        <!-- 11/28/25 ENTRY -->
         <article class="day" id="2025-11-28">
           <h2>11/28/25 Paddle</h2>
 
+          <div class="location-pill">
+            <span class="location-pill-dot"></span>
+            Murden Cove • Bainbridge Island
+          </div>
+
+          <div class="meta">
+            Late-November outing — crisp air and glassy water along the shoreline.
+          </div>
+
           <figure>
-            <img src="1128Pic.jpg" alt="11/28/25 Paddle — Cove Photo">
+            <img src="1128Pic.jpg" alt="11/28/25 kayak paddle in Murden Cove">
           </figure>
 
-          <a class="route-link" href="1128Map.jpg" target="_blank" rel="noopener">Route</a>
+          <div class="route-actions">
+            <a class="route-link" href="1128Map.jpg" target="_blank" rel="noopener">
+              <svg class="route-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 3l4-1 4 1 4-1v13l-4 1-4-1-4 1V3zm4 0v11l4 1V4l-4-1z"/>
+              </svg>
+              View Route Map
+            </a>
+          </div>
+
+          <div class="conditions">
+            Click the route button to see the full GPS path as an image.
+          </div>
         </article>
 
         <!-- 10/11/25 ENTRY -->
         <article class="day" id="2025-10-11">
           <h2>10/11/25 Paddle</h2>
 
+          <div class="location-pill">
+            <span class="location-pill-dot"></span>
+            Murden Cove • Bainbridge Island
+          </div>
+
+          <div class="meta">
+            Early-fall paddle — a mix of sun and clouds with calm conditions near the point.
+          </div>
+
           <figure>
-            <img src="IMG_6949.jpg" alt="10/11/25 Paddle — Cove Photo">
+            <img src="IMG_6949.jpg" alt="10/11/25 kayak paddle in Murden Cove">
           </figure>
 
-          <a class="route-link" href
+          <div class="route-actions">
+            <a class="route-link" href="Screenshot%202025-10-24%20230717.png" target="_blank" rel="noopener">
+              <svg class="route-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 3l4-1 4 1 4-1v13l-4 1-4-1-4 1V3zm4 0v11l4 1V4l-4-1z"/>
+              </svg>
+              View Route Map
+            </a>
+          </div>
 
+          <div class="conditions">
+            Route opens in a new tab so you can zoom in on distance and shoreline detail.
+          </div>
+        </article>
+
+      </main>
+    </div>
+
+  </div>
+</body>
+</html>
