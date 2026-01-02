@@ -3,33 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <title>Mariners Games</title>
-</head>
-<body>
-  <h1>Mariners Games</h1>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Game 1 -->
-  <h2>5/12/25 – New York Yankees vs Seattle Mariners</h2>
+  <style>
+    :root {
+      --bg: #0b1120;        /* deep navy */
+      --bg-alt: #020617;
+      --card-bg: #0f172a;
+      --accent: #22c55e;    /* teal-ish highlight */
+      --accent-soft: rgba(34, 197, 94, 0.15);
+      --text-main: #e5e7eb;
+      --text-muted: #94a3b8;
+      --max-width: 960px;
+      --radius-lg: 18px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.5);
+    }
 
-  <iframe width="100%" height="500"
-    src="https://www.youtube.com/embed/Uo4TBY1qmwc"
-    title="5/12/25 – New York Yankees vs Seattle Mariners"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+    * {
+      box-sizing: border-box;
+    }
 
-  <hr>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, var(--bg-alt) 45%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
 
-  <!-- Game 2 -->
-  <h2>10/10/25 – Detroit Tigers vs Seattle Mariners</h2>
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
 
-  <iframe width="100%" height="500"
-    src="https://www.youtube.com/embed/Ag_1JCtKUkw"
-    title="10/10/25 – Detroit Tigers vs Seattle Mariners"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-</body>
-</html>
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(2rem, 3vw + 1rem, 2.6rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+
+    /* Game list / TOC */
+    .game-list {
+      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .game-list h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--text-muted);
