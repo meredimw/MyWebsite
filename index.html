@@ -1,114 +1,336 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website Title</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>MurdenCove.com</title>
+  <style>
+    :root {
+      --max: 980px;
+      --sidebar: 250px;
+
+      --bg-top: #e0f2fe;          /* light sky */
+      --bg-bottom: #0f172a;       /* deep water */
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0ea5e9;          /* light blue */
+      --accent-soft: rgba(14,165,233,0.12);
+      --accent-strong: #0f766e;   /* teal */
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius-lg: 18px;
+      --radius-md: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(
+        to bottom,
+        var(--bg-top),
+        #e2f3ff 30%,
+        #c7e0ff 55%,
+        #9ca3af 70%,
+        var(--bg-bottom) 100%
+      );
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--sidebar);
+      background: rgba(15, 23, 42, 0.98);
+      color: #f9fafb;
+      overflow-y: auto;
+      padding: 1.5rem 1rem;
+      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-badge {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-soft);
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+    }
+
+    .sidebar-nav {
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px 12px;
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.98rem;
+      border-radius: 10px;
+      transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+    }
+
+    .sidebar a:hover {
+      background: rgba(148, 163, 184, 0.18);
+      transform: translateX(1px);
+      color: #f9fafb;
+    }
+
+    .sidebar a.current {
+      background: rgba(34, 197, 94, 0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(74, 222, 128, 0.35);
+    }
+
+    /* Content layout */
+    .content {
+      margin-left: var(--sidebar);
+    }
+
+    header {
+      padding: 2rem 1.25rem 0.75rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 .25rem;
+      font-size: clamp(1.9rem, 3vw + 1rem, 2.4rem);
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.25rem 2.5rem;
+    }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+    }
+
+    .hero-title {
+      font-size: 1.3rem;
+      margin: 0 0 .35rem;
+    }
+
+    .hero-text {
+      margin: 0 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+    }
+
+    .hero-image {
+      margin: 0.5rem auto 0.25rem;
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+      display: block;
+      height: auto;
+    }
+
+    .hero-links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.95rem;
+      font-size: 0.9rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-strong), #0ea5e9);
+      border-radius: 999px;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0 10px 25px rgba(14, 148, 136, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .hero-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15, 118, 110, 0.45);
+      filter: brightness(1.03);
+    }
+
+    .hero-link-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-radius: 0 0 16px 16px;
+      }
+
+      .sidebar-subtitle {
+        display: none;
+      }
+
+      .sidebar-nav {
+        border-top: none;
+        padding-top: 0;
+        flex-direction: row;
+      }
+
+      .sidebar a {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      header {
+        padding-top: 1.3rem;
+      }
+
+      main {
+        padding-bottom: 2rem;
+      }
+
+      .hero-card {
+        padding: 1.2rem 1rem 1.3rem;
+      }
+    }
+  </style>
 </head>
-
-
-
-
-    ****CENTER FRAME***
-
-<div class="main-content">
-  <!-- <h1>MurdenCove.com</h1> -->
-  <!-- <p>This is where your main page content goes.</p> -->
-<div style="text-align:center;">
-  <img src="IMG_6949.jpg" alt="Image description" style="max-width:90%; height:auto;">
-</div>
-
-
-<!-- <figure>
-  <audio controls preload="metadata" style="width:100%">
-    <source src="https://github.com/meredimw/MyWebsite/raw/refs/heads/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" type="audio/mpeg">
-    Your browser doesn’t support the audio element.
-  </audio>
-  <figcaption>
-    Dead Air — Season 6, Episode 5.2
-    (<a href="https://github.com/meredimw/MyWebsite/raw/refs/heads/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3">download MP3</a>)
-  </figcaption>
-</figure>
-
-    
 <body>
-    <h1>Welcome to My Website</h1>
-    <h2>About Me</h2>
-    <p>This is a paragraph of text about my website.</p>
-    <p>Photos, Kayak, Birdwatching, Songs, Ms Games, Short Stories, Philsophy, Dead Air, Frog Rock, Tree Poems, Puzzle Fighter Scores.</p>
-<a href="https://www.google.com">Here is a Link</a>-->
 
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-title">
+        <span class="sidebar-badge"></span>
+        Murden Cove
+      </div>
+      <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
+    </div>
+    <div class="sidebar-nav">
+      <a href="index.html" class="current">Home</a>
+      <a href="kayak.html">Paddle Log</a>
+    </div>
+  </nav>
 
+  <!-- Page Content -->
+  <div class="content">
+    <header>
+      <h1>MurdenCove.com</h1>
+      <p>Photos, paddles, and little things I love about Bainbridge Island’s coves.</p>
+    </header>
 
-</div>
+    <main>
+      <section class="hero-card">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Murden Cove • Bainbridge Island
+        </div>
 
+        <h2 class="hero-title">Welcome to the Cove</h2>
+        <p class="hero-text">
+          This is a quiet corner of the internet for tracking kayak trips, collecting photos,
+          and sharing a bit of life around Murden Cove.
+        </p>
 
-****SIDEBAR***
+        <img
+          src="IMG_6949.jpg"
+          alt="Kayak in Murden Cove off Bainbridge Island"
+          class="hero-image"
+        >
 
-
-<!-- Always-visible Sidebar -->
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  .sidebar {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    color: #f1f1f1;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-
-  .sidebar a {
-    display: block;
-    padding: 12px 16px;
-    color: #f1f1f1;
-    text-decoration: none;
-    font-size: 18px;
-  }
-
-  .sidebar a:hover {
-    background-color: #575757;
-  }
-
-  /* Push main content to the right */
-  .main-content {
-    margin-left: 250px;
-    padding: 16px;
-  }
-</style>
-
-
-<div class="sidebar">
-  <a href="#">MurdenCove.com</a>
-  <!-- <a href="#">Test</a> -->
-  <!-- <a href="deadair.html">Dead Air</a> -->
-  <a href="kayak.html">Paddle Log </a>
-
-</div>
+        <div class="hero-links">
+          <a class="hero-link" href="kayak.html">
+            <svg class="hero-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M3 10l7-7 2 2-4 4 4 4-2 2-7-7zM11 17h6v-2h-6v2z" />
+            </svg>
+            View Paddle Log
+          </a>
+          <!-- You can add more links here later, e.g. Photos, Music, Stories -->
+        </div>
+      </section>
+    </main>
+  </div>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
