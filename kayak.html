@@ -24,11 +24,8 @@
       --radius-md: 10px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    /* Base */
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -37,7 +34,6 @@
       min-height: 100vh;
     }
 
-    /* Sidebar */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
@@ -104,12 +100,8 @@
       border: 1px solid rgba(74, 222, 128, 0.35);
     }
 
-    /* Content offset */
-    .content {
-      margin-left: var(--sidebar);
-    }
+    .content { margin-left: var(--sidebar); }
 
-    /* Header & main */
     header {
       padding: 2rem 1.25rem 0.75rem;
       text-align: center;
@@ -132,7 +124,6 @@
       padding: 0 1.25rem 2.5rem;
     }
 
-    /* Day cards */
     .day {
       background: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -143,10 +134,7 @@
       border: 1px solid rgba(148, 163, 184, 0.35);
     }
 
-    .day h2 {
-      margin: 0 0 .35rem;
-      font-size: 1.2rem;
-    }
+    .day h2 { margin: 0 0 .35rem; font-size: 1.2rem; }
 
     .meta {
       font-size: .9rem;
@@ -174,9 +162,7 @@
       background: var(--accent-strong);
     }
 
-    figure {
-      margin: 0.75rem 0 0.5rem;
-    }
+    figure { margin: 0.75rem 0 0.5rem; }
 
     img {
       display: block;
@@ -217,10 +203,7 @@
       filter: brightness(1.03);
     }
 
-    .route-link-icon {
-      width: 14px;
-      height: 14px;
-    }
+    .route-link-icon { width: 14px; height: 14px; }
 
     .conditions {
       margin-top: 0.4rem;
@@ -228,7 +211,6 @@
       color: var(--text-muted);
     }
 
-    /* Responsive */
     @media (max-width: 720px) {
       .sidebar {
         position: static;
@@ -241,15 +223,8 @@
         border-radius: 0 0 16px 16px;
       }
 
-      .sidebar-content {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      }
-
-      .sidebar-subtitle {
-        display: none;
-      }
+      .sidebar-content { display: flex; flex-direction: column; gap: 0.2rem; }
+      .sidebar-subtitle { display: none; }
 
       .sidebar-nav {
         border-top: none;
@@ -258,32 +233,16 @@
         gap: 0.35rem;
       }
 
-      .sidebar a {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-      }
-
-      .content {
-        margin-left: 0;
-      }
-
-      header {
-        padding-top: 1.3rem;
-      }
-
-      main {
-        padding-bottom: 2rem;
-      }
-
-      .day {
-        padding: 1rem 0.9rem 1.1rem;
-      }
+      .sidebar a { padding: 8px 10px; font-size: 0.9rem; }
+      .content { margin-left: 0; }
+      header { padding-top: 1.3rem; }
+      main { padding-bottom: 2rem; }
+      .day { padding: 1rem 0.9rem 1.1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
   <nav class="sidebar">
     <div class="sidebar-content">
       <div class="sidebar-title">
@@ -298,7 +257,6 @@
     </div>
   </nav>
 
-  <!-- Page Content -->
   <div class="content">
     <header>
       <h1>Murden Cove Kayak Log</h1>
@@ -307,6 +265,37 @@
 
     <div class="main-content">
       <main>
+
+        <!-- NEW 01/04/26 ENTRY -->
+        <article class="day" id="2026-01-04">
+          <h2>01/04/26 Paddle</h2>
+
+          <div class="location-pill">
+            <span class="location-pill-dot"></span>
+            Murden Cove • Bainbridge Island
+          </div>
+
+          <div class="meta">
+            First paddle of 2026 — winter water, quiet shoreline, and that crisp Puget Sound air.
+          </div>
+
+          <figure>
+            <img src="0104Photo.jpg" alt="01/04/26 kayak paddle in Murden Cove">
+          </figure>
+
+          <div class="route-actions">
+            <a class="route-link" href="0104Map.PNG" target="_blank" rel="noopener">
+              <svg class="route-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 3l4-1 4 1 4-1v13l-4 1-4-1-4 1V3zm4 0v11l4 1V4l-4-1z"/>
+              </svg>
+              View Route Map
+            </a>
+          </div>
+
+          <div class="conditions">
+            Route opens in a new tab as an image so you can zoom in on the full track.
+          </div>
+        </article>
 
         <!-- 12/27/25 ENTRY -->
         <article class="day" id="2025-12-27">
