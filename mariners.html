@@ -205,7 +205,6 @@
       line-height: 1.35;
     }
 
-    /* Keep embeds visible and reliable */
     .video-shell {
       background: #000;
       border-radius: var(--r-md);
@@ -263,6 +262,9 @@
     <section class="game-list" aria-label="Game index">
       <h2>Game List</h2>
       <ul>
+        <!-- NEW GAME LIST ITEM -->
+        <li><a href="#game-new-uGhcenWa9ls"><span>New Game (Update Title / Date)</span><span class="date">—</span></a></li>
+
         <li><a href="#game-2025-03-30"><span>Athletics vs Seattle Mariners</span><span class="date">3/30/2025</span></a></li>
         <li><a href="#game-2025-05-12"><span>New York Yankees vs Seattle Mariners</span><span class="date">5/12/2025</span></a></li>
         <li><a href="#game-2025-10-10"><span>Detroit Tigers vs Seattle Mariners (ALDS G5)</span><span class="date">10/10/2025</span></a></li>
@@ -271,6 +273,47 @@
     </section>
 
     <main class="games">
+
+      <!-- NEW GAME CARD -->
+      <article class="game-card" id="game-new-uGhcenWa9ls">
+        <header class="game-header">
+          <div>
+            <div class="game-title">New Game (Update Title)</div>
+            <div class="game-meta">Update Date • Regular Season/Postseason</div>
+          </div>
+          <span class="tag"><span class="tag-dot"></span> Full Game</span>
+        </header>
+
+        <div class="scoreline" aria-label="Key line">
+          <span class="pill"><strong>SEA —</strong> • OPP —</span>
+          <span class="pill"><strong>SEA record:</strong> —</span>
+          <span class="pill"><strong>Key:</strong> —</span>
+        </div>
+
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Bat:</b> Update key offensive line (HR / RBIs / XBH / RISP).</li>
+          <li><b>Pitch:</b> Update starter + bullpen line (IP / ER / K / BB).</li>
+          <li><b>Game swing:</b> Update the inning/play that decided it.</li>
+        </ul>
+
+        <div class="context">
+          <b>Season impact:</b> Note what it meant for standings/playoff path/series.
+        </div>
+
+        <div class="video-shell">
+          <iframe
+            src="https://www.youtube.com/embed/uGhcenWa9ls"
+            title="Seattle Mariners Game Replay"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <a class="watch-link" href="https://www.youtube.com/watch?v=uGhcenWa9ls" target="_blank" rel="noopener">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M4 4h9v2H6v10H4V4zm4 3l8 3-8 3V7z"/></svg>
+          Watch on YouTube
+        </a>
+      </article>
 
       <!-- 3/30/25 -->
       <article class="game-card" id="game-2025-03-30">
