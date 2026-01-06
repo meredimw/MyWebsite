@@ -6,262 +6,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    :root {
-      --bg-alt: #020617;
-      --card-bg: rgba(15, 23, 42, 0.96);
-      --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.14);
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --max: 980px;
-      --r-lg: 18px;
-      --r-md: 12px;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
-      --border: 1px solid rgba(148, 163, 184, 0.38);
+    :root{
+      --bg-alt:#020617;
+      --card-bg:rgba(15,23,42,.96);
+      --accent:#22c55e;
+      --accent-soft:rgba(34,197,94,.14);
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --max:980px;
+      --r-lg:18px;
+      --r-md:12px;
+      --shadow:0 18px 40px rgba(15,23,42,.55);
+      --border:1px solid rgba(148,163,184,.38);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:radial-gradient(circle at top,#1e293b 0,var(--bg-alt) 45%,#020617 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+    .page{max-width:var(--max);margin:0 auto;padding:1.5rem 1.25rem 3rem}
+    header.site{text-align:center;margin-bottom:1.75rem}
+    .badge{
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.28rem .8rem;border-radius:999px;
+      background:rgba(15,23,42,.8);
+      border:var(--border);
+      font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;
+      color:var(--muted);margin-bottom:.8rem
+    }
+    .badge-dot{width:8px;height:8px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 6px var(--accent-soft)}
+    header.site h1{
+      margin:0 0 .55rem;
+      font-size:clamp(2rem,3vw + 1rem,2.6rem);
+      letter-spacing:.06em;text-transform:uppercase
+    }
+    header.site p{margin:0;color:var(--muted);font-size:.98rem}
+
+    .game-list{
+      background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(15,23,42,.85));
+      border-radius:var(--r-lg);
+      box-shadow:var(--shadow);
+      padding:1rem 1.25rem;
+      margin-bottom:1.75rem;
+      border:var(--border)
+    }
+    .game-list h2{
+      margin:0 0 .75rem;
+      font-size:1.05rem;text-transform:uppercase;letter-spacing:.08em;
+      font-weight:650;color:var(--muted)
+    }
+    .game-list h3{
+      margin:1rem 0 .5rem;
+      font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;
+      color:rgba(148,163,184,.95);font-weight:650
+    }
+    .game-list ul{list-style:none;padding:0;margin:0;display:grid;gap:.35rem}
+    .game-list a{
+      color:var(--text);text-decoration:none;
+      display:flex;justify-content:space-between;align-items:baseline;
+      padding:.45rem .35rem;border-radius:var(--r-md);
+      transition:background .18s ease,transform .12s ease;
+      font-size:.98rem
+    }
+    .game-list a span.date{color:var(--muted);font-size:.85rem;white-space:nowrap;margin-left:.75rem}
+    .game-list a:hover{background:rgba(15,23,42,.95);transform:translateY(-1px)}
+
+    .games{display:grid;gap:1.5rem}
+    .game-card{
+      background:var(--card-bg);
+      border-radius:var(--r-lg);
+      box-shadow:var(--shadow);
+      padding:1.25rem 1.25rem 1.5rem;
+      border:var(--border)
+    }
+    .game-header{
+      display:flex;flex-wrap:wrap;justify-content:space-between;
+      gap:.4rem .9rem;align-items:baseline;margin-bottom:.8rem
+    }
+    .game-title{font-size:1.22rem;font-weight:750}
+    .game-meta{font-size:.92rem;color:var(--muted)}
+
+    .tag{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.14rem .6rem;border-radius:999px;border:var(--border);
+      font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;
+      color:var(--muted);white-space:nowrap
+    }
+    .tag-dot{width:6px;height:6px;border-radius:999px;background:var(--accent)}
+
+    .scoreline{
+      display:flex;flex-wrap:wrap;gap:.5rem 1rem;
+      padding:.65rem .8rem;border-radius:var(--r-md);
+      background:rgba(2,6,23,.55);
+      border:1px solid rgba(148,163,184,.28);
+      margin:.65rem 0 .9rem
+    }
+    .scoreline .pill{
+      padding:.25rem .55rem;border-radius:999px;
+      border:1px solid rgba(148,163,184,.28);
+      background:rgba(15,23,42,.55);
+      font-size:.82rem;color:var(--muted)
+    }
+    .scoreline strong{color:var(--accent);font-weight:800}
+
+    .stats{margin:.25rem 0 1rem;padding-left:1.1rem;font-size:.93rem}
+    .stats li{margin:.28rem 0}
+    .stats b{color:var(--accent);font-weight:800}
+
+    .context{
+      margin:.35rem 0 1.05rem;
+      padding:.75rem .85rem;border-radius:var(--r-md);
+      background:rgba(34,197,94,.08);
+      border:1px solid rgba(34,197,94,.22);
+      color:var(--muted);
+      font-size:.92rem;line-height:1.35
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(circle at top, #1e293b 0, var(--bg-alt) 45%, #020617 100%);
-      color: var(--text);
-      min-height: 100vh;
+    /* Make embeds consistently visible */
+    .video-shell{
+      background:#000;border-radius:var(--r-md);
+      overflow:hidden;border:1px solid rgba(148,163,184,.25)
+    }
+    .video-shell iframe{
+      display:block;
+      width:100%;
+      height:500px;     /* explicit height = “always visible” */
+      border:0;
+      background:#000;
     }
 
-    .page {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
+    .watch-link{
+      display:inline-flex;align-items:center;gap:.45rem;
+      margin-top:.85rem;font-size:.92rem;color:var(--accent);
+      text-decoration:none;opacity:.92;
+      transition:opacity .15s ease,transform .12s ease
     }
+    .watch-link:hover{opacity:1;transform:translateY(-1px)}
+    .watch-link svg{width:14px;height:14px;flex-shrink:0}
 
-    header.site {
-      text-align: center;
-      margin-bottom: 1.75rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.28rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: var(--border);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .badge-dot {
-      width: 8px; height: 8px; border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-soft);
-    }
-
-    header.site h1 {
-      margin: 0 0 0.55rem;
-      font-size: clamp(2rem, 3vw + 1rem, 2.6rem);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    header.site p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .game-list {
-      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
-      border-radius: var(--r-lg);
-      box-shadow: var(--shadow);
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.75rem;
-      border: var(--border);
-    }
-
-    .game-list h2 {
-      margin: 0 0 0.75rem;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 650;
-      color: var(--muted);
-    }
-
-    .game-list h3 {
-      margin: 1rem 0 0.5rem;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(148,163,184,0.95);
-      font-weight: 650;
-    }
-
-    .game-list ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.35rem;
-    }
-
-    .game-list a {
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0.45rem 0.35rem;
-      border-radius: var(--r-md);
-      transition: background 0.18s ease, transform 0.12s ease;
-      font-size: 0.98rem;
-    }
-
-    .game-list a span.date {
-      color: var(--muted);
-      font-size: 0.85rem;
-      white-space: nowrap;
-      margin-left: 0.75rem;
-    }
-
-    .game-list a:hover {
-      background: rgba(15, 23, 42, 0.95);
-      transform: translateY(-1px);
-    }
-
-    .games { display: grid; gap: 1.5rem; }
-
-    .game-card {
-      background: var(--card-bg);
-      border-radius: var(--r-lg);
-      box-shadow: var(--shadow);
-      padding: 1.25rem 1.25rem 1.5rem;
-      border: var(--border);
-    }
-
-    .game-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.4rem 0.9rem;
-      align-items: baseline;
-      margin-bottom: 0.8rem;
-    }
-
-    .game-title { font-size: 1.22rem; font-weight: 750; }
-    .game-meta { font-size: 0.92rem; color: var(--muted); }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.14rem 0.6rem;
-      border-radius: 999px;
-      border: var(--border);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .tag-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
-
-    .scoreline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      padding: 0.65rem 0.8rem;
-      border-radius: var(--r-md);
-      background: rgba(2, 6, 23, 0.55);
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      margin: 0.65rem 0 0.9rem;
-    }
-
-    .scoreline .pill {
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      background: rgba(15, 23, 42, 0.55);
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .scoreline strong { color: var(--accent); font-weight: 800; }
-
-    .stats {
-      margin: 0.25rem 0 1rem;
-      padding-left: 1.1rem;
-      font-size: 0.93rem;
-    }
-
-    .stats li { margin: 0.28rem 0; }
-    .stats b { color: var(--accent); font-weight: 800; }
-
-    .context {
-      margin: 0.35rem 0 1.05rem;
-      padding: 0.75rem 0.85rem;
-      border-radius: var(--r-md);
-      background: rgba(34, 197, 94, 0.08);
-      border: 1px solid rgba(34, 197, 94, 0.22);
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.35;
-    }
-
-    .video-shell {
-      background: #000;
-      border-radius: var(--r-md);
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    iframe {
-      display: block;
-      width: 100%;
-      height: 500px;
-      border: 0;
-      background: #000;
-    }
-
-    .watch-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: 0.85rem;
-      font-size: 0.92rem;
-      color: var(--accent);
-      text-decoration: none;
-      opacity: 0.92;
-      transition: opacity 0.15s ease, transform 0.12s ease;
-    }
-
-    .watch-link:hover { opacity: 1; transform: translateY(-1px); }
-    .watch-link svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-    footer {
-      text-align: center;
-      padding: 0 1.25rem 2.2rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 640px) {
-      iframe { height: 260px; }
-      .game-card { padding: 1rem 0.95rem 1.25rem; }
-      .game-title { font-size: 1.08rem; }
+    footer{text-align:center;padding:0 1.25rem 2.2rem;font-size:.82rem;color:var(--muted)}
+    @media (max-width:640px){
+      .video-shell iframe{height:260px}
+      .game-card{padding:1rem .95rem 1.25rem}
+      .game-title{font-size:1.08rem}
     }
   </style>
 </head>
+
 <body>
-
   <div class="page">
-
     <header class="site">
       <div class="badge"><span class="badge-dot"></span> Seattle Mariners Replay Hub</div>
       <h1>Mariners Games</h1>
@@ -283,17 +179,16 @@
         <li><a href="#game-2025-10-10"><span>Detroit Tigers vs Seattle Mariners (ALDS G5)</span><span class="date">10/10/2025</span></a></li>
         <li><a href="#game-2025-10-12"><span>Seattle Mariners vs Toronto Blue Jays (Playoffs SF)</span><span class="date">10/12/2025</span></a></li>
 
-        <!-- ALCS series index -->
-        <li><a href="#game-2025-alcs-2"><span>SEA vs TOR (ALCS G2)</span><span class="date">Oct 2025</span></a></li>
-        <li><a href="#game-2025-alcs-3"><span>SEA vs TOR (ALCS G3)</span><span class="date">Oct 2025</span></a></li>
-        <li><a href="#game-2025-alcs-4"><span>SEA vs TOR (ALCS G4)</span><span class="date">Oct 2025</span></a></li>
-        <li><a href="#game-2025-alcs-5"><span>SEA vs TOR (ALCS G5)</span><span class="date">Oct 2025</span></a></li>
-        <li><a href="#game-2025-alcs-6"><span>SEA vs TOR (ALCS G6)</span><span class="date">Oct 2025</span></a></li>
-        <li><a href="#game-2025-10-20"><span>SEA vs TOR (ALCS G7)</span><span class="date">10/20/2025</span></a></li>
+        <!-- ALCS: add the whole set -->
+        <li><a href="#game-2025-alcs-g2"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G2)</span><span class="date">2025 ALCS</span></a></li>
+        <li><a href="#game-2025-alcs-g3"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G3)</span><span class="date">2025 ALCS</span></a></li>
+        <li><a href="#game-2025-alcs-g4"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G4)</span><span class="date">2025 ALCS</span></a></li>
+        <li><a href="#game-2025-alcs-g5"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G5)</span><span class="date">2025 ALCS</span></a></li>
+        <li><a href="#game-2025-alcs-g6"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G6)</span><span class="date">2025 ALCS</span></a></li>
+        <li><a href="#game-2025-10-20"><span>Seattle Mariners vs Toronto Blue Jays (ALCS G7)</span><span class="date">10/20/2025</span></a></li>
       </ul>
     </section>
 
-    <!-- Cards -->
     <main class="games">
 
       <!-- 3/30/25 -->
@@ -306,25 +201,23 @@
           <span class="tag"><span class="tag-dot"></span> Full Game</span>
         </header>
 
-        <div class="scoreline">
+        <div class="scoreline" aria-label="Key line">
           <span class="pill"><strong>SEA 2</strong> • OAK 1</span>
           <span class="pill"><strong>SEA record:</strong> 2–2</span>
           <span class="pill"><strong>Decision:</strong> Woo W • Muñoz SV</span>
         </div>
 
-        <ul class="stats">
-          <li><b>Run creation:</b> Seattle’s offense came via one swing (2-run HR) — “thin margin” win profile.</li>
-          <li><b>Rotation signal:</b> 6 innings from the starter = fewer bullpen bullets burned early in the year.</li>
-          <li><b>Closeout:</b> Clean save conversion is the kind of April habit that compounds.</li>
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Julio provided 100% of the offense:</b> 2-run HR (438 ft) in the 6th; Seattle scored 2 runs total.</li>
+          <li><b>Starter length:</b> Bryan Woo 6.0 IP • 3 H • 1 ER • 5 K • 2 BB.</li>
+          <li><b>Late leverage:</b> Muñoz closed the 9th for the save (2 K).</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> Banked win with minimal offense — exactly how teams survive cold bats across 162.
-        </div>
+        <div class="context"><b>Season impact:</b> Early-season “starter + bullpen” template win — the kind you stack to stabilize April.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/g0AQqxlIs-g"
+            src="https://www.youtube-nocookie.com/embed/g0AQqxlIs-g?rel=0"
             title="3/30/25 – Athletics vs Seattle Mariners"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -346,25 +239,24 @@
           <span class="tag"><span class="tag-dot"></span> Full Game</span>
         </header>
 
-        <div class="scoreline">
+        <div class="scoreline" aria-label="Key line">
           <span class="pill"><strong>SEA 5</strong> • NYY 11</span>
           <span class="pill"><strong>SEA record:</strong> 22–18</span>
           <span class="pill"><strong>HR:</strong> Polanco • Julio • Raleigh</span>
         </div>
 
-        <ul class="stats">
-          <li><b>Offense shape:</b> HR-driven scoring (three homers) — power can keep you alive even when rallies stall.</li>
-          <li><b>Run prevention:</b> When walks + hits stack early, it forces high-leverage bullpen innings before you want them.</li>
-          <li><b>Standings math:</b> At 22–18, every “non-repeatable” loss emphasizes the need for stable starter innings.</li>
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Power-only scoring:</b> 3 HR accounted for most of Seattle’s offense (Polanco, Julio, Raleigh).</li>
+          <li><b>Distance:</b> Julio HR 433 ft • Raleigh HR 420 ft.</li>
+          <li><b>Starter line:</b> Hancock 5.0 IP • 8 H • 7 ER • 5 K • 4 BB.</li>
+          <li><b>Situational:</b> SEA 2-for-6 w/RISP • 4 LOB.</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> A reminder that playoff teams still need “floor” starts — not just peak starts.
-        </div>
+        <div class="context"><b>Season impact:</b> Rotation volatility game — the kind that forces “how do we cover innings?” conversations.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/Uo4TBY1qmwc"
+            src="https://www.youtube-nocookie.com/embed/Uo4TBY1qmwc?rel=0"
             title="5/12/25 – New York Yankees vs Seattle Mariners"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -386,25 +278,21 @@
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
-        <div class="scoreline">
+        <div class="scoreline" aria-label="Key line">
           <span class="pill"><strong>SEA 3</strong> • DET 2</span>
           <span class="pill"><strong>Innings:</strong> 15</span>
           <span class="pill"><strong>Walk-off:</strong> Polanco (15th)</span>
         </div>
 
-        <ul class="stats">
-          <li><b>Run value:</b> A 3-run output wins a winner-take-all when you win the leverage plate appearances.</li>
-          <li><b>Roster stress test:</b> Extra innings reveal bullpen depth + who can take the “next out” repeatedly.</li>
-          <li><b>Series result:</b> Clinch game — postseason advancement is the only stat that matters.</li>
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Series clinch:</b> Walk-off RBI single in the 15th → Seattle to the ALCS.</li>
+          <li><b>Run prevention wins:</b> Scoreless frames late = bullpen + defense doing October work.</li>
+          <li><b>Pressure reps:</b> Track SEA’s late-inning plate discipline + contact vs. strikeout profile.</li>
         </ul>
-
-        <div class="context">
-          <b>Season impact:</b> “Survive and advance” game that defines a rotation/bullpen identity in October.
-        </div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/Ag_1JCtKUkw"
+            src="https://www.youtube-nocookie.com/embed/Ag_1JCtKUkw?rel=0"
             title="10/10/25 – Detroit Tigers vs Seattle Mariners (ALDS Game 5)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -426,25 +314,23 @@
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
-        <div class="scoreline">
+        <div class="scoreline" aria-label="Key line">
           <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
           <span class="pill"><strong>Round:</strong> Semi-Finals</span>
           <span class="pill"><strong>Video:</strong> Full Game</span>
         </div>
 
-        <ul class="stats">
-          <li><b>Leverage distribution:</b> Watch how quickly managers go to “A bullpen” arms once win expectancy tightens.</li>
-          <li><b>Contact vs K:</b> Track Seattle’s approach with 2 strikes (shorten up vs hunt damage).</li>
-          <li><b>Run creation:</b> Identify whether SEA’s scoring came from HR, extra bases, or chain-rallies.</li>
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Box score snapshot:</b> (add) SEA–TOR final • SEA R/H/E • TOR R/H/E.</li>
+          <li><b>Pitching focus:</b> (add) SEA starter IP/H/ER/K/BB • top relievers (SV/HLD).</li>
+          <li><b>Offense focus:</b> (add) SEA HR/RBI leaders • SEA w/RISP • LOB.</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> This is the “middle of the run” game — where bullpen usage and lineup depth decide series paths.
-        </div>
+        <div class="context"><b>Season impact:</b> Postseason swing game — great rewatch for lineup sequencing + bullpen leverage choices.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/DHOQVJa7sfo"
+            src="https://www.youtube-nocookie.com/embed/DHOQVJa7sfo?rel=0"
             title="10/12/25 – Seattle Mariners vs Toronto Blue Jays (Playoffs Semi-Finals)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -456,36 +342,34 @@
         </a>
       </article>
 
-      <!-- ALCS G2 -->
-      <article class="game-card" id="game-2025-alcs-2">
+      <!-- ALCS Game 2 -->
+      <article class="game-card" id="game-2025-alcs-g2">
         <header class="game-header">
           <div>
             <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 2)</div>
-            <div class="game-meta">October 2025 • American League Championship Series</div>
+            <div class="game-meta">2025 ALCS • Game 2 • Full Game Replay</div>
           </div>
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
         <div class="scoreline">
-          <span class="pill"><strong>Series:</strong> ALCS</span>
-          <span class="pill"><strong>Game:</strong> 2</span>
-          <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
+          <span class="pill"><strong>Box score:</strong> (add) SEA–TOR final</span>
+          <span class="pill"><strong>Series:</strong> (add) SEA leads/trails ___–___</span>
+          <span class="pill"><strong>Key:</strong> (add) HR / RBI / SV</span>
         </div>
 
         <ul class="stats">
-          <li><b>Series swing game:</b> Game 2 often sets bullpen availability for Games 3–4 (who’s “down,” who’s fresh).</li>
-          <li><b>Starting pitching priority:</b> Watch for quick hooks vs “let him wear it” — tells you the manager’s trust level.</li>
-          <li><b>Offense tells:</b> Are SEA’s best swings early-count aggression or late-count damage?</li>
+          <li><b>Mariners offense:</b> (add) HRs • XBH • BB/K • w/RISP • LOB.</li>
+          <li><b>Mariners pitching:</b> (add) starter line • bullpen IP/ER/K • leverage arms usage.</li>
+          <li><b>Defense / run prevention:</b> (add) DP • OF assists • errors (if any).</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> ALCS games are about resource management — outs are currency, bullpen innings are gold.
-        </div>
+        <div class="context"><b>Series impact:</b> Game 2 is where you see adjustment chess—how SEA counters TOR’s Game 1 plan.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/G7objc6cbX0"
-            title="ALCS Game 2 – Seattle Mariners vs Toronto Blue Jays"
+            src="https://www.youtube-nocookie.com/embed/G7objc6cbX0?rel=0"
+            title="2025 ALCS Game 2 – Seattle Mariners vs Toronto Blue Jays"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
@@ -496,36 +380,34 @@
         </a>
       </article>
 
-      <!-- ALCS G3 -->
-      <article class="game-card" id="game-2025-alcs-3">
+      <!-- ALCS Game 3 -->
+      <article class="game-card" id="game-2025-alcs-g3">
         <header class="game-header">
           <div>
             <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 3)</div>
-            <div class="game-meta">October 2025 • American League Championship Series</div>
+            <div class="game-meta">2025 ALCS • Game 3 • Full Game Replay</div>
           </div>
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
         <div class="scoreline">
-          <span class="pill"><strong>Series:</strong> ALCS</span>
-          <span class="pill"><strong>Game:</strong> 3</span>
-          <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
+          <span class="pill"><strong>Box score:</strong> (add) SEA–TOR final</span>
+          <span class="pill"><strong>Series:</strong> (add) SEA leads/trails ___–___</span>
+          <span class="pill"><strong>Key:</strong> (add) HR / RBI / SV</span>
         </div>
 
         <ul class="stats">
-          <li><b>Momentum + travel effect:</b> Early innings often show who carried their approach into the next park/day.</li>
-          <li><b>Run expectancy decisions:</b> Watch bunts, steals, and hit-and-run calls — playoff “one run” tactics spike.</li>
-          <li><b>Late-inning matchups:</b> Look for TOR’s best hitter vs SEA’s top leverage arm (the chessboard starts here).</li>
+          <li><b>First-inning tone:</b> (add) SEA runs in 1–3 innings vs late-inning scoring.</li>
+          <li><b>Pitch mix check:</b> (add) how SEA attacked TOR’s top 3 hitters (K/BB outcomes).</li>
+          <li><b>Clutch PAs:</b> (add) SEA high-leverage PAs (7th–9th) results.</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> ALCS Game 3 tends to define “who controls the leverage” for the rest of the series.
-        </div>
+        <div class="context"><b>Series impact:</b> Swing point game—home/road split often shows up in bullpen decisions.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/DZUuyyAVngg"
-            title="ALCS Game 3 – Seattle Mariners vs Toronto Blue Jays"
+            src="https://www.youtube-nocookie.com/embed/DZUuyyAVngg?rel=0"
+            title="2025 ALCS Game 3 – Seattle Mariners vs Toronto Blue Jays"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
@@ -536,36 +418,34 @@
         </a>
       </article>
 
-      <!-- ALCS G4 -->
-      <article class="game-card" id="game-2025-alcs-4">
+      <!-- ALCS Game 4 -->
+      <article class="game-card" id="game-2025-alcs-g4">
         <header class="game-header">
           <div>
             <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 4)</div>
-            <div class="game-meta">October 2025 • American League Championship Series</div>
+            <div class="game-meta">2025 ALCS • Game 4 • Full Game Replay</div>
           </div>
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
         <div class="scoreline">
-          <span class="pill"><strong>Series:</strong> ALCS</span>
-          <span class="pill"><strong>Game:</strong> 4</span>
-          <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
+          <span class="pill"><strong>Box score:</strong> (add) SEA–TOR final</span>
+          <span class="pill"><strong>Series:</strong> (add) SEA leads/trails ___–___</span>
+          <span class="pill"><strong>Key:</strong> (add) HR / RBI / SV</span>
         </div>
 
         <ul class="stats">
-          <li><b>“Bullpen tax” check:</b> By Game 4, you can see who’s running out of trusted relief options.</li>
-          <li><b>Lineup construction:</b> Watch platoons, pinch-hit timing, and defensive swaps — those are win-probability plays.</li>
-          <li><b>Damage control:</b> Preventing multi-run innings matters more than “winning” every inning.</li>
+          <li><b>Middle innings:</b> (add) SEA 4th–6th inning production + shutdown frames.</li>
+          <li><b>Mariners bullpen ladder:</b> (add) order of arms used + results (HLD/SV).</li>
+          <li><b>Damage control:</b> (add) TOR baserunners stranded (SEA pitching).</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> This is usually the fatigue game — depth (bench + bullpen) becomes a headline.
-        </div>
+        <div class="context"><b>Series impact:</b> Game 4 is where bullpen fatigue starts to matter—watch usage patterns closely.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/WkxDGeH56RA"
-            title="ALCS Game 4 – Seattle Mariners vs Toronto Blue Jays"
+            src="https://www.youtube-nocookie.com/embed/WkxDGeH56RA?rel=0"
+            title="2025 ALCS Game 4 – Seattle Mariners vs Toronto Blue Jays"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
@@ -576,36 +456,34 @@
         </a>
       </article>
 
-      <!-- ALCS G5 -->
-      <article class="game-card" id="game-2025-alcs-5">
+      <!-- ALCS Game 5 -->
+      <article class="game-card" id="game-2025-alcs-g5">
         <header class="game-header">
           <div>
             <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 5)</div>
-            <div class="game-meta">October 2025 • American League Championship Series</div>
+            <div class="game-meta">2025 ALCS • Game 5 • Full Game Replay</div>
           </div>
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
         <div class="scoreline">
-          <span class="pill"><strong>Series:</strong> ALCS</span>
-          <span class="pill"><strong>Game:</strong> 5</span>
-          <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
+          <span class="pill"><strong>Box score:</strong> (add) SEA–TOR final</span>
+          <span class="pill"><strong>Series:</strong> (add) SEA leads/trails ___–___</span>
+          <span class="pill"><strong>Key:</strong> (add) HR / RBI / SV</span>
         </div>
 
         <ul class="stats">
-          <li><b>Closeout pressure:</b> If SEA is ahead in series, Game 5 becomes a “shorten the game” bullpen strategy moment.</li>
-          <li><b>Pitch usage:</b> Look for back-to-back days, multi-inning saves, and “all hands” relief patterns.</li>
-          <li><b>Run conversion:</b> Track whether Seattle turns baserunners into runs (playoff teams can’t waste traffic).</li>
+          <li><b>Mariners run creation:</b> (add) BB + XBH vs station-to-station singles.</li>
+          <li><b>Starter endurance:</b> (add) IP + pitch count + times through order (TOR).</li>
+          <li><b>High leverage:</b> (add) SEA PAs w/Win Prob. swing (late).</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> Game 5 is where series narratives lock in — either you seize control or you let it drift.
-        </div>
+        <div class="context"><b>Series impact:</b> Game 5 is usually “pivot city” — the game that shapes the last two nights.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/QKTE3k2z6o0"
-            title="ALCS Game 5 – Seattle Mariners vs Toronto Blue Jays"
+            src="https://www.youtube-nocookie.com/embed/QKTE3k2z6o0?rel=0"
+            title="2025 ALCS Game 5 – Seattle Mariners vs Toronto Blue Jays"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
@@ -616,36 +494,34 @@
         </a>
       </article>
 
-      <!-- ALCS G6 -->
-      <article class="game-card" id="game-2025-alcs-6">
+      <!-- ALCS Game 6 -->
+      <article class="game-card" id="game-2025-alcs-g6">
         <header class="game-header">
           <div>
             <div class="game-title">Seattle Mariners vs Toronto Blue Jays (ALCS Game 6)</div>
-            <div class="game-meta">October 2025 • American League Championship Series</div>
+            <div class="game-meta">2025 ALCS • Game 6 • Full Game Replay</div>
           </div>
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
         <div class="scoreline">
-          <span class="pill"><strong>Series:</strong> ALCS</span>
-          <span class="pill"><strong>Game:</strong> 6</span>
-          <span class="pill"><strong>Matchup:</strong> SEA vs TOR</span>
+          <span class="pill"><strong>Box score:</strong> (add) SEA–TOR final</span>
+          <span class="pill"><strong>Series:</strong> (add) SEA leads/trails ___–___</span>
+          <span class="pill"><strong>Key:</strong> (add) HR / RBI / SV</span>
         </div>
 
         <ul class="stats">
-          <li><b>Elimination dynamics:</b> Game 6 often forces aggressive pitching decisions (no tomorrow = no saving arms).</li>
-          <li><b>High-leverage PAs:</b> Count how many times Seattle gets “best hitter vs best reliever.”</li>
-          <li><b>Defense value:</b> One misplay can be the whole series — watch range, positioning, and cutoff execution.</li>
+          <li><b>Elimination/clincher pressure:</b> (add) strike % + K/BB in leverage innings (SEA pitchers).</li>
+          <li><b>Mariners bats:</b> (add) hard-hit moments (HR/2B) + RISP efficiency.</li>
+          <li><b>Defense:</b> (add) key outs on bases / web gems / DP turns.</li>
         </ul>
 
-        <div class="context">
-          <b>Season impact:</b> If the series goes this far, it’s because both teams can punch back — this is pure tension baseball.
-        </div>
+        <div class="context"><b>Series impact:</b> Game 6 is where you either force a Game 7 or finish it—max leverage for every decision.</div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/1mgrlNhdp74"
-            title="ALCS Game 6 – Seattle Mariners vs Toronto Blue Jays"
+            src="https://www.youtube-nocookie.com/embed/1mgrlNhdp74?rel=0"
+            title="2025 ALCS Game 6 – Seattle Mariners vs Toronto Blue Jays"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
         </div>
@@ -666,26 +542,22 @@
           <span class="tag"><span class="tag-dot"></span> Postseason</span>
         </header>
 
-        <div class="scoreline">
+        <div class="scoreline" aria-label="Key line">
           <span class="pill"><strong>SEA 3</strong> • TOR 4</span>
           <span class="pill"><strong>Lead:</strong> SEA 3–1 (7th)</span>
           <span class="pill"><strong>Decider:</strong> Springer 3-run HR (7th)</span>
         </div>
 
-        <ul class="stats">
-          <li><b>Game state:</b> Seattle led 3–1 deep — this is why leverage outs are the whole postseason.</li>
-          <li><b>Scoring profile:</b> Seattle’s runs came via power (Julio + Raleigh HRs) + early production.</li>
-          <li><b>Single swing outcome:</b> Springer’s 7th-inning HR flips the game and the season storyline.</li>
-          <li><b>Opponent context:</b> Toronto advances to its first World Series since 1993.</li>
+        <ul class="stats" aria-label="Mariners stat highlights">
+          <li><b>Lead protection moment:</b> SEA up 3–1 into the 7th of Game 7.</li>
+          <li><b>Power output:</b> HRs by <b>Julio Rodríguez</b> and <b>Cal Raleigh</b> accounted for key runs.</li>
+          <li><b>Single swing:</b> Springer 3-run HR flips it to <b>TOR 4–3</b>.</li>
+          <li><b>Stakes:</b> Winner goes to the World Series (TOR’s first since <b>1993</b>).</li>
         </ul>
-
-        <div class="context">
-          <b>Season impact:</b> One win short of the World Series — the kind of ending that becomes fuel for the next season’s goals.
-        </div>
 
         <div class="video-shell">
           <iframe
-            src="https://www.youtube.com/embed/mqEeL3Yrj_g"
+            src="https://www.youtube-nocookie.com/embed/mqEeL3Yrj_g?rel=0"
             title="10/20/25 – Seattle Mariners vs Toronto Blue Jays (ALCS Game 7)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -698,12 +570,8 @@
       </article>
 
     </main>
-
   </div>
 
-  <footer>
-    Built for Mariners fans. All games embedded. ⚾
-  </footer>
-
+  <footer>Built for Mariners fans. All videos embedded. ⚾</footer>
 </body>
 </html>
