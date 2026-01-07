@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Cove Birds • MurdenCove.com</title>
-
   <style>
     :root {
       --max: 980px;
@@ -16,14 +15,15 @@
       --card-bg: #ffffff;
       --text-main: #0f172a;
       --text-muted: #64748b;
-
       --accent: #0ea5e9;
       --accent-soft: rgba(14,165,233,0.12);
       --accent-strong: #0f766e;
-
       --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
       --radius-lg: 18px;
       --radius-md: 10px;
+
+      --pill-bg: rgba(59, 130, 246, 0.06);
+      --pill-border: rgba(148, 163, 184, 0.5);
     }
 
     * { box-sizing: border-box; }
@@ -59,6 +59,8 @@
       gap: 1rem;
     }
 
+    .sidebar-content { display: flex; flex-direction: column; gap: 0.25rem; }
+
     .sidebar-title {
       font-size: 1.1rem;
       font-weight: 600;
@@ -70,17 +72,12 @@
     }
 
     .sidebar-badge {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
+      width: 9px; height: 9px; border-radius: 999px;
       background: var(--accent);
       box-shadow: 0 0 0 6px var(--accent-soft);
     }
 
-    .sidebar-subtitle {
-      font-size: 0.85rem;
-      color: #cbd5f5;
-    }
+    .sidebar-subtitle { font-size: 0.85rem; color: #cbd5f5; }
 
     .sidebar-nav {
       margin-top: 0.5rem;
@@ -113,7 +110,7 @@
       border: 1px solid rgba(74, 222, 128, 0.35);
     }
 
-    /* Layout */
+    /* Content */
     .content { margin-left: var(--sidebar); }
 
     header {
@@ -138,176 +135,384 @@
       padding: 0 1.25rem 2.5rem;
     }
 
-    /* Intro */
-    .intro-card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
-      padding: 1.1rem 1.1rem 1.15rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      margin-top: 0.5rem;
-    }
-
-    /* Bird entries */
-    .grid {
-      margin-top: 1rem;
-      display: grid;
-      gap: 1rem;
-    }
-
+    /* Bird cards */
     .bird-card {
       background: var(--card-bg);
       border-radius: var(--radius-lg);
+      padding: 1.25rem 1.25rem 1.4rem;
+      margin: 0 auto 1.25rem;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(148, 163, 184, 0.35);
       overflow: hidden;
     }
 
-    .bird-top {
-      display: grid;
-      grid-template-columns: 320px 1fr;
+    .bird-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
     }
 
-    /* IMAGE – uses Bird.jpg */
-    .bird-photo {
-      width: 100%;
-      height: 100%;
-      min-height: 240px;
-      object-fit: cover;
-      display: block;
-      background: #0f172a;
-    }
-
-    .bird-body {
-      padding: 1.1rem 1.15rem 1.2rem;
-    }
-
-    .bird-title {
+    .bird-name {
+      font-size: 1.25rem;
       margin: 0;
-      font-size: 1.35rem;
     }
 
-    .bird-sub {
-      margin: 0.25rem 0 0.8rem;
+    .bird-sci {
+      margin: 0.15rem 0 0;
       color: var(--text-muted);
       font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.5rem 0 0.8rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .pill-dot {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: var(--accent-strong);
+    }
+
+    .bird-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    figure { margin: 0; }
+
+    img.bird-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.22);
+    }
+
+    .facts {
+      background: rgba(2, 6, 23, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 16px;
+      padding: 0.9rem 0.95rem;
+    }
+
+    .facts h3 {
+      margin: 0 0 0.6rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0b4a6f;
+    }
+
+    .fact {
       display: flex;
       gap: 0.6rem;
-      flex-wrap: wrap;
+      padding: 0.5rem 0;
+      border-top: 1px dashed rgba(148, 163, 184, 0.45);
+      align-items: flex-start;
+    }
+    .fact:first-of-type { border-top: none; padding-top: 0; }
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      color: var(--accent-strong);
+      margin-top: 0.1rem;
     }
 
-    .panel {
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(255,255,255,0.7);
-      padding: 0.75rem 0.8rem;
-      margin-top: 0.75rem;
+    .fact b {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.1rem;
     }
-
-    .panel h3 {
-      margin: 0 0 0.35rem;
-      font-size: 0.92rem;
-      text-transform: uppercase;
-    }
-
-    .panel ul {
-      margin: 0;
-      padding-left: 1.05rem;
+    .fact span {
+      display: block;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.35;
     }
 
+    .notes {
+      margin-top: 0.9rem;
+      padding: 0.85rem 0.95rem;
+      border-radius: 16px;
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.22);
+      color: var(--text-muted);
+      line-height: 1.45;
+      font-size: 0.94rem;
+    }
+
+    .source {
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.8rem;
+      align-items: center;
+    }
+
+    .source a {
+      color: #0b4a6f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { text-decoration: underline; }
+
     @media (max-width: 900px) {
-      .bird-top { grid-template-columns: 1fr; }
+      .bird-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
       .sidebar {
         position: static;
         width: 100%;
+        height: auto;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-radius: 0 0 16px 16px;
       }
+
+      .sidebar-subtitle { display: none; }
+
+      .sidebar-nav {
+        border-top: none;
+        padding-top: 0;
+        flex-direction: row;
+      }
+
+      .sidebar a { padding: 8px 10px; font-size: 0.9rem; }
+
       .content { margin-left: 0; }
+      header { padding-top: 1.3rem; }
+      main { padding-bottom: 2rem; }
+      .bird-card { padding: 1rem 0.9rem 1.1rem; }
     }
   </style>
 </head>
-
 <body>
 
+  <!-- Sidebar -->
   <nav class="sidebar">
-    <div>
+    <div class="sidebar-content">
       <div class="sidebar-title">
         <span class="sidebar-badge"></span>
         Murden Cove
       </div>
       <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
     </div>
-
     <div class="sidebar-nav">
       <a href="index.html">Home</a>
       <a href="kayak.html">Paddle Log</a>
-      <a href="cove-birds.html" class="current">Cove Birds</a>
+      <a href="birds.html" class="current">Cove Birds</a>
     </div>
   </nav>
 
   <div class="content">
     <header>
       <h1>Cove Birds</h1>
-      <p>All bird sightings logged on a single page.</p>
+      <p>A simple catalog of birds spotted around Murden Cove — photo first, then the facts.</p>
     </header>
 
     <main>
-      <section class="grid">
 
-        <!-- RED-NECKED GREBE -->
-        <article class="bird-card" id="red-necked-grebe">
-          <div class="bird-top">
+      <!-- ENTRY 1 -->
+      <article class="bird-card" id="red-necked-grebe">
+        <div class="bird-head">
+          <div>
+            <h2 class="bird-name">Red-necked Grebe</h2>
+            <div class="bird-sci">Podiceps grisegena</div>
+          </div>
 
-            <!-- ✅ CAPITAL B -->
-            <img
-              class="bird-photo"
-              src="Bird.jpg"
-              alt="Red-necked Grebe photographed at Murden Cove"
-            />
+          <div class="pill-row" aria-label="Tags">
+            <span class="pill"><span class="pill-dot"></span> Waterbird</span>
+            <span class="pill"><span class="pill-dot"></span> Grebe</span>
+            <span class="pill"><span class="pill-dot"></span> Winter coastal visitor</span>
+          </div>
+        </div>
 
-            <div class="bird-body">
-              <h2 class="bird-title">Red-necked Grebe</h2>
+        <div class="bird-grid">
+          <figure>
+            <img class="bird-photo" src="bird.jpg" alt="Red-necked Grebe photographed at Murden Cove">
+          </figure>
 
-              <div class="bird-sub">
-                <span><em>Podiceps grisegena</em></span>
-                <span>• Murden Cove</span>
-              </div>
+          <aside class="facts" aria-label="Quick facts">
+            <h3>Quick facts</h3>
 
-              <p style="color:var(--text-muted);line-height:1.45;">
-                A large grebe often seen swimming or diving on open water.
-                In breeding plumage it shows a chestnut-red neck; in winter it becomes grayer
-                but keeps a strong face pattern.
-              </p>
-
-              <div class="panel">
-                <h3>Quick ID</h3>
-                <ul>
-                  <li>Long neck and straight, stout bill</li>
-                  <li>Dark cap with pale cheeks</li>
-                  <li>Often rides low in the water</li>
-                </ul>
-              </div>
-
-              <div class="panel">
-                <h3>Behavior</h3>
-                <ul>
-                  <li>Frequently dives rather than flying</li>
-                  <li>Often solitary in winter</li>
-                  <li>Can be surprisingly tolerant of nearby boats</li>
-                </ul>
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M3 10c4-6 10-6 14 0-4 6-10 6-14 0zm7 3a3 3 0 100-6 3 3 0 000 6z"/>
+              </svg>
+              <div>
+                <b>ID keys</b>
+                <span>Long-bodied grebe; pale cheeks; in breeding plumage, a reddish neck; often shows a yellowish bill.</span>
               </div>
             </div>
-          </div>
-        </article>
 
-      </section>
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 6h12v2H4V6zm0 6h12v2H4v-2zM6 8h2v4H6V8zm6 0h2v4h-2V8z"/>
+              </svg>
+              <div>
+                <b>Size</b>
+                <span>18–20 in (46–51 cm) in length.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M10 2c2.7 0 4.9 2.2 4.9 4.9 0 4.1-4.9 11.1-4.9 11.1S5.1 11 5.1 6.9C5.1 4.2 7.3 2 10 2zm0 6.6a1.7 1.7 0 100-3.4 1.7 1.7 0 000 3.4z"/>
+              </svg>
+              <div>
+                <b>Where to look (habitat)</b>
+                <span>Coasts/shorelines and wetlands; in winter, often on salt water including protected bays and sometimes offshore.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M2 12c2-2 4-3 8-3s6 1 8 3v2c-2-2-4-3-8-3s-6 1-8 3v-2zm2-6c1.5-1.2 3.2-2 6-2s4.5.8 6 2l-1 1.5C14 6.7 12.6 6 10 6S6 6.7 5 7.5L4 6z"/>
+              </svg>
+              <div>
+                <b>Behavior</b>
+                <span>Strong swimmer; direct flight with rapid wingbeats; can be clumsy taking off.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M10 2l7 4v8l-7 4-7-4V6l7-4zm0 2.2L5 6.8v6.4l5 2.6 5-2.6V6.8l-5-2.6z"/>
+              </svg>
+              <div>
+                <b>Conservation status</b>
+                <span>IUCN: Least Concern.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="notes">
+          <b>Murden Cove note:</b> Grebes ride low and dive like they’re teleporting. If you lose one, scan 30–80 yards out —
+          they often surface much farther away than you expect.
+        </div>
+
+        <div class="source">
+          <span><b>Source:</b> Audubon Field Guide page for Red-necked Grebe</span>
+          <a href="https://www.audubon.org/field-guide/bird/red-necked-grebe" target="_blank" rel="noopener">Open Audubon Guide</a>
+        </div>
+      </article>
+
+      <!-- ENTRY 2 -->
+      <article class="bird-card" id="great-blue-heron">
+        <div class="bird-head">
+          <div>
+            <h2 class="bird-name">Great Blue Heron</h2>
+            <div class="bird-sci">Ardea herodias</div>
+          </div>
+
+          <div class="pill-row" aria-label="Tags">
+            <span class="pill"><span class="pill-dot"></span> Wader</span>
+            <span class="pill"><span class="pill-dot"></span> Shoreline hunter</span>
+            <span class="pill"><span class="pill-dot"></span> Year-round local</span>
+          </div>
+        </div>
+
+        <div class="bird-grid">
+          <figure>
+            <img class="bird-photo" src="bird2.jpg" alt="Great Blue Heron photographed at Murden Cove">
+          </figure>
+
+          <aside class="facts" aria-label="Quick facts">
+            <h3>Quick facts</h3>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M3 10c4-6 10-6 14 0-4 6-10 6-14 0zm7 3a3 3 0 100-6 3 3 0 000 6z"/>
+              </svg>
+              <div>
+                <b>ID keys</b>
+                <span>Tall gray-blue heron with an S-curved neck; dagger-like yellow bill; slow, powerful wingbeats in flight with neck tucked.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 6h12v2H4V6zm0 6h12v2H4v-2zM6 8h2v4H6V8zm6 0h2v4h-2V8z"/>
+              </svg>
+              <div>
+                <b>Size</b>
+                <span>About 4 ft tall; wingspan roughly 6+ ft — the “pterodactyl of the cove” when it lifts off.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M10 2c2.7 0 4.9 2.2 4.9 4.9 0 4.1-4.9 11.1-4.9 11.1S5.1 11 5.1 6.9C5.1 4.2 7.3 2 10 2zm0 6.6a1.7 1.7 0 100-3.4 1.7 1.7 0 000 3.4z"/>
+              </svg>
+              <div>
+                <b>Where to look (habitat)</b>
+                <span>Shallow shoreline edges, docks, tidal flats, and creek mouths — anywhere fish get pinned in skinny water.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M2 12c2-2 4-3 8-3s6 1 8 3v2c-2-2-4-3-8-3s-6 1-8 3v-2zm2-6c1.5-1.2 3.2-2 6-2s4.5.8 6 2l-1 1.5C14 6.7 12.6 6 10 6S6 6.7 5 7.5L4 6z"/>
+              </svg>
+              <div>
+                <b>Feeding style</b>
+                <span>Stand-still ambush hunter — slow steps, long pause, then a lightning spear-stab for fish/crabs.</span>
+              </div>
+            </div>
+
+            <div class="fact">
+              <svg class="icon" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill="currentColor" d="M4 4h12v2H4V4zm0 4h8v2H4V8zm0 4h12v2H4v-2z"/>
+              </svg>
+              <div>
+                <b>Common confusion</b>
+                <span>Not a crane: herons fly with their neck tucked; cranes fly with neck extended.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="notes">
+          <b>Murden Cove note:</b> The heron is the cove’s statue that moves. You’ll see one posted up on a rock or dock like it’s
+          been there all morning — and it probably has. If you drift quietly, you can watch the whole hunt: micro-steps, freeze,
+          head tilt to judge refraction, then the strike.
+        </div>
+
+        <div class="source">
+          <span><b>Reference:</b> Great Blue Heron overview</span>
+          <a href="https://www.audubon.org/field-guide/bird/great-blue-heron" target="_blank" rel="noopener">Open Audubon Guide</a>
+        </div>
+      </article>
+
     </main>
   </div>
 
