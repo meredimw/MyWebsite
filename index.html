@@ -23,9 +23,7 @@
       --radius-md: 10px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -119,9 +117,7 @@
     }
 
     /* Content layout */
-    .content {
-      margin-left: var(--sidebar);
-    }
+    .content { margin-left: var(--sidebar); }
 
     header {
       padding: 2rem 1.25rem 0.75rem;
@@ -176,10 +172,7 @@
       background: var(--accent-strong);
     }
 
-    .hero-title {
-      font-size: 1.3rem;
-      margin: 0 0 .35rem;
-    }
+    .hero-title { font-size: 1.3rem; margin: 0 0 .35rem; }
 
     .hero-text {
       margin: 0 0 1rem;
@@ -226,10 +219,7 @@
       filter: brightness(1.03);
     }
 
-    .hero-link-icon {
-      width: 14px;
-      height: 14px;
-    }
+    .hero-link-icon { width: 14px; height: 14px; }
 
     @media (max-width: 720px) {
       .sidebar {
@@ -243,9 +233,7 @@
         border-radius: 0 0 16px 16px;
       }
 
-      .sidebar-subtitle {
-        display: none;
-      }
+      .sidebar-subtitle { display: none; }
 
       .sidebar-nav {
         border-top: none;
@@ -253,26 +241,11 @@
         flex-direction: row;
       }
 
-      .sidebar a {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-      }
-
-      .content {
-        margin-left: 0;
-      }
-
-      header {
-        padding-top: 1.3rem;
-      }
-
-      main {
-        padding-bottom: 2rem;
-      }
-
-      .hero-card {
-        padding: 1.2rem 1rem 1.3rem;
-      }
+      .sidebar a { padding: 8px 10px; font-size: 0.9rem; }
+      .content { margin-left: 0; }
+      header { padding-top: 1.3rem; }
+      main { padding-bottom: 2rem; }
+      .hero-card { padding: 1.2rem 1rem 1.3rem; }
     }
   </style>
 </head>
@@ -290,6 +263,7 @@
     <div class="sidebar-nav">
       <a href="index.html" class="current">Home</a>
       <a href="kayak.html">Paddle Log</a>
+      <a href="cove-birds.html">Cove Birds</a>
     </div>
   </nav>
 
@@ -326,7 +300,13 @@
             </svg>
             View Paddle Log
           </a>
-          <!-- You can add more links here later, e.g. Photos, Music, Stories -->
+
+          <a class="hero-link" href="cove-birds.html">
+            <svg class="hero-link-icon" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M10 2c2.8 0 5 2.2 5 5 0 2.7-2 4.6-4.5 5l-.5.1V18H8v-5.8l-.5-.1C5 11.6 3 9.7 3 7c0-2.8 2.2-5 5-5h2zm0 2H8a3 3 0 0 0-3 3c0 1.7 1.3 3 3 3h4a3 3 0 0 0 3-3 3 3 0 0 0-3-3h-2z"/>
+            </svg>
+            Explore Cove Birds
+          </a>
         </div>
       </section>
     </main>
