@@ -147,7 +147,12 @@
     }
 
     .bird-name { font-size: 1.25rem; margin: 0; }
-    .bird-sci { font-style: italic; color: var(--text-muted); }
+
+    .bird-sci {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
 
     .pill-row {
       display: flex;
@@ -210,7 +215,26 @@
 
     .fact:first-child { border-top: none; }
 
-    .fact span { color: var(--text-muted); }
+    .fact b { font-size: 0.9rem; }
+    .fact span {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .source {
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .source a {
+      color: #0b4a6f;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .source a:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       .bird-grid { grid-template-columns: 1fr; }
@@ -252,7 +276,7 @@
 
   <main>
 
-    <!-- Common Merganser -->
+    <!-- Common Merganser (updated) -->
     <article class="bird-card">
       <div class="bird-head">
         <div>
@@ -270,22 +294,191 @@
         <img class="bird-photo" src="bird.jpg" alt="Common Merganser">
         <div class="facts">
           <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Long, narrow red bill with serrated edges; sleek profile.</span></div>
-          <div class="fact"><b>Male vs female</b><span>Males bright white with dark head; females gray-bodied with rusty crest.</span></div>
-          <div class="fact"><b>Habitat</b><span>Coastal waters, bays, and large lakes.</span></div>
-          <div class="fact"><b>Behavior</b><span>Fast, efficient diver that hunts fish underwater.</span></div>
-          <div class="fact"><b>Flight</b><span>Strong, direct flight with rapid wingbeats.</span></div>
+          <div class="fact"><b>ID keys</b><span>Long, narrow red bill; clean, sleek profile; often rides low on the water.</span></div>
+          <div class="fact"><b>Male vs female</b><span>Males bright white with dark green head; females gray with rusty head/crest.</span></div>
+          <div class="fact"><b>Habitat</b><span>Bays, inlets, and protected saltwater; also large lakes and rivers.</span></div>
+          <div class="fact"><b>Behavior</b><span>Efficient diver—often pops up far from where it went under.</span></div>
+          <div class="fact"><b>Mariners-eye moment</b><span>When they start “submarine hunting,” it’s like watching a tiny torpedo patrol.</span></div>
         </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/common-merganser" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
       </div>
     </article>
 
     <!-- Great Blue Heron -->
-    <!-- Black Guillemot -->
-    <!-- Pelagic Cormorant -->
-    <!-- Bald Eagle -->
-    <!-- Bufflehead -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Great Blue Heron</h2>
+          <div class="bird-sci">Ardea herodias</div>
+        </div>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span> Wader</span>
+          <span class="pill"><span class="pill-dot"></span> Shoreline hunter</span>
+          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+        </div>
+      </div>
 
-    <!-- (Remaining bird cards unchanged and still included below this point) -->
+      <div class="bird-grid">
+        <img class="bird-photo" src="bird2.jpg" alt="Great Blue Heron">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Tall gray-blue heron, dagger bill, slow deliberate stalk.</span></div>
+          <div class="fact"><b>Size</b><span>About 4 ft tall; wingspan often over 6 ft.</span></div>
+          <div class="fact"><b>Habitat</b><span>Shorelines, tidal flats, docks, marinas, quiet coves.</span></div>
+          <div class="fact"><b>Feeding</b><span>Ambush predator—stands statue-still, then strikes like a spear.</span></div>
+          <div class="fact"><b>Flight ID</b><span>Flies with neck tucked back (“S” shape) and slow wingbeats.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/great-blue-heron" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
+
+    <!-- Black Guillemot -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Black Guillemot</h2>
+          <div class="bird-sci">Cepphus grylle</div>
+        </div>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span> Seabird</span>
+          <span class="pill"><span class="pill-dot"></span> Diver</span>
+          <span class="pill"><span class="pill-dot"></span> Coastal</span>
+        </div>
+      </div>
+
+      <div class="bird-grid">
+        <img class="bird-photo" src="bird3.jpg" alt="Black Guillemot">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Dark body with bright white wing patches (seasonal variation); red legs/feet.</span></div>
+          <div class="fact"><b>Habitat</b><span>Nearshore waters, rocky coasts, protected marine areas.</span></div>
+          <div class="fact"><b>Behavior</b><span>Dives for fish and invertebrates; often close to shore.</span></div>
+          <div class="fact"><b>Vibe</b><span>One of those “wait—what is THAT?” birds that feels like a rare DLC unlock.</span></div>
+          <div class="fact"><b>Tip</b><span>Look for quick, low flights over water between dives.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/black-guillemot" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
+
+    <!-- Pelagic Cormorant -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Pelagic Cormorant</h2>
+          <div class="bird-sci">Urile pelagicus</div>
+        </div>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span> Seabird</span>
+          <span class="pill"><span class="pill-dot"></span> Cliff & rock perch</span>
+          <span class="pill"><span class="pill-dot"></span> Underwater hunter</span>
+        </div>
+      </div>
+
+      <div class="bird-grid">
+        <img class="bird-photo" src="bird4.jpg" alt="Pelagic Cormorant">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Slender cormorant with long neck; often looks “sleeker” than double-crested.</span></div>
+          <div class="fact"><b>Habitat</b><span>Rocky shorelines, islands, offshore rocks; coastal Puget Sound fits.</span></div>
+          <div class="fact"><b>Behavior</b><span>Dives and swims underwater for fish; often perches to dry wings.</span></div>
+          <div class="fact"><b>Silhouette</b><span>Classic cormorant posture: upright with a slight “cobra” neck curve.</span></div>
+          <div class="fact"><b>Tell</b><span>If it’s on a rock looking smug and aerodynamic, you’re probably close.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/pelagic-cormorant" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
+
+    <!-- Bald Eagle -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Bald Eagle</h2>
+          <div class="bird-sci">Haliaeetus leucocephalus</div>
+        </div>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span> Raptor</span>
+          <span class="pill"><span class="pill-dot"></span> Apex shoreline</span>
+          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+        </div>
+      </div>
+
+      <div class="bird-grid">
+        <img class="bird-photo" src="bald.jpg" alt="Bald Eagle">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Adult: white head and tail; massive yellow bill; huge wings.</span></div>
+          <div class="fact"><b>Habitat</b><span>Near water with tall trees for perching and nesting.</span></div>
+          <div class="fact"><b>Behavior</b><span>Soars, perches, and opportunistically hunts fish and waterfowl.</span></div>
+          <div class="fact"><b>Sound</b><span>High, chattery calls (not the Hollywood hawk scream).</span></div>
+          <div class="fact"><b>Moment</b><span>Everything else goes quiet when one cruises overhead.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/bald-eagle" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
+
+    <!-- Bufflehead -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Bufflehead</h2>
+          <div class="bird-sci">Bucephala albeola</div>
+        </div>
+        <div class="pill-row">
+          <span class="pill"><span class="pill-dot"></span> Small diving duck</span>
+          <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
+          <span class="pill"><span class="pill-dot"></span> Fast & buoyant</span>
+        </div>
+      </div>
+
+      <div class="bird-grid">
+        <img class="bird-photo" src="bird5.jpg" alt="Bufflehead">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Male: bold white head patch on dark head; compact “bobble” profile.</span></div>
+          <div class="fact"><b>Habitat</b><span>Protected bays and coves; often close to shore.</span></div>
+          <div class="fact"><b>Behavior</b><span>Quick dives for insects/crustaceans; pops up like a cork.</span></div>
+          <div class="fact"><b>Movement</b><span>Often in small groups; very “zip and dive” energy.</span></div>
+          <div class="fact"><b>Spotting tip</b><span>Watch for synchronized dips—like tiny periscopes disappearing.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/bufflehead" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
 
   </main>
 </div>
