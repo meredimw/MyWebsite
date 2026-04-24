@@ -42,7 +42,6 @@
       min-height: 100vh;
     }
 
-    /* Sidebar */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
@@ -128,7 +127,6 @@
       padding: 0 1.25rem 2.5rem;
     }
 
-    /* Critter cards */
     .critter-card {
       background: var(--card-bg);
       border-radius: 18px;
@@ -191,6 +189,11 @@
       align-items: start;
     }
 
+    .photo-stack {
+      display: grid;
+      gap: 0.85rem;
+    }
+
     img.critter-photo {
       width: 100%;
       border-radius: 16px;
@@ -221,6 +224,7 @@
     .fact:first-child { border-top: none; }
 
     .fact b { font-size: 0.9rem; }
+
     .fact span {
       display: block;
       font-size: 0.9rem;
@@ -238,20 +242,6 @@
       font-size: 0.92rem;
       line-height: 1.4;
     }
-
-    .source {
-      margin-top: 0.75rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .source a {
-      color: #0b4a6f;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .source a:hover { text-decoration: underline; }
 
     @media (max-width: 900px) {
       .critter-grid { grid-template-columns: 1fr; }
@@ -295,6 +285,72 @@
 
   <main>
 
+    <!-- Moon Glow Anemone -->
+    <article class="critter-card">
+      <div class="critter-head">
+        <div>
+          <h2 class="critter-name">Moon Glow Anemone</h2>
+          <div class="critter-sci">Anthopleura artemisia</div>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Sea anemone</span>
+            <span class="pill"><span class="pill-dot"></span> Tidepool resident</span>
+            <span class="pill"><span class="pill-dot"></span> Pacific Northwest shoreline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="critter-grid">
+        <img class="critter-photo" src="Moonglow anenome.jpg" alt="Moon Glow Anemone">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Soft-bodied anemone with a rounded column and a crown of tentacles that can look pale, greenish, lavender, or “glowy” in shallow water.</span></div>
+          <div class="fact"><b>Size</b><span>Usually small to medium-sized, often only a few inches across when fully open.</span></div>
+          <div class="fact"><b>Where you’ll see it</b><span>Attached to rocks, pilings, shells, or other hard surfaces in tidepools and protected nearshore areas.</span></div>
+          <div class="fact"><b>Movement</b><span>Mostly stays attached in one place, but can slowly shift its position over time.</span></div>
+          <div class="fact"><b>Sting</b><span>Uses stinging cells to catch tiny prey; best observed gently without touching or disturbing it.</span></div>
+        </div>
+      </div>
+
+      <div class="note">
+        Look for anemones during lower tides, especially on shaded rocks or protected edges where the water stays calm.
+      </div>
+    </article>
+
+    <!-- Humpback Whale -->
+    <article class="critter-card">
+      <div class="critter-head">
+        <div>
+          <h2 class="critter-name">Humpback Whale</h2>
+          <div class="critter-sci">Megaptera novaeangliae</div>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Marine mammal</span>
+            <span class="pill"><span class="pill-dot"></span> Baleen whale</span>
+            <span class="pill"><span class="pill-dot"></span> Puget Sound visitor</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="critter-grid">
+        <div class="photo-stack">
+          <img class="critter-photo" src="Humpback 1.jpg" alt="Humpback Whale in Puget Sound">
+          <img class="critter-photo" src="Humpback 2.jpg" alt="Humpback Whale surfacing">
+        </div>
+
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Large whale with a rounded back, long pectoral fins, and a small dorsal fin often seen after the blow as the whale arches to dive.</span></div>
+          <div class="fact"><b>Size</b><span>Adults can reach roughly 40 to 50 feet long, making them one of the largest animals sometimes seen in Puget Sound.</span></div>
+          <div class="fact"><b>Where you’ll see it</b><span>Open water, channels, and feeding areas where small schooling fish or krill may be present.</span></div>
+          <div class="fact"><b>Movement</b><span>Often travels by surfacing, breathing, arching, and diving; tail flukes may be visible on deeper dives.</span></div>
+          <div class="fact"><b>Behavior</b><span>Known for dramatic surface activity, long migrations, and bubble-net or lunge-feeding behavior in productive waters.</span></div>
+        </div>
+      </div>
+
+      <div class="note">
+        If you see a whale from shore or a boat, give it plenty of distance and avoid changing its path. The best view is usually from a respectful distance.
+      </div>
+    </article>
+
     <!-- Moon Jelly -->
     <article class="critter-card">
       <div class="critter-head">
@@ -320,7 +376,6 @@
           <div class="fact"><b>Sting</b><span>Generally mild for humans, but still best admired without handling.</span></div>
         </div>
       </div>
- 
     </article>
 
   </main>
