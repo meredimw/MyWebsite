@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Cove Birds • MurdenCove.com</title>
+  <title>Cove Critters • MurdenCove.com</title>
+
   <style>
     :root {
       --max: 980px;
@@ -20,29 +21,18 @@
       --accent-strong: #0f766e;
       --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
       --radius-lg: 18px;
-      --radius-md: 10px;
-      --pill-bg: rgba(59, 130, 246, 0.06);
-      --pill-border: rgba(148, 163, 184, 0.5);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        var(--bg-top),
-        #e2f3ff 30%,
-        #c7e0ff 55%,
-        #9ca3af 70%,
-        var(--bg-bottom) 100%
-      );
+      font-family: system-ui;
+      background: linear-gradient(to bottom, var(--bg-top), #c7e0ff 60%, var(--bg-bottom));
       color: var(--text-main);
-      min-height: 100vh;
     }
 
-    /* Sidebar */
+    /* SIDEBAR */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
@@ -50,439 +40,177 @@
       background: rgba(15, 23, 42, 0.98);
       color: #f9fafb;
       padding: 1.5rem 1rem;
-      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
-      z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
 
     .sidebar-title {
-      font-size: 1.1rem;
       font-weight: 600;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 6px;
     }
 
     .sidebar-badge {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
+      width: 8px;
+      height: 8px;
       background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-soft);
+      border-radius: 50%;
     }
 
     .sidebar-subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #cbd5f5;
     }
 
-    .sidebar-nav {
-      margin-top: 0.5rem;
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      padding-top: 0.75rem;
-    }
-
-    .sidebar a {
+    .sidebar-nav a {
       display: block;
-      padding: 10px 12px;
+      padding: 8px 10px;
       color: #e5e7eb;
       text-decoration: none;
-      font-size: 0.98rem;
-      border-radius: 10px;
-      transition: background 0.18s ease;
+      border-radius: 8px;
     }
 
-    .sidebar a:hover { background: rgba(148, 163, 184, 0.18); }
-
-    .sidebar a.current {
-      background: rgba(34, 197, 94, 0.16);
-      color: #bbf7d0;
-      border: 1px solid rgba(74, 222, 128, 0.35);
+    .sidebar-nav a.current {
+      background: rgba(34,197,94,0.2);
     }
 
     .content { margin-left: var(--sidebar); }
 
     header {
-      padding: 2rem 1.25rem 0.75rem;
       text-align: center;
-    }
-
-    header h1 {
-      margin: 0 0 .25rem;
-      font-size: clamp(1.9rem, 3vw + 1rem, 2.4rem);
-    }
-
-    header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.98rem;
+      padding: 2rem 1rem;
     }
 
     main {
       max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.25rem 2.5rem;
+      margin: auto;
+      padding: 1rem;
     }
 
-    /* Bird cards */
-    .bird-card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
+    .critter-card {
+      background: white;
+      border-radius: 18px;
       padding: 1.25rem;
       margin-bottom: 1.25rem;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
     }
 
-    .bird-head {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .bird-name { font-size: 1.25rem; margin: 0; }
-
-    .bird-sci {
-      font-style: italic;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.4rem;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.18rem 0.7rem;
-      border-radius: 999px;
-      background: var(--pill-bg);
-      border: 1px solid var(--pill-border);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent-strong);
-    }
-
-    .bird-grid {
+    .critter-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 1rem;
-      align-items: start;
     }
 
-    img.bird-photo {
+    img {
       width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.22);
+      border-radius: 14px;
     }
 
     .facts {
-      background: rgba(2, 6, 23, 0.03);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: 16px;
-      padding: 0.9rem;
+      background: rgba(0,0,0,0.03);
+      padding: 10px;
+      border-radius: 12px;
     }
 
-    .facts h3 {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #0b4a6f;
-      margin: 0 0 0.6rem;
+    .note {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(14,165,233,0.08);
+      border-radius: 12px;
     }
 
-    .fact {
-      border-top: 1px dashed rgba(148, 163, 184, 0.45);
-      padding: 0.5rem 0;
-    }
-
-    .fact:first-child { border-top: none; }
-
-    .fact b { font-size: 0.9rem; }
-    .fact span {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .source {
-      margin-top: 0.75rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .source a {
-      color: #0b4a6f;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .source a:hover { text-decoration: underline; }
-
-    @media (max-width: 900px) {
-      .bird-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .sidebar {
-        position: static;
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      .sidebar-subtitle { display: none; }
-      .content { margin-left: 0; }
+    @media(max-width:720px){
+      .sidebar{position:static;width:100%;}
+      .content{margin-left:0;}
+      .critter-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
+
 <body>
 
 <nav class="sidebar">
   <div>
     <div class="sidebar-title">
-      <span class="sidebar-badge"></span> Murden Cove
+      <span class="sidebar-badge"></span>
+      Murden Cove
     </div>
     <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
   </div>
+
   <div class="sidebar-nav">
     <a href="index.html">Home</a>
     <a href="kayak.html">Paddle Log</a>
-    <a href="cove-birds.html" class="current">Cove Birds</a>
-    <a href="cove-critters.html">Cove Critters</a>
-    <a href="frog-rock.html">Frog Rock</a>
+    <a href="cove-birds.html">Cove Birds</a>
+    <a href="cove-critters.html" class="current">Cove Critters</a>
   </div>
 </nav>
 
 <div class="content">
-  <header>
-    <h1>Cove Birds</h1>
-    <p>A catalog of birds observed around Murden Cove and nearby shoreline.</p>
-  </header>
 
-  <main>
+<header>
+  <h1>Cove Critters</h1>
+  <p>Animals and marine life spotted around Murden Cove.</p>
+</header>
 
-    <!-- Common Merganser (updated) -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Common Merganser</h2>
-          <div class="bird-sci">Mergus merganser</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Diving duck</span>
-          <span class="pill"><span class="pill-dot"></span> Fish-eater</span>
-          <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
-        </div>
-      </div>
+<main>
 
-      <div class="bird-grid">
-        <img class="bird-photo" src="bird.jpg" alt="Common Merganser">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Long, narrow red bill; clean, sleek profile; often rides low on the water.</span></div>
-          <div class="fact"><b>Male vs female</b><span>Males bright white with dark green head; females gray with rusty head/crest.</span></div>
-          <div class="fact"><b>Habitat</b><span>Bays, inlets, and protected saltwater; also large lakes and rivers.</span></div>
-          <div class="fact"><b>Behavior</b><span>Efficient diver—often pops up far from where it went under.</span></div>
-          <div class="fact"><b>Mariners-eye moment</b><span>When they start “submarine hunting,” it’s like watching a tiny torpedo patrol.</span></div>
-        </div>
-      </div>
+<!-- Moon Glow Anemone -->
+<div class="critter-card">
+<h2>Moon Glow Anemone</h2>
+<div><i>Anthopleura artemisia</i></div>
 
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/common-merganser" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
+<div class="critter-grid">
+<img src="Moonglow anenome.jpg">
+<div class="facts">
+<b>ID keys:</b> Soft-bodied, glowing tones<br>
+<b>Habitat:</b> Tidepools<br>
+<b>Movement:</b> Stationary<br>
+</div>
+</div>
 
-    <!-- Great Blue Heron -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Great Blue Heron</h2>
-          <div class="bird-sci">Ardea herodias</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Wader</span>
-          <span class="pill"><span class="pill-dot"></span> Shoreline hunter</span>
-          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
-        </div>
-      </div>
+<div class="note">Best spotted at low tide.</div>
+</div>
 
-      <div class="bird-grid">
-        <img class="bird-photo" src="bird2.jpg" alt="Great Blue Heron">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Tall gray-blue heron, dagger bill, slow deliberate stalk.</span></div>
-          <div class="fact"><b>Size</b><span>About 4 ft tall; wingspan often over 6 ft.</span></div>
-          <div class="fact"><b>Habitat</b><span>Shorelines, tidal flats, docks, marinas, quiet coves.</span></div>
-          <div class="fact"><b>Feeding</b><span>Ambush predator—stands statue-still, then strikes like a spear.</span></div>
-          <div class="fact"><b>Flight ID</b><span>Flies with neck tucked back (“S” shape) and slow wingbeats.</span></div>
-        </div>
-      </div>
+<!-- Humpback Whale -->
+<div class="critter-card">
+<h2>Humpback Whale</h2>
+<div><i>Megaptera novaeangliae</i></div>
 
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/great-blue-heron" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
+<div class="critter-grid">
+<div>
+<img src="Humpback 1.jpg">
+<img src="Humpback 2.jpg">
+</div>
 
-    <!-- Black Guillemot -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Black Guillemot</h2>
-          <div class="bird-sci">Cepphus grylle</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Seabird</span>
-          <span class="pill"><span class="pill-dot"></span> Diver</span>
-          <span class="pill"><span class="pill-dot"></span> Coastal</span>
-        </div>
-      </div>
+<div class="facts">
+<b>Size:</b> 40–50 ft<br>
+<b>Behavior:</b> Breaching, diving<br>
+</div>
+</div>
 
-      <div class="bird-grid">
-        <img class="bird-photo" src="bird3.jpg" alt="Black Guillemot">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Dark body with bright white wing patches (seasonal variation); red legs/feet.</span></div>
-          <div class="fact"><b>Habitat</b><span>Nearshore waters, rocky coasts, protected marine areas.</span></div>
-          <div class="fact"><b>Behavior</b><span>Dives for fish and invertebrates; often close to shore.</span></div>
-          <div class="fact"><b>Vibe</b><span>One of those “wait—what is THAT?” birds that feels like a rare DLC unlock.</span></div>
-          <div class="fact"><b>Tip</b><span>Look for quick, low flights over water between dives.</span></div>
-        </div>
-      </div>
+<div class="note">Observe from a distance.</div>
+</div>
 
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/black-guillemot" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
+<!-- Moon Jelly -->
+<div class="critter-card">
+<h2>Moon Jelly</h2>
+<div><i>Aurelia aurita</i></div>
 
-    <!-- Pelagic Cormorant -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Pelagic Cormorant</h2>
-          <div class="bird-sci">Urile pelagicus</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Seabird</span>
-          <span class="pill"><span class="pill-dot"></span> Cliff & rock perch</span>
-          <span class="pill"><span class="pill-dot"></span> Underwater hunter</span>
-        </div>
-      </div>
+<div class="critter-grid">
+<img src="jelly.jpg">
+<div class="facts">
+<b>ID:</b> Transparent bell<br>
+<b>Movement:</b> Drifting<br>
+</div>
+</div>
 
-      <div class="bird-grid">
-        <img class="bird-photo" src="bird4.jpg" alt="Pelagic Cormorant">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Slender cormorant with long neck; often looks “sleeker” than double-crested.</span></div>
-          <div class="fact"><b>Habitat</b><span>Rocky shorelines, islands, offshore rocks; coastal Puget Sound fits.</span></div>
-          <div class="fact"><b>Behavior</b><span>Dives and swims underwater for fish; often perches to dry wings.</span></div>
-          <div class="fact"><b>Silhouette</b><span>Classic cormorant posture: upright with a slight “cobra” neck curve.</span></div>
-          <div class="fact"><b>Tell</b><span>If it’s on a rock looking smug and aerodynamic, you’re probably close.</span></div>
-        </div>
-      </div>
+</div>
 
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/pelagic-cormorant" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
-
-    <!-- Bald Eagle -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Bald Eagle</h2>
-          <div class="bird-sci">Haliaeetus leucocephalus</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Raptor</span>
-          <span class="pill"><span class="pill-dot"></span> Apex shoreline</span>
-          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
-        </div>
-      </div>
-
-      <div class="bird-grid">
-        <img class="bird-photo" src="bald.jpg" alt="Bald Eagle">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Adult: white head and tail; massive yellow bill; huge wings.</span></div>
-          <div class="fact"><b>Habitat</b><span>Near water with tall trees for perching and nesting.</span></div>
-          <div class="fact"><b>Behavior</b><span>Soars, perches, and opportunistically hunts fish and waterfowl.</span></div>
-          <div class="fact"><b>Sound</b><span>High, chattery calls (not the Hollywood hawk scream).</span></div>
-          <div class="fact"><b>Moment</b><span>Everything else goes quiet when one cruises overhead.</span></div>
-        </div>
-      </div>
-
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/bald-eagle" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
-
-    <!-- Bufflehead -->
-    <article class="bird-card">
-      <div class="bird-head">
-        <div>
-          <h2 class="bird-name">Bufflehead</h2>
-          <div class="bird-sci">Bucephala albeola</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Small diving duck</span>
-          <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
-          <span class="pill"><span class="pill-dot"></span> Fast & buoyant</span>
-        </div>
-      </div>
-
-      <div class="bird-grid">
-        <img class="bird-photo" src="bird5.jpg" alt="Bufflehead">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Male: bold white head patch on dark head; compact “bobble” profile.</span></div>
-          <div class="fact"><b>Habitat</b><span>Protected bays and coves; often close to shore.</span></div>
-          <div class="fact"><b>Behavior</b><span>Quick dives for insects/crustaceans; pops up like a cork.</span></div>
-          <div class="fact"><b>Movement</b><span>Often in small groups; very “zip and dive” energy.</span></div>
-          <div class="fact"><b>Spotting tip</b><span>Watch for synchronized dips—like tiny periscopes disappearing.</span></div>
-        </div>
-      </div>
-
-      <div class="source">
-        Source:
-        <a href="https://www.audubon.org/field-guide/bird/bufflehead" target="_blank" rel="noopener">
-          Audubon Field Guide
-        </a>
-      </div>
-    </article>
-
-  </main>
+</main>
 </div>
 
 </body>
