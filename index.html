@@ -10,7 +10,6 @@
     :root {
       --max: 980px;
       --sidebar: 250px;
-
       --bg-top: #e0f2fe;
       --bg-bottom: #0f172a;
       --card-bg: #ffffff;
@@ -27,11 +26,13 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(to bottom, var(--bg-top), #c7e0ff 60%, var(--bg-bottom));
+      background:
+        radial-gradient(circle at top right, rgba(14,165,233,0.35), transparent 35%),
+        linear-gradient(to bottom, var(--bg-top), #c7e0ff 60%, var(--bg-bottom));
       color: var(--text-main);
+      min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
@@ -39,6 +40,37 @@
       background: rgba(15, 23, 42, 0.98);
       color: #f9fafb;
       padding: 1.5rem 1rem;
+      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-badge {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(14,165,233,0.12);
+    }
+
+    .sidebar-subtitle {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-nav {
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding-top: 0.75rem;
     }
 
     .sidebar a {
@@ -47,39 +79,70 @@
       color: #e5e7eb;
       text-decoration: none;
       border-radius: 10px;
+      transition: background 0.18s ease, transform 0.12s ease;
+    }
+
+    .sidebar a:hover {
+      background: rgba(148, 163, 184, 0.18);
+      transform: translateX(1px);
     }
 
     .sidebar a.current {
       background: rgba(34, 197, 94, 0.16);
       color: #bbf7d0;
+      border: 1px solid rgba(74, 222, 128, 0.35);
     }
 
     .content { margin-left: var(--sidebar); }
 
     header {
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 1rem;
       text-align: center;
     }
 
-    header h1 { margin: 0; }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
 
-    header p { color: var(--text-muted); }
+    header p {
+      color: var(--text-muted);
+    }
 
     main {
       max-width: var(--max);
       margin: auto;
-      padding: 1rem;
+      padding: 1rem 1rem 3rem;
     }
 
     .hero-card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 22px;
       padding: 1.5rem;
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 22px 50px rgba(15,23,42,0.18);
       text-align: center;
+      border: 1px solid rgba(255,255,255,0.75);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* MAGAZINE LAYOUT */
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent-strong), var(--accent), #38bdf8);
+    }
+
+    .hero-card h2 {
+      margin-top: 0.5rem;
+    }
+
+    .hero-card p {
+      color: var(--text-muted);
+    }
+
     .hero-gallery {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -88,7 +151,46 @@
     }
 
     .hero-main {
+      position: relative;
+      min-height: 320px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.25);
+    }
+
+    .hero-main img,
+    .hero-side img {
+      width: 100%;
       height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .hero-main:hover img,
+    .hero-side img:hover {
+      transform: scale(1.025);
+      filter: brightness(1.03);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 1rem;
+      color: white;
+      text-align: left;
+      background: linear-gradient(to top, rgba(15,23,42,0.78), transparent);
+    }
+
+    .hero-overlay strong {
+      display: block;
+      font-size: 1.15rem;
+    }
+
+    .hero-overlay span {
+      font-size: 0.9rem;
+      opacity: 0.9;
     }
 
     .hero-side {
@@ -96,26 +198,11 @@
       gap: 0.75rem;
     }
 
-    .hero-gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .hero-side img {
+      height: 155px;
       border-radius: 16px;
       box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
-      transition: transform 0.2s ease;
-    }
-
-    .hero-gallery img:hover {
-      transform: scale(1.02);
-    }
-
-    .hero-main img {
-      height: 100%;
-      min-height: 300px;
-    }
-
-    .hero-side img {
-      height: 146px;
+      cursor: pointer;
     }
 
     .hero-links {
@@ -133,18 +220,65 @@
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
+      box-shadow: 0 12px 28px rgba(14,148,136,0.35);
+    }
+
+    .hero-link:hover {
+      filter: brightness(1.04);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.9);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 88vh;
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
     }
 
     @media(max-width:720px){
-      .sidebar{position:static;width:100%;}
-      .content{margin-left:0;}
+      .sidebar {
+        position: static;
+        width: 100%;
+      }
+
+      .content {
+        margin-left: 0;
+      }
 
       .hero-gallery {
         grid-template-columns: 1fr;
       }
 
+      .hero-main {
+        min-height: 260px;
+      }
+
       .hero-side img {
-        height: 200px;
+        height: 210px;
       }
     }
   </style>
@@ -153,11 +287,19 @@
 <body>
 
 <nav class="sidebar">
-  <a href="index.html" class="current">Home</a>
-  <a href="kayak.html">Paddle Log</a>
-  <a href="cove-birds.html">Cove Birds</a>
-  <a href="cove-critters.html">Cove Critters</a>
-  <a href="frog-rock.html">Frog Rock</a>
+  <div class="sidebar-title">
+    <span class="sidebar-badge"></span>
+    Murden Cove
+  </div>
+  <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
+
+  <div class="sidebar-nav">
+    <a href="index.html" class="current">Home</a>
+    <a href="kayak.html">Paddle Log</a>
+    <a href="cove-birds.html">Cove Birds</a>
+    <a href="cove-critters.html">Cove Critters</a>
+    <a href="frog-rock.html">Frog Rock</a>
+  </div>
 </nav>
 
 <div class="content">
@@ -169,22 +311,24 @@
 
 <main>
   <section class="hero-card">
-
     <h2>Welcome to the Cove</h2>
     <p>
       A quiet corner for kayak trips, shoreline discoveries,
       and life around Murden Cove.
     </p>
 
-    <!-- MAGAZINE STYLE -->
     <div class="hero-gallery">
-      <div class="hero-main">
-        <img src="IMG_6949.jpg">
+      <div class="hero-main" onclick="openLightbox(featuredImage.src)">
+        <img id="featuredImage" src="IMG_6949.jpg" alt="Murden Cove featured photo">
+        <div class="hero-overlay">
+          <strong>Life around Murden Cove</strong>
+          <span>Kayaks, weather, wildlife, and quiet shoreline moments.</span>
+        </div>
       </div>
 
       <div class="hero-side">
-        <img src="man.jpg">
-        <img src="rainbow.jpg">
+        <img src="man.jpg" alt="Murden Cove photo" onclick="setFeatured(this.src); openLightbox(this.src)">
+        <img src="rainbow.jpg" alt="Rainbow over Murden Cove" onclick="setFeatured(this.src); openLightbox(this.src)">
       </div>
     </div>
 
@@ -194,11 +338,43 @@
       <a class="hero-link" href="cove-critters.html">Cove Critters</a>
       <a class="hero-link" href="frog-rock.html">Frog Rock</a>
     </div>
-
   </section>
 </main>
 
 </div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightboxImage" src="" alt="Expanded Cove photo">
+</div>
+
+<script>
+  const galleryImages = ["IMG_6949.jpg", "man.jpg", "rainbow.jpg"];
+  let currentIndex = 0;
+  const featuredImage = document.getElementById("featuredImage");
+
+  function setFeatured(src) {
+    featuredImage.src = src;
+    currentIndex = galleryImages.findIndex(name => src.includes(name));
+    if (currentIndex < 0) currentIndex = 0;
+  }
+
+  function rotateFeatured() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    featuredImage.src = galleryImages[currentIndex];
+  }
+
+  setInterval(rotateFeatured, 4500);
+
+  function openLightbox(src) {
+    document.getElementById("lightboxImage").src = src;
+    document.getElementById("lightbox").classList.add("active");
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+  }
+</script>
 
 </body>
 </html>
