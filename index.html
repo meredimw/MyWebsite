@@ -8,17 +8,17 @@
 
   <style>
     :root {
-      --max: 980px;
+      --max: 1080px;
       --sidebar: 250px;
       --bg-top: #e0f2fe;
       --bg-bottom: #0f172a;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255,255,255,0.9);
       --text-main: #0f172a;
       --text-muted: #64748b;
       --accent: #0ea5e9;
       --accent-strong: #0f766e;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
-      --radius-lg: 18px;
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.22);
+      --radius-lg: 24px;
     }
 
     * { box-sizing: border-box; }
@@ -27,8 +27,9 @@
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(14,165,233,0.35), transparent 35%),
-        linear-gradient(to bottom, var(--bg-top), #c7e0ff 60%, var(--bg-bottom));
+        radial-gradient(circle at top right, rgba(14,165,233,0.35), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(15,118,110,0.35), transparent 30%),
+        linear-gradient(to bottom, #e0f2fe 0%, #c7e0ff 45%, #64748b 72%, #0f172a 100%);
       color: var(--text-main);
       min-height: 100vh;
     }
@@ -40,12 +41,12 @@
       background: rgba(15, 23, 42, 0.98);
       color: #f9fafb;
       padding: 1.5rem 1rem;
-      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
+      box-shadow: 2px 0 24px rgba(15, 23, 42, .4);
     }
 
     .sidebar-title {
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       display: flex;
@@ -79,12 +80,10 @@
       color: #e5e7eb;
       text-decoration: none;
       border-radius: 10px;
-      transition: background 0.18s ease, transform 0.12s ease;
     }
 
     .sidebar a:hover {
       background: rgba(148, 163, 184, 0.18);
-      transform: translateX(1px);
     }
 
     .sidebar a.current {
@@ -96,33 +95,36 @@
     .content { margin-left: var(--sidebar); }
 
     header {
-      padding: 2rem 1rem 1rem;
       text-align: center;
+      padding: 2.4rem 1rem 1.25rem;
+      color: #0f172a;
     }
 
     header h1 {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.3rem, 5vw, 4.2rem);
+      letter-spacing: -0.04em;
     }
 
     header p {
-      color: var(--text-muted);
+      color: #475569;
+      font-size: 1rem;
+      margin-top: 0.35rem;
     }
 
     main {
       max-width: var(--max);
       margin: auto;
-      padding: 1rem 1rem 3rem;
+      padding: 1rem 1rem 3.5rem;
     }
 
     .hero-card {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(10px);
-      border-radius: 22px;
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
-      box-shadow: 0 22px 50px rgba(15,23,42,0.18);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.8);
       position: relative;
       overflow: hidden;
     }
@@ -131,82 +133,115 @@
       content: "";
       position: absolute;
       inset: 0;
-      height: 6px;
+      height: 7px;
       background: linear-gradient(90deg, var(--accent-strong), var(--accent), #38bdf8);
     }
 
+    .hero-intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 1.25rem;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(14,165,233,0.09);
+      border: 1px solid rgba(14,165,233,0.22);
+      color: #0f766e;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-strong);
+    }
+
     .hero-card h2 {
-      margin-top: 0.5rem;
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.65rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
     }
 
     .hero-card p {
       color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
     }
 
     .hero-gallery {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 0.75rem;
-      margin-top: 1rem;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 0.9rem;
+      margin-top: 1.25rem;
     }
 
-    .hero-main {
+    .photo-tile {
       position: relative;
-      min-height: 320px;
-      cursor: pointer;
       overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.28);
+      cursor: pointer;
+      background: #0f172a;
     }
 
-    .hero-main img,
-    .hero-side img {
+    .photo-tile img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
-      transition: transform 0.2s ease, filter 0.2s ease;
+      object-fit: cover;
+      transition: transform 0.25s ease, filter 0.25s ease;
     }
 
-    .hero-main:hover img,
-    .hero-side img:hover {
-      transform: scale(1.025);
-      filter: brightness(1.03);
+    .photo-tile:hover img {
+      transform: scale(1.035);
+      filter: brightness(1.04);
     }
 
-    .hero-overlay {
+    .photo-main {
+      min-height: 430px;
+    }
+
+    .photo-side {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .photo-side .photo-tile {
+      height: 210px;
+    }
+
+    .photo-caption {
       position: absolute;
       inset: auto 0 0 0;
       padding: 1rem;
       color: white;
       text-align: left;
-      background: linear-gradient(to top, rgba(15,23,42,0.78), transparent);
+      background: linear-gradient(to top, rgba(15,23,42,0.82), transparent);
     }
 
-    .hero-overlay strong {
+    .photo-caption strong {
       display: block;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
     }
 
-    .hero-overlay span {
-      font-size: 0.9rem;
+    .photo-caption span {
+      display: block;
+      font-size: 0.88rem;
       opacity: 0.9;
-    }
-
-    .hero-side {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .hero-side img {
-      height: 155px;
-      border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
-      cursor: pointer;
+      margin-top: 0.15rem;
     }
 
     .hero-links {
-      margin-top: 1rem;
+      margin-top: 1.25rem;
       display: flex;
       gap: 0.75rem;
       justify-content: center;
@@ -214,17 +249,18 @@
     }
 
     .hero-link {
-      padding: 0.5rem 1rem;
+      padding: 0.55rem 1.05rem;
       color: white;
       background: linear-gradient(135deg, var(--accent-strong), var(--accent));
       border-radius: 999px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 12px 28px rgba(14,148,136,0.35);
     }
 
     .hero-link:hover {
-      filter: brightness(1.04);
+      filter: brightness(1.05);
+      transform: translateY(-1px);
     }
 
     .lightbox {
@@ -232,7 +268,7 @@
       position: fixed;
       z-index: 999;
       inset: 0;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
@@ -256,7 +292,6 @@
       color: white;
       font-size: 2rem;
       cursor: pointer;
-      line-height: 1;
     }
 
     @media(max-width:720px){
@@ -273,12 +308,12 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-main {
-        min-height: 260px;
+      .photo-main {
+        min-height: 300px;
       }
 
-      .hero-side img {
-        height: 210px;
+      .photo-side .photo-tile {
+        height: 230px;
       }
     }
   </style>
@@ -311,24 +346,40 @@
 
 <main>
   <section class="hero-card">
-    <h2>Welcome to the Cove</h2>
-    <p>
-      A quiet corner for kayak trips, shoreline discoveries,
-      and life around Murden Cove.
-    </p>
+    <div class="hero-intro">
+      <div class="hero-kicker">Murden Cove • Bainbridge Island</div>
+      <h2>Welcome to the Cove</h2>
+      <p>
+        A quiet corner for kayak trips, shoreline discoveries,
+        wildlife notes, weather moments, and life around Murden Cove.
+      </p>
+    </div>
 
     <div class="hero-gallery">
-      <div class="hero-main" onclick="openLightbox(featuredImage.src)">
-        <img id="featuredImage" src="IMG_6949.jpg" alt="Murden Cove featured photo">
-        <div class="hero-overlay">
-          <strong>Life around Murden Cove</strong>
-          <span>Kayaks, weather, wildlife, and quiet shoreline moments.</span>
+      <div class="photo-tile photo-main" onclick="openLightbox('IMG_6949.jpg')">
+        <img src="IMG_6949.jpg" alt="Kayak in Murden Cove">
+        <div class="photo-caption">
+          <strong>On the water</strong>
+          <span>Kayak routes, calm mornings, and the shoreline from the cove.</span>
         </div>
       </div>
 
-      <div class="hero-side">
-        <img src="man.jpg" alt="Murden Cove photo" onclick="setFeatured(this.src); openLightbox(this.src)">
-        <img src="rainbow.jpg" alt="Rainbow over Murden Cove" onclick="setFeatured(this.src); openLightbox(this.src)">
+      <div class="photo-side">
+        <div class="photo-tile" onclick="openLightbox('man.jpg')">
+          <img src="man.jpg" alt="Murden Cove shoreline photo">
+          <div class="photo-caption">
+            <strong>Cove moments</strong>
+            <span>Small scenes from around the water.</span>
+          </div>
+        </div>
+
+        <div class="photo-tile" onclick="openLightbox('rainbow.jpg')">
+          <img src="rainbow.jpg" alt="Rainbow over Murden Cove">
+          <div class="photo-caption">
+            <strong>Weather & light</strong>
+            <span>Rainbows, clouds, and changing skies over Bainbridge.</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -349,23 +400,6 @@
 </div>
 
 <script>
-  const galleryImages = ["IMG_6949.jpg", "man.jpg", "rainbow.jpg"];
-  let currentIndex = 0;
-  const featuredImage = document.getElementById("featuredImage");
-
-  function setFeatured(src) {
-    featuredImage.src = src;
-    currentIndex = galleryImages.findIndex(name => src.includes(name));
-    if (currentIndex < 0) currentIndex = 0;
-  }
-
-  function rotateFeatured() {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    featuredImage.src = galleryImages[currentIndex];
-  }
-
-  setInterval(rotateFeatured, 4500);
-
   function openLightbox(src) {
     document.getElementById("lightboxImage").src = src;
     document.getElementById("lightbox").classList.add("active");
