@@ -9,7 +9,6 @@
     :root {
       --max: 980px;
       --sidebar: 250px;
-
       --bg-top: #e0f2fe;
       --bg-bottom: #0f172a;
       --card-bg: #ffffff;
@@ -20,26 +19,15 @@
       --accent-strong: #0f766e;
       --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
       --radius-lg: 18px;
-      --radius-md: 10px;
-      --pill-bg: rgba(59, 130, 246, 0.06);
-      --pill-border: rgba(148, 163, 184, 0.5);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        var(--bg-top),
-        #e2f3ff 30%,
-        #c7e0ff 55%,
-        #9ca3af 70%,
-        var(--bg-bottom) 100%
-      );
+      font-family: system-ui;
+      background: linear-gradient(to bottom, var(--bg-top), #c7e0ff 60%, var(--bg-bottom));
       color: var(--text-main);
-      min-height: 100vh;
     }
 
     .sidebar {
@@ -48,354 +36,141 @@
       width: var(--sidebar);
       background: rgba(15, 23, 42, 0.98);
       color: #f9fafb;
-      overflow-y: auto;
       padding: 1.5rem 1rem;
-      box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .sidebar-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .sidebar-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .sidebar-badge {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-soft);
-    }
-
-    .sidebar-subtitle {
-      font-size: 0.85rem;
-      color: #cbd5f5;
-    }
-
-    .sidebar-nav {
-      margin-top: 0.5rem;
-      border-top: 1px solid rgba(148, 163, 184, 0.4);
-      padding-top: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
     }
 
     .sidebar a {
-      display: block;
-      padding: 10px 12px;
-      color: #e5e7eb;
-      text-decoration: none;
-      font-size: 0.98rem;
-      border-radius: 10px;
-      transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
-    }
-
-    .sidebar a:hover {
-      background: rgba(148, 163, 184, 0.18);
-      transform: translateX(1px);
-      color: #f9fafb;
+      display:block;
+      padding:8px;
+      color:#e5e7eb;
+      text-decoration:none;
     }
 
     .sidebar a.current {
-      background: rgba(34, 197, 94, 0.16);
-      color: #bbf7d0;
-      border: 1px solid rgba(74, 222, 128, 0.35);
+      background:rgba(34,197,94,0.2);
     }
 
     .content { margin-left: var(--sidebar); }
 
-    header {
-      padding: 2rem 1.25rem 0.75rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0 0 .25rem;
-      font-size: clamp(1.9rem, 3vw + 1rem, 2.4rem);
-    }
-
-    header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.98rem;
-    }
-
     main {
       max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.25rem 2.5rem;
+      margin:auto;
+      padding:1rem;
     }
 
     .critter-card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
+      background:white;
+      border-radius:18px;
+      padding:1.25rem;
+      margin-bottom:1.25rem;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .critter-head {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-      align-items: baseline;
-    }
-
-    .critter-name {
-      font-size: 1.25rem;
-      margin: 0;
-    }
-
-    .critter-sci {
-      font-style: italic;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.4rem;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.18rem 0.7rem;
-      border-radius: 999px;
-      background: var(--pill-bg);
-      border: 1px solid var(--pill-border);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent-strong);
     }
 
     .critter-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1rem;
-      align-items: start;
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:1rem;
     }
 
-    .photo-stack {
-      display: grid;
-      gap: 0.85rem;
-    }
+    img { width:100%; border-radius:14px; }
 
-    img.critter-photo {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.22);
-      display: block;
-    }
+    .facts { padding:10px; background:#f3f4f6; border-radius:12px; }
 
-    .facts {
-      background: rgba(2, 6, 23, 0.03);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: 16px;
-      padding: 0.9rem;
-    }
+    .note { margin-top:10px; padding:10px; background:#e0f2fe; border-radius:12px; }
 
-    .facts h3 {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #0b4a6f;
-      margin: 0 0 0.6rem;
-    }
-
-    .fact {
-      border-top: 1px dashed rgba(148, 163, 184, 0.45);
-      padding: 0.5rem 0;
-    }
-
-    .fact:first-child { border-top: none; }
-
-    .fact b { font-size: 0.9rem; }
-
-    .fact span {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.35;
-    }
-
-    .note {
-      margin-top: 0.85rem;
-      padding: 0.85rem 0.95rem;
-      border-radius: 16px;
-      background: rgba(14, 165, 233, 0.09);
-      border: 1px solid rgba(14, 165, 233, 0.22);
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.4;
-    }
-
-    @media (max-width: 900px) {
-      .critter-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .sidebar {
-        position: static;
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0.75rem 1rem;
-      }
-
-      .sidebar-subtitle { display: none; }
-      .content { margin-left: 0; }
+    @media(max-width:720px){
+      .sidebar{position:static;width:100%;}
+      .content{margin-left:0;}
+      .critter-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
+
 <body>
 
 <nav class="sidebar">
-  <div class="sidebar-content">
-    <div class="sidebar-title">
-      <span class="sidebar-badge"></span>
-      Murden Cove
-    </div>
-    <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
-  </div>
-  <div class="sidebar-nav">
-    <a href="index.html">Home</a>
-    <a href="kayak.html">Paddle Log</a>
-    <a href="cove-birds.html">Cove Birds</a>
-    <a href="cove-critters.html" class="current">Cove Critters</a>
-    <a href="frog-rock.html">Frog Rock</a>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="kayak.html">Paddle Log</a>
+  <a href="cove-birds.html">Cove Birds</a>
+  <a href="cove-critters.html" class="current">Cove Critters</a>
+  <a href="frog-rock.html">Frog Rock</a>
 </nav>
 
 <div class="content">
-  <header>
-    <h1>Cove Critters</h1>
-    <p>A catalog of animals and marine life spotted around Murden Cove and nearby shoreline.</p>
-  </header>
+<main>
 
-  <main>
+<!-- Moon Glow Anemone -->
+<div class="critter-card">
+<h2>Moon Glow Anemone</h2>
+<i>Anthopleura artemisia</i>
 
-    <!-- Moon Glow Anemone -->
-    <article class="critter-card">
-      <div class="critter-head">
-        <div>
-          <h2 class="critter-name">Moon Glow Anemone</h2>
-          <div class="critter-sci">Anthopleura artemisia</div>
-          <div class="pill-row">
-            <span class="pill"><span class="pill-dot"></span> Sea anemone</span>
-            <span class="pill"><span class="pill-dot"></span> Tidepool resident</span>
-            <span class="pill"><span class="pill-dot"></span> Pacific Northwest shoreline</span>
-          </div>
-        </div>
-      </div>
+<div class="critter-grid">
+<img src="Moonglow anenome.jpg">
+<div class="facts">
+<b>ID:</b> Soft glowing anemone<br>
+<b>Habitat:</b> Tidepools<br>
+<b>Movement:</b> Stationary<br>
+</div>
+</div>
 
-      <div class="critter-grid">
-        <img class="critter-photo" src="Moonglow anenome.jpg" alt="Moon Glow Anemone">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Soft-bodied anemone with a rounded column and a crown of tentacles that can look pale, greenish, lavender, or “glowy” in shallow water.</span></div>
-          <div class="fact"><b>Size</b><span>Usually small to medium-sized, often only a few inches across when fully open.</span></div>
-          <div class="fact"><b>Where you’ll see it</b><span>Attached to rocks, pilings, shells, or other hard surfaces in tidepools and protected nearshore areas.</span></div>
-          <div class="fact"><b>Movement</b><span>Mostly stays attached in one place, but can slowly shift its position over time.</span></div>
-          <div class="fact"><b>Sting</b><span>Uses stinging cells to catch tiny prey; best observed gently without touching or disturbing it.</span></div>
-        </div>
-      </div>
+<div class="note">Look during low tide.</div>
+</div>
 
-      <div class="note">
-        Look for anemones during lower tides, especially on shaded rocks or protected edges where the water stays calm.
-      </div>
-    </article>
+<!-- Humpback Whale -->
+<div class="critter-card">
+<h2>Humpback Whale</h2>
+<i>Megaptera novaeangliae</i>
 
-    <!-- Humpback Whale -->
-    <article class="critter-card">
-      <div class="critter-head">
-        <div>
-          <h2 class="critter-name">Humpback Whale</h2>
-          <div class="critter-sci">Megaptera novaeangliae</div>
-          <div class="pill-row">
-            <span class="pill"><span class="pill-dot"></span> Marine mammal</span>
-            <span class="pill"><span class="pill-dot"></span> Baleen whale</span>
-            <span class="pill"><span class="pill-dot"></span> Puget Sound visitor</span>
-          </div>
-        </div>
-      </div>
+<div class="critter-grid">
+<div>
+<img src="Humpback 1.jpg">
+<img src="Humpback 2.jpg">
+</div>
 
-      <div class="critter-grid">
-        <div class="photo-stack">
-          <img class="critter-photo" src="Humpback 1.jpg" alt="Humpback Whale in Puget Sound">
-          <img class="critter-photo" src="Humpback 2.jpg" alt="Humpback Whale surfacing">
-        </div>
+<div class="facts">
+<b>Size:</b> 40–50 ft<br>
+<b>Behavior:</b> Breaching<br>
+</div>
+</div>
 
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Large whale with a rounded back, long pectoral fins, and a small dorsal fin often seen after the blow as the whale arches to dive.</span></div>
-          <div class="fact"><b>Size</b><span>Adults can reach roughly 40 to 50 feet long, making them one of the largest animals sometimes seen in Puget Sound.</span></div>
-          <div class="fact"><b>Where you’ll see it</b><span>Open water, channels, and feeding areas where small schooling fish or krill may be present.</span></div>
-          <div class="fact"><b>Movement</b><span>Often travels by surfacing, breathing, arching, and diving; tail flukes may be visible on deeper dives.</span></div>
-          <div class="fact"><b>Behavior</b><span>Known for dramatic surface activity, long migrations, and bubble-net or lunge-feeding behavior in productive waters.</span></div>
-        </div>
-      </div>
+<div class="note">Keep distance.</div>
+</div>
 
-      <div class="note">
-        If you see a whale from shore or a boat, give it plenty of distance and avoid changing its path. The best view is usually from a respectful distance.
-      </div>
-    </article>
+<!-- Harbor Seal -->
+<div class="critter-card">
+<h2>Harbor Seal</h2>
+<i>Phoca vitulina</i>
 
-    <!-- Moon Jelly -->
-    <article class="critter-card">
-      <div class="critter-head">
-        <div>
-          <h2 class="critter-name">Moon Jelly</h2>
-          <div class="critter-sci">Aurelia aurita</div>
-          <div class="pill-row">
-            <span class="pill"><span class="pill-dot"></span> Jellyfish</span>
-            <span class="pill"><span class="pill-dot"></span> Nearshore drifter</span>
-            <span class="pill"><span class="pill-dot"></span> Common in Puget Sound</span>
-          </div>
-        </div>
-      </div>
+<div class="critter-grid">
+<img src="Seal.jpg">
 
-      <div class="critter-grid">
-        <img class="critter-photo" src="jelly.jpg" alt="Moon Jelly (Aurelia aurita)">
-        <div class="facts">
-          <h3>Quick facts</h3>
-          <div class="fact"><b>ID keys</b><span>Translucent “moon” bell with four faint, horseshoe-shaped rings (gonads) visible in the center.</span></div>
-          <div class="fact"><b>Size</b><span>Typically a few inches across; can appear larger depending on bloom conditions.</span></div>
-          <div class="fact"><b>Where you’ll see it</b><span>Quiet coves, docks, protected bays—often near the surface on calm days.</span></div>
-          <div class="fact"><b>Movement</b><span>Slow pulsing drift; mostly carried by currents and wind.</span></div>
-          <div class="fact"><b>Sting</b><span>Generally mild for humans, but still best admired without handling.</span></div>
-        </div>
-      </div>
-    </article>
+<div class="facts">
+<b>ID:</b> Rounded head, spotted coat<br>
+<b>Size:</b> 5–6 ft<br>
+<b>Habitat:</b> Shorelines and docks<br>
+<b>Behavior:</b> Curious, often watching<br>
+</div>
+</div>
 
-  </main>
+<div class="note">Common year-round in Puget Sound.</div>
+</div>
+
+<!-- Moon Jelly -->
+<div class="critter-card">
+<h2>Moon Jelly</h2>
+<i>Aurelia aurita</i>
+
+<div class="critter-grid">
+<img src="jelly.jpg">
+<div class="facts">
+<b>ID:</b> Transparent bell<br>
+<b>Movement:</b> Drifting<br>
+</div>
+</div>
+
+</div>
+
+</main>
 </div>
 
 </body>
