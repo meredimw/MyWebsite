@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Cove Birds • MurdenCove.com</title>
+
   <style>
     :root {
       --max: 980px;
       --sidebar: 250px;
-
       --bg-top: #e0f2fe;
       --bg-bottom: #0f172a;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255,255,255,0.92);
       --text-main: #0f172a;
       --text-muted: #64748b;
       --accent: #0ea5e9;
       --accent-soft: rgba(14,165,233,0.12);
       --accent-strong: #0f766e;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
-      --radius-lg: 18px;
-      --radius-md: 10px;
+      --shadow-soft: 0 22px 50px rgba(15,23,42,0.18);
+      --radius-lg: 22px;
       --pill-bg: rgba(59, 130, 246, 0.06);
       --pill-border: rgba(148, 163, 184, 0.5);
     }
@@ -29,32 +28,34 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(
-        to bottom,
-        var(--bg-top),
-        #e2f3ff 30%,
-        #c7e0ff 55%,
-        #9ca3af 70%,
-        var(--bg-bottom) 100%
-      );
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(14,165,233,0.35), transparent 35%),
+        linear-gradient(to bottom, var(--bg-top), #c7e0ff 55%, #334155 78%, var(--bg-bottom));
       color: var(--text-main);
       min-height: 100vh;
     }
 
-    /* Sidebar */
     .sidebar {
       position: fixed;
       inset: 0 auto 0 0;
       width: var(--sidebar);
+      height: 100%;
       background: rgba(15, 23, 42, 0.98);
       color: #f9fafb;
+      overflow-y: auto;
       padding: 1.5rem 1rem;
       box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
       z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .sidebar-title {
@@ -84,6 +85,9 @@
       margin-top: 0.5rem;
       border-top: 1px solid rgba(148, 163, 184, 0.4);
       padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .sidebar a {
@@ -93,10 +97,14 @@
       text-decoration: none;
       font-size: 0.98rem;
       border-radius: 10px;
-      transition: background 0.18s ease;
+      transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
     }
 
-    .sidebar a:hover { background: rgba(148, 163, 184, 0.18); }
+    .sidebar a:hover {
+      background: rgba(148, 163, 184, 0.18);
+      transform: translateX(1px);
+      color: #f9fafb;
+    }
 
     .sidebar a.current {
       background: rgba(34, 197, 94, 0.16);
@@ -107,35 +115,43 @@
     .content { margin-left: var(--sidebar); }
 
     header {
-      padding: 2rem 1.25rem 0.75rem;
       text-align: center;
+      padding: 2rem 1rem 1rem;
     }
 
     header h1 {
-      margin: 0 0 .25rem;
-      font-size: clamp(1.9rem, 3vw + 1rem, 2.4rem);
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
     }
 
     header p {
-      margin: 0;
       color: var(--text-muted);
-      font-size: 0.98rem;
     }
 
     main {
       max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.25rem 2.5rem;
+      margin: auto;
+      padding: 1rem 1rem 3rem;
     }
 
-    /* Bird cards */
     .bird-card {
+      position: relative;
+      overflow: hidden;
       background: var(--card-bg);
+      backdrop-filter: blur(10px);
       border-radius: var(--radius-lg);
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
+      padding: 1.35rem;
+      margin-bottom: 1.35rem;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      border: 1px solid rgba(255,255,255,0.75);
+    }
+
+    .bird-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent-strong), var(--accent), #38bdf8);
     }
 
     .bird-head {
@@ -143,29 +159,34 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
+      align-items: baseline;
     }
 
-    .bird-name { font-size: 1.25rem; margin: 0; }
+    .bird-name {
+      font-size: 1.35rem;
+      margin: 0;
+    }
 
     .bird-sci {
       font-style: italic;
       color: var(--text-muted);
       font-size: 0.95rem;
+      margin-top: 0.2rem;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.45rem;
-      margin-top: 0.4rem;
+      margin-top: 0.55rem;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.18rem 0.7rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 999px;
       background: var(--pill-bg);
       border: 1px solid var(--pill-border);
@@ -190,14 +211,15 @@
     img.bird-photo {
       width: 100%;
       border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.22);
+      box-shadow: 0 16px 36px rgba(15,23,42,0.25);
+      display: block;
     }
 
     .facts {
-      background: rgba(2, 6, 23, 0.03);
+      background: rgba(2, 6, 23, 0.035);
       border: 1px solid rgba(148, 163, 184, 0.35);
       border-radius: 16px;
-      padding: 0.9rem;
+      padding: 0.95rem;
     }
 
     .facts h3 {
@@ -213,28 +235,37 @@
       padding: 0.5rem 0;
     }
 
-    .fact:first-child { border-top: none; }
+    .fact:first-of-type {
+      border-top: none;
+    }
 
-    .fact b { font-size: 0.9rem; }
+    .fact b {
+      font-size: 0.9rem;
+    }
+
     .fact span {
       display: block;
       font-size: 0.9rem;
       color: var(--text-muted);
+      line-height: 1.35;
+      margin-top: 0.15rem;
     }
 
     .source {
-      margin-top: 0.75rem;
+      margin-top: 0.9rem;
       font-size: 0.88rem;
       color: var(--text-muted);
     }
 
     .source a {
       color: #0b4a6f;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
     }
 
-    .source a:hover { text-decoration: underline; }
+    .source a:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 900px) {
       .bird-grid { grid-template-columns: 1fr; }
@@ -244,23 +275,25 @@
       .sidebar {
         position: static;
         width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
+        height: auto;
       }
-      .sidebar-subtitle { display: none; }
+
       .content { margin-left: 0; }
     }
   </style>
 </head>
+
 <body>
 
 <nav class="sidebar">
-  <div>
+  <div class="sidebar-content">
     <div class="sidebar-title">
-      <span class="sidebar-badge"></span> Murden Cove
+      <span class="sidebar-badge"></span>
+      Murden Cove
     </div>
     <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
   </div>
+
   <div class="sidebar-nav">
     <a href="index.html">Home</a>
     <a href="kayak.html">Paddle Log</a>
@@ -278,17 +311,17 @@
 
   <main>
 
-    <!-- Common Merganser (updated) -->
+    <!-- Common Merganser -->
     <article class="bird-card">
       <div class="bird-head">
         <div>
           <h2 class="bird-name">Common Merganser</h2>
           <div class="bird-sci">Mergus merganser</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Diving duck</span>
-          <span class="pill"><span class="pill-dot"></span> Fish-eater</span>
-          <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Diving duck</span>
+            <span class="pill"><span class="pill-dot"></span> Fish-eater</span>
+            <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
+          </div>
         </div>
       </div>
 
@@ -318,11 +351,11 @@
         <div>
           <h2 class="bird-name">Great Blue Heron</h2>
           <div class="bird-sci">Ardea herodias</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Wader</span>
-          <span class="pill"><span class="pill-dot"></span> Shoreline hunter</span>
-          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Wader</span>
+            <span class="pill"><span class="pill-dot"></span> Shoreline hunter</span>
+            <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+          </div>
         </div>
       </div>
 
@@ -352,11 +385,11 @@
         <div>
           <h2 class="bird-name">Black Guillemot</h2>
           <div class="bird-sci">Cepphus grylle</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Seabird</span>
-          <span class="pill"><span class="pill-dot"></span> Diver</span>
-          <span class="pill"><span class="pill-dot"></span> Coastal</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Seabird</span>
+            <span class="pill"><span class="pill-dot"></span> Diver</span>
+            <span class="pill"><span class="pill-dot"></span> Coastal</span>
+          </div>
         </div>
       </div>
 
@@ -386,11 +419,11 @@
         <div>
           <h2 class="bird-name">Pelagic Cormorant</h2>
           <div class="bird-sci">Urile pelagicus</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Seabird</span>
-          <span class="pill"><span class="pill-dot"></span> Cliff & rock perch</span>
-          <span class="pill"><span class="pill-dot"></span> Underwater hunter</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Seabird</span>
+            <span class="pill"><span class="pill-dot"></span> Cliff & rock perch</span>
+            <span class="pill"><span class="pill-dot"></span> Underwater hunter</span>
+          </div>
         </div>
       </div>
 
@@ -414,17 +447,51 @@
       </div>
     </article>
 
+    <!-- Osprey -->
+    <article class="bird-card">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Osprey</h2>
+          <div class="bird-sci">Pandion haliaetus</div>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Raptor</span>
+            <span class="pill"><span class="pill-dot"></span> Fish hunter</span>
+            <span class="pill"><span class="pill-dot"></span> Shoreline visitor</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bird-grid">
+        <img class="bird-photo" src="EagleBird.jpg" alt="Osprey">
+        <div class="facts">
+          <h3>Quick facts</h3>
+          <div class="fact"><b>ID keys</b><span>Large raptor with white underside, dark brown or gray accents, and a bold dark eye stripe.</span></div>
+          <div class="fact"><b>Flight ID</b><span>Often shows a characteristic “M” shape in flight, with long angled wings.</span></div>
+          <div class="fact"><b>Habitat</b><span>Usually found near water, including coves, bays, lakes, rivers, and shorelines where fish are available.</span></div>
+          <div class="fact"><b>Behavior</b><span>Specialized fish hunter; may hover briefly before plunging feet-first toward the water.</span></div>
+          <div class="fact"><b>Moment</b><span>Easy to mistake for an eagle at first glance, until the wing shape and fishing style give it away.</span></div>
+        </div>
+      </div>
+
+      <div class="source">
+        Source:
+        <a href="https://www.audubon.org/field-guide/bird/osprey" target="_blank" rel="noopener">
+          Audubon Field Guide
+        </a>
+      </div>
+    </article>
+
     <!-- Bald Eagle -->
     <article class="bird-card">
       <div class="bird-head">
         <div>
           <h2 class="bird-name">Bald Eagle</h2>
           <div class="bird-sci">Haliaeetus leucocephalus</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Raptor</span>
-          <span class="pill"><span class="pill-dot"></span> Apex shoreline</span>
-          <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Raptor</span>
+            <span class="pill"><span class="pill-dot"></span> Apex shoreline</span>
+            <span class="pill"><span class="pill-dot"></span> Year-round resident</span>
+          </div>
         </div>
       </div>
 
@@ -454,11 +521,11 @@
         <div>
           <h2 class="bird-name">Bufflehead</h2>
           <div class="bird-sci">Bucephala albeola</div>
-        </div>
-        <div class="pill-row">
-          <span class="pill"><span class="pill-dot"></span> Small diving duck</span>
-          <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
-          <span class="pill"><span class="pill-dot"></span> Fast & buoyant</span>
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Small diving duck</span>
+            <span class="pill"><span class="pill-dot"></span> Winter visitor</span>
+            <span class="pill"><span class="pill-dot"></span> Fast & buoyant</span>
+          </div>
         </div>
       </div>
 
