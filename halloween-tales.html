@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Halloween Tales • MurdenCove.com</title>
+
+<style>
+:root {
+  --max: 980px;
+  --sidebar: 250px;
+  --bg-top: #1e1b4b;
+  --bg-bottom: #020617;
+  --card-bg: rgba(255,255,255,0.94);
+  --dark-card: rgba(15, 23, 42, 0.94);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent: #f97316;
+  --accent-soft: rgba(249,115,22,0.14);
+  --accent-strong: #7c2d12;
+  --gold: #facc15;
+  --shadow-soft: 0 22px 50px rgba(15,23,42,0.22);
+  --radius-lg: 22px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(249,115,22,0.28), transparent 35%),
+    linear-gradient(to bottom, var(--bg-top), #312e81 30%, #334155 58%, var(--bg-bottom));
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar);
+  height: 100%;
+  background: rgba(15, 23, 42, 0.98);
+  color: #f9fafb;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-badge {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+.sidebar-subtitle {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.sidebar-nav {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 12px;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.98rem;
+  border-radius: 10px;
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+}
+
+.sidebar a:hover {
+  background: rgba(148, 163, 184, 0.18);
+  transform: translateX(1px);
+  color: #f9fafb;
+}
+
+.sidebar a.current {
+  background: rgba(249,115,22,0.18);
+  color: #fed7aa;
+  border: 1px solid rgba(251,146,60,0.38);
+}
+
+/* CONTENT */
+.content { margin-left: var(--sidebar); }
+
+header {
+  text-align: center;
+  padding: 2rem 1.25rem 1rem;
+  color: #f8fafc;
+}
+
+header h1 {
+  margin: 0 0 .25rem;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  letter-spacing: 0.03em;
+}
+
+header p {
+  margin: 0 auto;
+  color: #dbeafe;
+  max-width: 760px;
+  line-height: 1.5;
+}
+
+/* MAIN */
+main {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 1.25rem 3rem;
+}
+
+.intro-card,
+.entry-card,
+.critique-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1.35rem;
+  overflow: hidden;
+}
+
+.intro-card {
+  background: var(--dark-card);
+  color: #f8fafc;
+  border: 1px solid rgba(251,146,60,0.28);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.intro-pill,
+.entry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(251,146,60,0.35);
+  color: #fed7aa;
+  font-size: 0.82rem;
+  margin-bottom: 0.65rem;
+}
+
+.intro-dot,
+.entry-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.intro-card h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.45rem;
+}
+
+.intro-card p {
+  margin: 0 auto;
+  color: #cbd5e1;
+  line-height: 1.5;
+  max-width: 760px;
+}
+
+.entry-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.75);
+}
+
+.entry-head {
+  background:
+    radial-gradient(circle at top right, rgba(249,115,22,0.22), transparent 35%),
+    linear-gradient(135deg, #111827, #431407);
+  color: #f8fafc;
+  padding: 1.35rem 1.5rem;
+}
+
+.entry-head h2 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.entry-meta {
+  margin-top: 0.4rem;
+  color: #fed7aa;
+  font-size: 0.95rem;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffedd5;
+  font-size: 0.82rem;
+}
+
+.story-body {
+  padding: 1.45rem 1.6rem;
+  line-height: 1.68;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.story-body p {
+  margin: 0 0 1rem;
+}
+
+.pull-quote {
+  margin: 1.15rem 0;
+  padding: 1rem 1.15rem;
+  border-left: 5px solid var(--accent);
+  background: rgba(249,115,22,0.08);
+  color: #7c2d12;
+  font-size: 1.05rem;
+  font-style: italic;
+  border-radius: 0 16px 16px 0;
+}
+
+.critique-card {
+  background: #fff7ed;
+  border: 1px solid rgba(251,146,60,0.32);
+  padding: 1.35rem 1.5rem;
+}
+
+.critique-card h2 {
+  margin: 0 0 0.35rem;
+  color: #7c2d12;
+}
+
+.critique-card h3 {
+  margin: 1rem 0 0.45rem;
+  color: #9a3412;
+}
+
+.critique-card p,
+.critique-card li {
+  color: #475569;
+  line-height: 1.5;
+}
+
+.critique-card ul {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 720px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .content { margin-left: 0; }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  header { padding-top: 1.25rem; }
+
+  .story-body {
+    padding: 1.15rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-content">
+    <div class="sidebar-title">
+      <span class="sidebar-badge"></span>
+      Murden Cove
+    </div>
+    <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <a href="index.html">Home</a>
+    <a href="kayak.html">Paddle Log</a>
+    <a href="cove-birds.html">Cove Birds</a>
+    <a href="cove-critters.html">Cove Critters</a>
+    <a href="frog-rock.html">Frog Rock</a>
+    <a href="halloween-tales.html" class="current">Halloween Tales</a>
+  </div>
+</nav>
+
+<div class="content">
+
+<header>
+  <h1>Halloween Tales</h1>
+  <p>Annual Halloween writing contest submissions, critiques, and strange little stories from the foggy edges of Bainbridge Island.</p>
+</header>
+
+<main>
+
+<section class="intro-card">
+  <div class="intro-pill">
+    <span class="intro-dot"></span>
+    Murden Cove • October Archive
+  </div>
+  <h2>Stories from the Fog</h2>
+  <p>
+    This page collects Halloween writing contest entries and related notes. The first entry,
+    <em>In July</em>, is a literary horror piece about language, harvest, ritual, and the terrible
+    things that may be buried beneath ordinary soil.
+  </p>
+</section>
+
+<article class="entry-card">
+  <div class="entry-head">
+    <div class="entry-pill">
+      <span class="entry-dot"></span>
+      2025 Entry
+    </div>
+    <h2>In July</h2>
+    <div class="entry-meta">Bainbridge Island Halloween Writing Contest • Literary Horror / Weird Fiction</div>
+    <div class="tag-row">
+      <span class="tag">Folk Horror</span>
+      <span class="tag">Weird Fiction</span>
+      <span class="tag">Harvest Ritual</span>
+      <span class="tag">Murden Fog</span>
+    </div>
+  </div>
+
+  <div class="story-body">
+    <p>We know a remote farm on Bainbridge Island, where Ms. Buckley lives. In July, peas grow there.</p>
+
+    <p>What a ridiculous language.</p>
+
+    <p>Only in the New World can you be expected to begin a sentence with the word “in” and have it to bear weight at all. The elders had no such vanity. They began with Names, with things Eternal, things that struck the tongue like hammers on sacrificial altars. The Canaanites had a proper language. Aramaic — the tongue of Jesus — the only carriage strong enough to hold ideas that matter at all. But now? Now we say, with a sigh: Peas. Grow. There. In July.</p>
+
+    <p>They stand in planted rows, upright, against the rolling fog of Murden Cove — like confederate infantrymen with the rage of a thousand dead grandfathers. Mendel’s genetically perfect children, each pod the bastard edict of science, inheritance, and family. In July. Always in July. The word repeats with a slouch, without meaning. An annual metronome in the mouth of schoolmasters, politicians, news-readers.</p>
+
+    <p>Nihilists.</p>
+
+    <p>Subject, verb, predicate. Meaningless, idiotic, propaganda. The Germans had a proper language. Verbalnomen. They recognized there is no noun behind the verb. No do-er behind the deed. God - how different the history of human sociology, human morality, but for the damned grammar teachers. But, you see, the schools are gone now, the teachers are gone now, the peas are gone now. She has picked them. Mrs. Buckley’s hands, coarse from labor, took them from their stalks, neatly, carefully, and carried them off in their baskets – their bassinets and caskets. The peas are gone but their rows stand, empty, the fog hanging low. The Buckley house now waits, empty, except for me. And my work, undone.</p>
+
+    <p>This time of year, this sanctified time of year, she raises a crop of a different kind. Some might call them gourds, of this type or that: turnips, perhaps, or squash. But what is any word in this cursed tongue? Nothing – Shakespeare’s rose could have just have easily been a pumpkin. I call them pumpkins rather than flowers. Why? Because it pleases me and I make things what they are. And why not pumpkins? They are heavy enough. They are round enough. And when my blade enters, they resist just as a pumpkin ought to. And it is Halloween after all - so you’ll protest no more, you little pest, and realize that for thousands of years pumpkins are grown, and carved, on Halloween, on Samhein. A pumpkin is a pumpkin because I say it is, and that is the end of it.</p>
+
+    <p>If you’re still waiting for a perfect orange caricature, bought from a corporate town and borne of alchemy, with a vine and price still clinging to it, you are an imbecile, a grammarian, a petty professor — the sort who would scrape barnacles from the hull of language and polish them up for sale, abandoning the ship for the shells, thinking it is the husk makes the fruit. I should like to show you the meaning of an honest day’s work —what it takes to grow a pumpkin of this sort.</p>
+
+    <div class="pull-quote">
+      So, stop your quibbling and watch as I carve. Here, now, there is no poetry, no metaphor, no language - only my knife.
+    </div>
+
+    <p>It goes in — and the flesh parts. The sound is polite. Small and wet. The smell: thick, sugary, full of copper, you know it well. I reach in with my hand. Strings cling to it. Seeds stick to it — slick, red, glistening. They come away in my fist and fall with a splatter on the wooden floor-boards. You, save the seeds. We must save the seeds. Tradition demands it, and we keep tradition. If you read your Genesis, you’ll read of seeds like this. If you read Leviticus, you’ll read of blood like this. The Fallen scatter both. And the Lord harvests from each of them, just the same.</p>
+
+    <p>Collect them: I have carving to do; creating to do—the eyes first, always the eyes. The windows to the Soul. The Fallen, we make our own souls, now. Deep triangular souls: black shadows, staring at nothing – like everyone honest with themselves does. I scrape them clean. Now, the mouth – no room for the body. The mouth fights – like every other mouth living today. It grins, a cave - full of teeth. Stubborn teeth, but I will have them. I force them, one by one, until they sit in an obedient row, like the stones of Puma Punka that only a being of the sky could see properly; could only make properly. Count them if you must. I do not. What is the number to me – another illusion, another rose, another pumpkin.</p>
+
+    <p>Now watch as I place the candle – Plato’s light; it does nothing but show us shadows, but that is all we have ever really seen – except this: we have made a face free of shadows – we make what light cannot. It glows. Red. It looks at me, and I look back. And we know each other. Now tell me, my Pumpkin: who is the abyss, and who, the monster. Stingy Jack: tried to trick the Devil but was instead denied by God. Now he has only this coal for light. A lantern in the dark that is not enough to see in this Murden Fog, at least not enough to see what really matters.</p>
+
+    <p>But our work is not done. No work, by anyone, is done until the Earth takes them. Look no further than the peas. The peas are gone, but the ground cries for them to replenish it. The soil remembers the peas. Mrs. Buckley’s hands took them, but mine will return to it something stronger, better. Her shovel waits for me. I open the pit. The dark Island soil is hungry for what has been taken from it, what has been stolen from it. History is always a history of theft; but this Halloween, something is finally given back.</p>
+
+    <p>I lower the lantern, cradled the way a mother might her babe, someone’s babe. Then the soil. Again and again the soil. Only soil. Not a mound. Not a trace. Only the soil, tamped down, covered by the lingering fog. The empty pea stalks, rattling in the night air - like bones.</p>
+
+    <p>And when July comes, peas will grow once again on Bainbridge Island. Mrs. Buckley will pick them, and she will smile at how sweet they are. And you will taste them and say, “How fine the peas grow where Mrs. Buckley lives, on Bainbridge Island. In July.”</p>
+
+    <p>But you will not know — not ever — what lantern burns beneath your feet.</p>
+
+    <p>Only I will know.</p>
+
+    <p>Happy Halloween.</p>
+  </div>
+</article>
+
+<section class="critique-card">
+  <h2>Critique Notes</h2>
+  <p><strong>Emily Smiley, BARN Writers’ Studio Programming Coordinator:</strong></p>
+
+  <h3>Things that worked well</h3>
+  <ul>
+    <li>The prose was described as literary, poetic, and “absolutely fantastic.”</li>
+    <li>The pumpkin carving sequence was singled out as the strongest section.</li>
+    <li>The sensory details were especially vivid: the feel of the pumpkin seeds, the sound of the innards, and the smell of fresh pumpkin.</li>
+  </ul>
+
+  <h3>Suggestions for revision</h3>
+  <ul>
+    <li>Cut back on a few metaphors so the strongest ones land harder.</li>
+    <li>Clarify or trim some of the more mysterious language where it creates confusion rather than atmosphere.</li>
+    <li>Lean even more into concrete sensory details, especially around the peas and farm setting.</li>
+  </ul>
+
+  <p>
+    Overall, the critique emphasized that the story’s prose and atmosphere were strong,
+    and that a more focused revision could make the horror sharper and more immediate.
+  </p>
+</section>
+
+</main>
+</div>
+
+</body>
+</html>
