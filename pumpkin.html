@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Pumpkin Patch • MurdenCove.com</title>
+
+<style>
+:root {
+  --max: 980px;
+  --sidebar: 250px;
+
+  --bg-top: #1f2937;
+  --bg-bottom: #020617;
+  --card-bg: rgba(255,255,255,0.93);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent: #f97316;
+  --accent-soft: rgba(249,115,22,0.16);
+  --accent-strong: #9a3412;
+  --shadow-soft: 0 22px 50px rgba(15,23,42,0.22);
+  --radius-lg: 22px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(249,115,22,0.35), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(34,197,94,0.18), transparent 35%),
+    linear-gradient(to bottom, #111827, #374151 45%, var(--bg-bottom));
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar);
+  height: 100%;
+  background: rgba(15, 23, 42, 0.98);
+  color: #f9fafb;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-badge {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+.sidebar-subtitle {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.sidebar-nav {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 12px;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.98rem;
+  border-radius: 10px;
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+}
+
+.sidebar a:hover {
+  background: rgba(148, 163, 184, 0.18);
+  transform: translateX(1px);
+  color: #f9fafb;
+}
+
+.sidebar a.current {
+  background: rgba(249,115,22,0.18);
+  color: #fed7aa;
+  border: 1px solid rgba(251,146,60,0.38);
+}
+
+/* CONTENT */
+.content { margin-left: var(--sidebar); }
+
+header {
+  text-align: center;
+  padding: 2rem 1.25rem 1rem;
+  color: #f8fafc;
+}
+
+header h1 {
+  margin: 0 0 .25rem;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+header p {
+  margin: 0 auto;
+  color: #dbeafe;
+  max-width: 760px;
+  line-height: 1.5;
+}
+
+main {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 1.25rem 3rem;
+}
+
+.intro-card,
+.pumpkin-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1.35rem;
+  overflow: hidden;
+}
+
+.intro-card {
+  background: rgba(15, 23, 42, 0.94);
+  color: #f8fafc;
+  border: 1px solid rgba(251,146,60,0.28);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.intro-pill,
+.pumpkin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(251,146,60,0.35);
+  color: #fed7aa;
+  font-size: 0.82rem;
+  margin-bottom: 0.65rem;
+}
+
+.intro-dot,
+.pumpkin-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.intro-card h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.45rem;
+}
+
+.intro-card p {
+  margin: 0 auto;
+  color: #cbd5e1;
+  line-height: 1.5;
+  max-width: 760px;
+}
+
+.pumpkin-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.75);
+  position: relative;
+}
+
+.pumpkin-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, #9a3412, #f97316, #facc15);
+}
+
+.pumpkin-head {
+  padding: 1.35rem 1.5rem 1rem;
+  text-align: center;
+}
+
+.pumpkin-head h2 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.pumpkin-meta {
+  margin: 0.45rem auto 0;
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.45;
+}
+
+.pumpkin-photo {
+  display: block;
+  width: calc(100% - 2.7rem);
+  max-width: 880px;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.28);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  padding: 0 1.35rem 1.35rem;
+}
+
+.detail {
+  background: rgba(2, 6, 23, 0.035);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  padding: 0.85rem;
+}
+
+.detail b {
+  display: block;
+  font-size: 0.88rem;
+  color: #7c2d12;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.detail span {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.note {
+  margin: 0 1.35rem 1.35rem;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  background: rgba(249,115,22,0.09);
+  border: 1px solid rgba(249,115,22,0.22);
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .content { margin-left: 0; }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  header { padding-top: 1.25rem; }
+
+  .pumpkin-photo {
+    width: calc(100% - 1.5rem);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-content">
+    <div class="sidebar-title">
+      <span class="sidebar-badge"></span>
+      Murden Cove
+    </div>
+    <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <a href="index.html">Home</a>
+    <a href="kayak.html">Paddle Log</a>
+    <a href="cove-birds.html">Cove Birds</a>
+    <a href="cove-critters.html">Cove Critters</a>
+    <a href="frog-rock.html">Frog Rock</a>
+    <a href="halloween-tales.html">Halloween Tales</a>
+    <a href="pumpkin-patch.html" class="current">Pumpkin Patch</a>
+  </div>
+</nav>
+
+<div class="content">
+
+<header>
+  <h1>Pumpkin Patch</h1>
+  <p>
+    A yearly record of pumpkins grown near Murden Cove, carved for Halloween,
+    and added to the autumn archive.
+  </p>
+</header>
+
+<main>
+
+<section class="intro-card">
+  <div class="intro-pill">
+    <span class="intro-dot"></span>
+    Murden Cove • Halloween Harvest
+  </div>
+  <h2>From Vine to Lantern</h2>
+  <p>
+    Each year, this page will collect the pumpkins grown in the yard near Murden Cove —
+    the season, the harvest, the carving, and the final jack-o’-lantern glow.
+  </p>
+</section>
+
+<article class="pumpkin-card">
+  <div class="pumpkin-head">
+    <div class="pumpkin-pill">
+      <span class="pumpkin-dot"></span>
+      2026 Harvest
+    </div>
+    <h2>2026 Pumpkin</h2>
+    <div class="pumpkin-meta">
+      The first entry in the Murden Cove Pumpkin Patch — grown in 2026 and waiting for its Halloween transformation.
+    </div>
+  </div>
+
+  <img class="pumpkin-photo" src="2026Pumpkin.jpg" alt="2026 pumpkin grown near Murden Cove">
+
+  <div class="detail-grid">
+    <div class="detail">
+      <b>Year</b>
+      <span>2026</span>
+    </div>
+    <div class="detail">
+      <b>Location</b>
+      <span>Near Murden Cove, Bainbridge Island</span>
+    </div>
+    <div class="detail">
+      <b>Status</b>
+      <span>Growing now — carving planned for Halloween</span>
+    </div>
+  </div>
+
+  <div class="note">
+    The 2026 pumpkin begins the archive: a small annual record of the yard, the season,
+    and the eventual jack-o’-lantern that comes out of the patch.
+  </div>
+</article>
+
+</main>
+</div>
+
+</body>
+</html>
