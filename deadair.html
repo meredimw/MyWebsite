@@ -1,61 +1,944 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Season 6 - Episode 5</title>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Listen to and download archived episodes of Dead Air."
+  >
+
+  <title>Dead Air Radio Archive</title>
+
+  <style>
+    :root {
+      --ink: #17151d;
+      --paper: #fffaf0;
+      --purple: #5d45bd;
+      --lavender: #aaa8d1;
+      --coral: #f08063;
+      --pink: #ef70c4;
+      --lime: #c8ed52;
+      --blue: #62cce8;
+      --yellow: #ffdc56;
+      --muted: #5f5a69;
+      --shadow: 8px 8px 0 var(--ink);
+      --small-shadow: 4px 4px 0 var(--ink);
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(255, 255, 255, 0.35) 0 2px,
+          transparent 3px
+        ),
+        linear-gradient(
+          135deg,
+          var(--lavender),
+          #817ec2
+        );
+      background-size: 28px 28px, auto;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    audio,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      z-index: 1000;
+      padding: 0.75rem 1rem;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: relative;
+      overflow: hidden;
+      padding: 4.5rem 1.25rem 3.5rem;
+      color: var(--paper);
+      background: var(--ink);
+      border-bottom: 6px solid var(--ink);
+    }
+
+    .site-header::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: -60px;
+      width: 310px;
+      height: 310px;
+      background: var(--coral);
+      border: 5px solid var(--paper);
+      border-radius: 50%;
+      opacity: 0.95;
+    }
+
+    .site-header::after {
+      content: "90.5 FM";
+      position: absolute;
+      right: 20px;
+      bottom: 5px;
+      color: var(--ink);
+      font-size: clamp(2rem, 7vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      transform: rotate(-7deg);
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 2;
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .station-label {
+      display: inline-block;
+      margin: 0 0 1rem;
+      padding: 0.35rem 0.7rem;
+      color: var(--ink);
+      background: var(--lime);
+      border: 3px solid var(--paper);
+      box-shadow: 4px 4px 0 var(--purple);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+    .site-title {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(3.4rem, 12vw, 8.6rem);
+      font-weight: 1000;
+      letter-spacing: -0.085em;
+      line-height: 0.8;
+      text-transform: uppercase;
+    }
+
+    .site-title span {
+      display: block;
+      color: var(--pink);
+      text-shadow:
+        4px 4px 0 var(--paper),
+        8px 8px 0 var(--purple);
+    }
+
+    .site-tagline {
+      max-width: 630px;
+      margin: 2rem 0 0;
+      color: #e8e4ef;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+    }
+
+    /* Navigation */
+
+    .episode-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--yellow);
+      border-bottom: 4px solid var(--ink);
+    }
+
+    .episode-nav-inner {
+      display: flex;
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .episode-nav a {
+      flex: 0 0 auto;
+      padding: 1rem 1.2rem;
+      border-right: 3px solid var(--ink);
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .episode-nav a:hover,
+    .episode-nav a:focus-visible {
+      color: var(--paper);
+      background: var(--purple);
+      outline: none;
+    }
+
+    /* Main content */
+
+    main {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+      padding: 3.5rem 0 5rem;
+    }
+
+    .archive-intro {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: var(--paper);
+      border: 4px solid var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .archive-intro h2 {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .archive-intro p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .signal-icon {
+      position: relative;
+      width: 110px;
+      height: 80px;
+      flex: 0 0 auto;
+    }
+
+    .signal-icon span {
+      position: absolute;
+      bottom: 0;
+      width: 14px;
+      background: var(--purple);
+      border: 3px solid var(--ink);
+    }
+
+    .signal-icon span:nth-child(1) {
+      left: 0;
+      height: 25px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      left: 24px;
+      height: 50px;
+      background: var(--coral);
+    }
+
+    .signal-icon span:nth-child(3) {
+      left: 48px;
+      height: 75px;
+      background: var(--lime);
+    }
+
+    .signal-icon span:nth-child(4) {
+      left: 72px;
+      height: 45px;
+      background: var(--pink);
+    }
+
+    .signal-icon span:nth-child(5) {
+      left: 96px;
+      height: 65px;
+      background: var(--blue);
+    }
+
+    /* Episode cards */
+
+    .episode {
+      scroll-margin-top: 90px;
+      margin: 0 0 4rem;
+      background: var(--paper);
+      border: 5px solid var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .episode-header {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem;
+      color: var(--paper);
+      background: var(--purple);
+      border-bottom: 5px solid var(--ink);
+    }
+
+    .episode:nth-of-type(even) .episode-header {
+      color: var(--ink);
+      background: var(--coral);
+    }
+
+    .episode-header::after {
+      content: "";
+      position: absolute;
+      top: -45px;
+      right: -30px;
+      width: 150px;
+      height: 150px;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          var(--lime) 0 12px,
+          var(--ink) 12px 20px
+        );
+      border: 4px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .episode-number {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      margin: 0 0 0.75rem;
+      padding: 0.25rem 0.6rem;
+      color: var(--ink);
+      background: var(--yellow);
+      border: 3px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--paper);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .episode-title {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 5rem);
+      font-weight: 1000;
+      letter-spacing: -0.065em;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .episode-date {
+      position: relative;
+      z-index: 2;
+      margin: 1rem 0 0;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .episode-body {
+      padding: 1.5rem;
+    }
+
+    .track-list {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 1.25rem;
+      align-items: center;
+      padding: 1.25rem;
+      background: #ffffff;
+      border: 3px solid var(--ink);
+      box-shadow: var(--small-shadow);
+    }
+
+    .track:nth-child(4n + 1) .part-number {
+      background: var(--pink);
+    }
+
+    .track:nth-child(4n + 2) .part-number {
+      background: var(--lime);
+    }
+
+    .track:nth-child(4n + 3) .part-number {
+      background: var(--blue);
+    }
+
+    .track:nth-child(4n + 4) .part-number {
+      background: var(--yellow);
+    }
+
+    .part-number {
+      display: grid;
+      width: 82px;
+      height: 82px;
+      place-items: center;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      font-size: 2.25rem;
+      font-weight: 1000;
+      line-height: 1;
+      transform: rotate(-4deg);
+    }
+
+    .track:nth-child(even) .part-number {
+      transform: rotate(4deg);
+    }
+
+    .track-content {
+      min-width: 0;
+    }
+
+    .track-heading {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .track-heading h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    audio {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      margin: 0;
+    }
+
+    .download-button {
+      display: inline-block;
+      margin-top: 0.9rem;
+      padding: 0.65rem 0.9rem;
+      color: var(--paper);
+      background: var(--ink);
+      border: 3px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--purple);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background 120ms ease;
+    }
+
+    .download-button:hover,
+    .download-button:focus-visible {
+      color: var(--ink);
+      background: var(--lime);
+      box-shadow: 1px 1px 0 var(--ink);
+      outline: none;
+      transform: translate(2px, 2px);
+    }
+
+    .episode-note {
+      margin: 1.5rem 0 0;
+      padding: 1rem;
+      color: var(--ink);
+      background: #eee9ff;
+      border-left: 7px solid var(--purple);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      padding: 3rem 1.25rem;
+      color: var(--paper);
+      background: var(--ink);
+      border-top: 6px solid var(--coral);
+      text-align: center;
+    }
+
+    .site-footer p {
+      margin: 0.4rem 0;
+    }
+
+    .site-footer strong {
+      color: var(--lime);
+    }
+
+    .site-footer a {
+      color: var(--pink);
+      font-weight: 800;
+    }
+
+    .footer-frequency {
+      margin-bottom: 1rem;
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 1000;
+      letter-spacing: -0.07em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    /* Responsive layout */
+
+    @media (max-width: 700px) {
+      .site-header {
+        padding-top: 3rem;
+      }
+
+      .site-header::after {
+        right: 12px;
+        font-size: 2.4rem;
+      }
+
+      .archive-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-icon {
+        display: none;
+      }
+
+      .episode-header {
+        padding: 1.5rem;
+      }
+
+      .episode-header::after {
+        top: -75px;
+        right: -65px;
+      }
+
+      .episode-body {
+        padding: 1rem;
+      }
+
+      .track {
+        grid-template-columns: 1fr;
+      }
+
+      .part-number {
+        width: 64px;
+        height: 64px;
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Season 6 - Episode 5</h1>
+  <a class="skip-link" href="#archive">
+    Skip to episode archive
+  </a>
 
-  <h2>Dead Air</h2>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="station-label">
+        KWCW Radio Archive
+      </p>
 
-  <!-- PART 1 -->
-  <h3>Part 1</h3>
-  <audio controls preload="metadata" style="width:100%;">
-    <source src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <p>
-    <a href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" download>
-      Download Part 1
-    </a>
-  </p>
+      <h1 class="site-title">
+        Dead
+        <span>Air</span>
+      </h1>
 
-  <!-- PART 2 -->
-  <h3>Part 2</h3>
-  <audio controls preload="metadata" style="width:100%;">
-    <source src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h36m36s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <p>
-    <a href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h36m36s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" download>
-      Download Part 2
-    </a>
-  </p>
+      <p class="site-tagline">
+        Archived broadcasts from the strange hours of college radio.
+        Listen online or download individual segments.
+      </p>
+    </div>
+  </header>
 
-  <!-- PART 3 -->
-  <h3>Part 3</h3>
-  <audio controls preload="metadata" style="width:100%;">
-    <source src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h59m19s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <p>
-    <a href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h59m19s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" download>
-      Download Part 3
-    </a>
-  </p>
+  <nav class="episode-nav" aria-label="Episode navigation">
+    <div class="episode-nav-inner">
+      <a href="#season-4-episode-9">
+        Season 4 · Episode 9
+      </a>
 
-  <!-- PART 4 -->
-  <h3>Part 4</h3>
-  <audio controls preload="metadata" style="width:100%;">
-    <source src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-23h21m14s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <p>
-    <a href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-23h21m14s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3" download>
-      Download Part 4
-    </a>
-  </p>
+      <a href="#season-6-episode-5">
+        Season 6 · Episode 5
+      </a>
 
+      <a href="https://kwcwradio.com/" target="_blank" rel="noopener">
+        Visit KWCW
+      </a>
+    </div>
+  </nav>
+
+  <main id="archive">
+    <section class="archive-intro" aria-labelledby="archive-heading">
+      <div>
+        <h2 id="archive-heading">Broadcast Archive</h2>
+
+        <p>
+          Select a part below to begin listening. Starting a new recording
+          will automatically pause any other recording currently playing.
+        </p>
+      </div>
+
+      <div class="signal-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SEASON 4, EPISODE 9
+         ========================================================= -->
+
+    <article class="episode" id="season-4-episode-9">
+      <header class="episode-header">
+        <p class="episode-number">
+          Season 4 · Episode 9
+        </p>
+
+        <h2 class="episode-title">
+          Dead Air
+        </h2>
+
+        <p class="episode-date">
+          Originally broadcast December 4, 2008
+        </p>
+      </header>
+
+      <div class="episode-body">
+        <div class="track-list">
+
+          <!-- Season 4, Episode 9: Part 1 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">1</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 1</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-09h37m45s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-09h37m45s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                download="Dead-Air-S04E09-Part-1.mp3"
+              >
+                Download Part 1
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 4, Episode 9: Part 2 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">2</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 2</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h02m03s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h02m03s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                download="Dead-Air-S04E09-Part-2.mp3"
+              >
+                Download Part 2
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 4, Episode 9: Part 3 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">3</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 3</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h22m50s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h22m50s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                download="Dead-Air-S04E09-Part-3.mp3"
+              >
+                Download Part 3
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 4, Episode 9: Part 4 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">4</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 4</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h42m14s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2026-07-27-10h42m14s-Dead%20Air%20-%20Season%204%20-%20Episode%209%20-%2012-04-2008.mp3-"
+                download="Dead-Air-S04E09-Part-4.mp3"
+              >
+                Download Part 4
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <p class="episode-note">
+          Four-part recording of the December 4, 2008 broadcast.
+        </p>
+      </div>
+    </article>
+
+    <!-- =========================================================
+         SEASON 6, EPISODE 5
+         ========================================================= -->
+
+    <article class="episode" id="season-6-episode-5">
+      <header class="episode-header">
+        <p class="episode-number">
+          Season 6 · Episode 5
+        </p>
+
+        <h2 class="episode-title">
+          Dead Air
+        </h2>
+
+        <p class="episode-date">
+          Four-part broadcast archive
+        </p>
+      </header>
+
+      <div class="episode-body">
+        <div class="track-list">
+
+          <!-- Season 6, Episode 5: Part 1 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">1</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 1</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-20h57m34s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                download="Dead-Air-S06E05-Part-1.mp3"
+              >
+                Download Part 1
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 6, Episode 5: Part 2 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">2</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 2</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h36m36s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h36m36s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                download="Dead-Air-S06E05-Part-2.mp3"
+              >
+                Download Part 2
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 6, Episode 5: Part 3 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">3</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 3</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h59m19s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-22h59m19s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                download="Dead-Air-S06E05-Part-3.mp3"
+              >
+                Download Part 3
+              </a>
+            </div>
+          </section>
+
+          <!-- Season 6, Episode 5: Part 4 -->
+          <section class="track">
+            <div class="part-number" aria-hidden="true">4</div>
+
+            <div class="track-content">
+              <div class="track-heading">
+                <h3>Part 4</h3>
+              </div>
+
+              <audio controls preload="metadata">
+                <source
+                  src="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-23h21m14s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                  type="audio/mpeg"
+                >
+
+                Your browser does not support HTML audio.
+              </audio>
+
+              <a
+                class="download-button"
+                href="https://raw.githubusercontent.com/meredimw/MyWebsite/main/vlc-record-2025-10-24-23h21m14s-Dead%20Air%20-%20Season%206%20-%20Episode%205.2.mp3-.mp3"
+                download="Dead-Air-S06E05-Part-4.mp3"
+              >
+                Download Part 4
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-frequency">
+      Radio Is Not Dead
+    </div>
+
+    <p>
+      An independent archive of <strong>Dead Air</strong> broadcasts.
+    </p>
+
+    <p>
+      Visit
+      <a
+        href="https://kwcwradio.com/"
+        target="_blank"
+        rel="noopener"
+      >
+        KWCW 90.5 FM
+      </a>
+      for current station programming.
+    </p>
+  </footer>
+
+  <script>
+    /*
+      Pause all other recordings when a listener starts a new one.
+      This prevents multiple episode segments from playing together.
+    */
+
+    const audioPlayers = document.querySelectorAll("audio");
+
+    audioPlayers.forEach((currentPlayer) => {
+      currentPlayer.addEventListener("play", () => {
+        audioPlayers.forEach((otherPlayer) => {
+          if (otherPlayer !== currentPlayer) {
+            otherPlayer.pause();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
