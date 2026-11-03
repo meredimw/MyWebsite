@@ -345,7 +345,8 @@ main {
   </p>
 </section>
 
-<article class="pumpkin-card">
+<!-- 2026 pumpkin -->
+<article class="pumpkin-card" id="pumpkin-2026">
   <div class="pumpkin-head">
     <div class="pumpkin-pill">
       <span class="pumpkin-dot"></span>
@@ -353,11 +354,12 @@ main {
     </div>
     <h2>2026 Pumpkin</h2>
     <div class="pumpkin-meta">
-      The first entry in the Murden Cove Pumpkin Patch — grown in 2026 and waiting for its Halloween transformation.
+      The latest addition to the Murden Cove Pumpkin Patch — the 2026 pumpkin,
+      continuing the yearly autumn tradition.
     </div>
   </div>
 
-  <img class="pumpkin-photo" src="2026Pumpkin.jpg" alt="2026 pumpkin grown near Murden Cove">
+  <img class="pumpkin-photo" src="2026P.jpg" alt="2026 pumpkin at Murden Cove" loading="lazy">
 
   <div class="detail-grid">
     <div class="detail">
@@ -369,14 +371,50 @@ main {
       <span>Near Murden Cove, Bainbridge Island</span>
     </div>
     <div class="detail">
-      <b>Status</b>
-      <span>Growing now — carving planned for Halloween</span>
+      <b>Season</b>
+      <span>Autumn 2026</span>
     </div>
   </div>
 
   <div class="note">
-    The 2026 pumpkin begins the archive: a small annual record of the yard, the season,
-    and the eventual jack-o’-lantern that comes out of the patch.
+    The 2026 pumpkin carries on the tradition — another season in the patch and
+    another photograph for the growing Murden Cove autumn archive.
+  </div>
+</article>
+
+<!-- 2025 pumpkin: original photograph -->
+<article class="pumpkin-card" id="pumpkin-2025">
+  <div class="pumpkin-head">
+    <div class="pumpkin-pill">
+      <span class="pumpkin-dot"></span>
+      2025 Harvest
+    </div>
+    <h2>2025 Pumpkin</h2>
+    <div class="pumpkin-meta">
+      The original entry in the Murden Cove Pumpkin Patch archive — a look back at the 2025 growing season.
+    </div>
+  </div>
+
+  <img class="pumpkin-photo" src="2026Pumpkin.jpg" alt="2025 pumpkin grown near Murden Cove" loading="lazy">
+
+  <div class="detail-grid">
+    <div class="detail">
+      <b>Year</b>
+      <span>2025</span>
+    </div>
+    <div class="detail">
+      <b>Location</b>
+      <span>Near Murden Cove, Bainbridge Island</span>
+    </div>
+    <div class="detail">
+      <b>Season</b>
+      <span>Autumn 2025</span>
+    </div>
+  </div>
+
+  <div class="note">
+    The 2025 pumpkin started the archive — the first installment in a yearly record
+    of the garden, the harvest, and Halloween near Murden Cove.
   </div>
 </article>
 
