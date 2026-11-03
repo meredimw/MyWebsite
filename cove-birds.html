@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -355,6 +354,46 @@
       text-decoration: underline;
     }
 
+
+    /* FEATURED NEW ENTRY — matches the existing card design */
+    .bird-card.featured {
+      border-color: rgba(14,165,233,0.45);
+    }
+
+    .bird-card.featured .bird-name { color: #075985; }
+
+    .bird-photo-link {
+      display: block;
+      border-radius: 16px;
+      text-decoration: none;
+    }
+
+    .bird-photo-link:focus-visible {
+      outline: 3px solid #0ea5e9;
+      outline-offset: 4px;
+    }
+
+    .bird-photo-caption {
+      margin: 0.65rem 0 0;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .bird-spotlight {
+      margin: 0 0 1rem;
+      padding: 0.8rem 1rem;
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.22);
+      border-radius: 14px;
+      font-size: 0.94rem;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .source a + a { margin-left: 0.65rem; }
+    .source a + a::before { content: "• "; color: var(--text-muted); }
+
     @media (max-width: 900px) {
       .bird-grid {
         grid-template-columns: 1fr;
@@ -411,6 +450,121 @@
   </header>
 
   <main>
+
+    <!-- Bonaparte's Gull: newly added photo NewBird.jpg -->
+    <article class="bird-card featured" id="bonapartes-gull">
+      <div class="bird-head">
+        <div>
+          <h2 class="bird-name">Bonaparte's Gull</h2>
+          <div class="bird-sci">Chroicocephalus philadelphia</div>
+
+          <div class="pill-row">
+            <span class="pill"><span class="pill-dot"></span> Small gull</span>
+            <span class="pill"><span class="pill-dot"></span> Winter plumage</span>
+            <span class="pill"><span class="pill-dot"></span> Puget Sound shoreline</span>
+            <span class="status-pill status-seasonal">
+              <span class="status-dot"></span> Seasonal Visitor
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <p class="bird-spotlight">
+        <b>The giveaway:</b> A bright white winter head with a distinct dark
+        <b>"ear spot" just behind the eye</b>, a slender black bill, and a
+        delicate, almost tern-like shape. A beautiful seasonal visitor to
+        Puget Sound's bays, beaches, and sheltered waters.
+      </p>
+
+      <div class="bird-grid">
+        <div>
+          <!-- Upload NewBird.jpg to the same directory as cove-birds.html -->
+          <a class="bird-photo-link" href="NewBird.jpg" target="_blank" rel="noopener" aria-label="View Bonaparte's Gull photo full size">
+            <img class="bird-photo" src="NewBird.jpg"
+                 alt="Bonaparte's Gull in white-headed nonbreeding plumage"
+                 loading="lazy" decoding="async">
+          </a>
+          <p class="bird-photo-caption">
+            Bonaparte's Gull in nonbreeding (winter) plumage.
+            Select the photograph to see it full size.
+          </p>
+        </div>
+
+        <div class="facts">
+          <h3>Quick facts</h3>
+
+          <div class="fact">
+            <b>ID keys: the "ear spot"</b>
+            <span>In winter the adult's dark breeding hood is replaced by a mostly
+              white head with a neat dark spot behind the eye. Look also for a
+              tiny, needle-like black bill, pale gray upperwings, and a white body.</span>
+          </div>
+
+          <div class="fact">
+            <b>Summer vs. winter</b>
+            <span>Breeding adults wear a dark black hood and show red legs;
+              nonbreeding adults have a pale head with a gray-black ear mark
+              and usually pinkish legs.</span>
+          </div>
+
+          <div class="fact">
+            <b>Size</b>
+            <span>Among North America's smallest gulls: about 11–12 inches
+              long with a wingspan of approximately 35–39 inches. Much finer
+              and lighter-looking than the large gulls common around docks.</span>
+          </div>
+
+          <div class="fact">
+            <b>Flight ID</b>
+            <span>Quick, buoyant, tern-like flight on slender pointed wings.
+              A flashing white wedge in the outer wing contrasts with black
+              tips on the primary feathers.</span>
+          </div>
+
+          <div class="fact">
+            <b>Puget Sound presence</b>
+            <span>Regular along Washington's saltwater coast in winter and
+              during migration. Sheltered inlets, estuaries, and coastal
+              waters around Bainbridge Island are good places to watch.</span>
+          </div>
+
+          <div class="fact">
+            <b>Habitat</b>
+            <span>Bays, beaches, tidal inlets, estuaries, lakes, rivers,
+              and sometimes open marine waters. Often appears in active
+              feeding flocks.</span>
+          </div>
+
+          <div class="fact">
+            <b>Diet &amp; behavior</b>
+            <span>Snatches small fish and tiny crustaceans at the surface,
+              sometimes dipping into the water like a tern. During the
+              breeding season it also catches flying insects in midair.</span>
+          </div>
+
+          <div class="fact">
+            <b>Surprising nesting habit</b>
+            <span>Unlike most gulls, Bonaparte's Gulls often nest in trees
+              in the northern boreal forests of Canada and Alaska.</span>
+          </div>
+
+          <div class="fact">
+            <b>Spotting tip</b>
+            <span>Scan small gulls moving low over the water. The graceful
+              flight and clean dark ear spot help separate this species
+              from the larger, heavier local gulls.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="source">
+        Sources:
+        <a href="https://www.allaboutbirds.org/guide/Bonapartes_Gull/id" target="_blank" rel="noopener">Cornell Lab · Identification</a>
+        <a href="https://www.allaboutbirds.org/guide/Bonapartes_Gull/lifehistory" target="_blank" rel="noopener">Cornell Lab · Life History</a>
+        <a href="https://birdweb.org/birdweb/bird/bonapartes_gull" target="_blank" rel="noopener">BirdWeb · Washington</a>
+        <a href="https://www.audubon.org/field-guide/bird/bonapartes-gull" target="_blank" rel="noopener">Audubon</a>
+      </div>
+    </article>
 
     <!-- Canada Goose -->
     <article class="bird-card">
@@ -1189,4 +1343,3 @@
 
 </body>
 </html>
-```
