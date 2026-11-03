@@ -1,555 +1,503 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<title>Radio Tiki Music Videos • MurdenCove.com</title>
-
-<style>
-:root {
-  --max: 980px;
-  --sidebar: 250px;
-  --bg-top: #0f172a;
-  --bg-bottom: #020617;
-  --card-bg: rgba(255,255,255,0.94);
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --accent: #f97316;
-  --accent-soft: rgba(249,115,22,0.14);
-  --accent-strong: #0f766e;
-  --shadow-soft: 0 22px 50px rgba(15,23,42,0.22);
-  --radius-lg: 22px;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(circle at top right, rgba(249,115,22,0.28), transparent 35%),
-    linear-gradient(to bottom, var(--bg-top), #1e293b 45%, var(--bg-bottom));
-  color: var(--text-main);
-  min-height: 100vh;
-}
-
-.sidebar {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: var(--sidebar);
-  height: 100%;
-  background: rgba(15, 23, 42, 0.98);
-  color: #f9fafb;
-  overflow-y: auto;
-  padding: 1.5rem 1rem;
-  box-shadow: 2px 0 20px rgba(15, 23, 42, .35);
-  z-index: 100;
-}
-
-.sidebar-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.sidebar-badge {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px var(--accent-soft);
-}
-
-.sidebar-subtitle {
-  font-size: 0.85rem;
-  color: #cbd5f5;
-  margin-top: 0.25rem;
-}
-
-.sidebar-nav {
-  margin-top: 1rem;
-  border-top: 1px solid rgba(148, 163, 184, 0.4);
-  padding-top: 0.75rem;
-}
-
-.sidebar a {
-  display: block;
-  padding: 10px 12px;
-  color: #e5e7eb;
-  text-decoration: none;
-  font-size: 0.98rem;
-  border-radius: 10px;
-}
-
-.sidebar a:hover {
-  background: rgba(148, 163, 184, 0.18);
-}
-
-.sidebar a.current {
-  background: rgba(249,115,22,0.18);
-  color: #fed7aa;
-  border: 1px solid rgba(251,146,60,0.38);
-}
-
-.content { margin-left: var(--sidebar); }
-
-header {
-  text-align: center;
-  padding: 2rem 1.25rem 1rem;
-  color: #f8fafc;
-}
-
-header h1 {
-  margin: 0 0 .25rem;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-}
-
-header p {
-  margin: 0 auto;
-  color: #cbd5e1;
-  max-width: 760px;
-  line-height: 1.5;
-}
-
-main {
-  max-width: var(--max);
-  margin: auto;
-  padding: 0 1.25rem 3rem;
-}
-
-.intro-card,
-.track-card {
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 1.35rem;
-  overflow: hidden;
-}
-
-.intro-card {
-  background: rgba(15, 23, 42, 0.94);
-  color: #f8fafc;
-  border: 1px solid rgba(251,146,60,0.28);
-  padding: 1.5rem;
-  text-align: center;
-}
-
-.intro-pill,
-.track-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(249,115,22,0.12);
-  border: 1px solid rgba(251,146,60,0.35);
-  color: #fed7aa;
-  font-size: 0.82rem;
-  margin-bottom: 0.65rem;
-}
-
-.intro-dot,
-.track-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--accent);
-}
-
-.intro-card h2 {
-  margin: 0 0 0.55rem;
-  font-size: 1.45rem;
-}
-
-.intro-card p {
-  margin: 0 auto;
-  color: #cbd5e1;
-  line-height: 1.5;
-  max-width: 760px;
-}
-
-.track-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,0.75);
-}
-
-.track-head {
-  background:
-    radial-gradient(circle at top right, rgba(249,115,22,0.22), transparent 35%),
-    linear-gradient(135deg, #111827, #431407);
-  color: #f8fafc;
-  padding: 1.25rem 1.5rem;
-}
-
-.track-head h2 {
-  margin: 0;
-  font-size: 1.35rem;
-}
-
-.track-meta {
-  margin-top: 0.35rem;
-  color: #fed7aa;
-  font-size: 0.95rem;
-}
-
-.video-wrap {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-  background: #000;
-}
-
-.video-wrap iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.track-note {
-  padding: 1rem 1.25rem 1.25rem;
-  color: var(--text-muted);
-  line-height: 1.45;
-}
-
-.episode-card {
-  background: rgba(255,255,255,0.92);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  padding: 1.35rem 1.5rem;
-  margin-bottom: 1.35rem;
-  border: 1px solid rgba(255,255,255,0.75);
-}
-
-.episode-card h2 {
-  margin: 0 0 0.5rem;
-}
-
-.episode-card ul {
-  margin-bottom: 0;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-@media (max-width: 720px) {
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-  }
-
-  .content { margin-left: 0; }
-
-  .sidebar-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<nav class="sidebar">
-  <div>
-    <div class="sidebar-title">
-      <span class="sidebar-badge"></span>
-      Murden Cove
-    </div>
-    <div class="sidebar-subtitle">Bainbridge Island • Washington</div>
-  </div>
-
-  <div class="sidebar-nav">
-    <a href="index.html">Home</a>
-    <a href="kayak.html">Paddle Log</a>
-    <a href="cove-birds.html">Cove Birds</a>
-    <a href="cove-critters.html">Cove Critters</a>
-    <a href="frog-rock.html">Frog Rock</a>
-    <a href="halloween-tales.html">Halloween Tales</a>
-    <a href="favorite-movies.html">Murden Cove Cinema</a>
-    <a href="radio-tiki.html" class="current">Radio Tiki</a>
-  </div>
-</nav>
-
-<div class="content">
-
-<header>
-  <h1>Radio Tiki</h1>
-  <p>A tribute to Chris P.’s musical selections from the first episode of Radio Tiki.</p>
-</header>
-
-<main>
-
-<section class="intro-card">
-  <div class="intro-pill">
-    <span class="intro-dot"></span>
-    Episode One • February 11, 2000
-  </div>
-  <h2>Broadcast from the Old Internet</h2>
-  <p>
-    The first Radio Tiki episode mixed jokes, dispatches from the early web, cultural detours,
-    and a perfect little playlist: New Order, The Cure, Aimee Mann, Tori Amos, and Cocteau Twins.
-  </p>
-</section>
-
-<section class="episode-card">
-  <h2>Episode Highlights</h2>
-  <ul>
-    <li>Bob Dobbs introduces the H-Bomb</li>
-    <li>Tom’s trip to the “studio”</li>
-    <li>Stephen Hawking chimes in</li>
-    <li>We don’t need no stinkin’ FCC</li>
-    <li>Cheeks and the Buffy Report</li>
-    <li>Kevin Smith vs. Magnolia</li>
-    <li>Internet Under Siege</li>
-    <li>William “FREAKING” Gibson</li>
-    <li>Chris’ Spam Bin / Tales of the Old Internet</li>
-  </ul>
-</section>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Track 1
-    </div>
-    <h2>New Order — “Regret”</h2>
-    <div class="track-meta">Radio Tiki Episode One selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/71ZHVmSuBJM" title="New Order - Regret" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    A perfect opening cut: bright, melancholy, and very turn-of-the-century in retrospect.
-  </div>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Radio Tiki • Murden Cove Music Archive</title><style>
+:root{--max:1120px;--sidebar:250px;--card:rgba(255,255,255,.96);--muted:#64748b;--ink:#0f172a;--orange:#f97316;--orange-dark:#7c2d12;--green:#0f766e;--shadow:0 22px 50px rgba(2,6,23,.32)}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 85% 5%,rgba(249,115,22,.27),transparent 35%),linear-gradient(#0f172a,#1e293b 46%,#020617);min-height:100vh}
+a{color:inherit}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);height:100vh;overflow:auto;background:rgba(15,23,42,.98);color:#e5e7eb;padding:1.5rem 1rem;z-index:5;box-shadow:2px 0 20px #0005}.sidebar-title{font-size:1.1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem}.sidebar-badge{width:9px;height:9px;background:var(--orange);border-radius:50%;box-shadow:0 0 0 6px #f9731629}.sidebar-subtitle{font-size:.85rem;color:#cbd5f5;margin:.3rem 0 1rem}.sidebar-nav{border-top:1px solid #94a3b866;padding-top:.75rem}.sidebar-nav a{display:block;padding:10px 12px;border-radius:10px;font-size:.95rem;text-decoration:none}.sidebar-nav a:hover{background:#94a3b82e}.sidebar-nav a.current{background:#f973162e;color:#fed7aa;border:1px solid #fb923c61}
+.content{margin-left:var(--sidebar)}.page-head{text-align:center;padding:2.1rem 1.25rem 1.2rem;color:#f8fafc}.page-head h1{font-size:clamp(2.2rem,4vw,3.2rem);margin:0 0 .35rem}.page-head p{color:#cbd5e1;margin:.2rem auto;max-width:730px;line-height:1.55}.page{max-width:var(--max);margin:auto;padding:0 1.15rem 3rem}.intro,.index,.episode{border-radius:22px;box-shadow:var(--shadow);margin-bottom:1.35rem;overflow:hidden}.intro{background:#0f172af0;border:1px solid #fb923c47;color:#f8fafc;padding:1.4rem;text-align:center}.intro h2{margin:.15rem 0 .5rem}.intro p{color:#cbd5e1;line-height:1.6;max-width:780px;margin:.4rem auto}.count-row{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem}.count-row span{border-radius:30px;padding:.35rem .8rem;border:1px solid #fb923c55;background:#f9731614;color:#fed7aa;font-size:.85rem}
+.index{background:#fffdf9;padding:1.35rem}.index h2{margin:0 0 .6rem}.tools{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:.7rem 0}.search{padding:.7rem .85rem;flex:1 1 250px;min-width:0;border:1px solid #94a3b8;border-radius:12px;font:inherit}.btn{border:none;cursor:pointer;background:var(--green);border-radius:12px;padding:.65rem .9rem;color:white;font:inherit;font-weight:600}.btn:hover{filter:brightness(1.1)}.episode-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.45rem}.episode-links a{display:flex;flex-direction:column;padding:.65rem .75rem;background:#f1f5f9;border-radius:11px;text-decoration:none}.episode-links a:hover{background:#ffedd5}.episode-links small{color:#64748b;margin-top:.12rem}.footnote{font-size:.84rem;color:#64748b;line-height:1.55;margin:.7rem 0 0}
+.episode{background:var(--card);scroll-margin-top:1rem}.episode-head{padding:1.15rem 1.4rem;background:radial-gradient(circle at top right,#f9731638,transparent 45%),linear-gradient(135deg,#111827,#431407);color:#fff}.episode-head h2{font-size:1.48rem;margin:0}.episode-head p{margin:.28rem 0 0;color:#fed7aa;font-size:.93rem}.episode-inner{padding:1rem 1.2rem 1.25rem}.episode-actions{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin:.2rem 0 1rem}.toggle{padding:.5rem .8rem;background:#ffedd5;border:1px solid #fdba74;color:#7c2d12;border-radius:10px;cursor:pointer;font-weight:700}.tracks{display:grid;gap:1rem}.track{border:1px solid #cbd5e1;border-radius:16px;overflow:hidden;background:#fff}.track-top{display:flex;align-items:center;gap:.55rem;padding:.85rem 1rem;flex-wrap:wrap}.track-num{font-size:.78rem;color:#9a3412;border:1px solid #f9731650;background:#fff7ed;padding:.18rem .5rem;border-radius:99px}.track-name{margin:0;font-size:1.05rem;flex:1 1 170px}.track-kind{font-size:.75rem;color:#166534;background:#dcfce7;padding:.25rem .5rem;border-radius:99px}.track-kind.pending{color:#92400e;background:#fef3c7}.video-unit{padding:0 1rem 1rem}.preview{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;position:relative;display:block;overflow:hidden;background:#030712;color:#fff;cursor:pointer;max-height:520px}.preview img{width:100%;height:100%;object-fit:cover;opacity:.72}.preview .play-icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:18px;background:#e11d48ee;padding:13px 25px;font-weight:800;font-size:1.2rem;box-shadow:0 10px 30px #0008}.video-unit iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}.video-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin:.6rem .15rem 0;font-size:.9rem}.video-actions a{color:#0f766e;font-weight:700}.unverified{padding:.75rem 1rem 1rem;background:#fff7ed}.unverified p{margin:.1rem 0 .65rem;font-size:.88rem;color:#92400e}.paste{margin-top:.6rem;border-top:1px dashed #fdba74;padding-top:.6rem}.paste summary{cursor:pointer;color:#475569;font-size:.85rem}.paste div{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}.paste input{padding:.55rem .7rem;border:1px solid #cbd5e1;border-radius:9px;flex:1 1 220px;min-width:0}.paste button{border:0;background:#0f766e;color:white;border-radius:9px;padding:.5rem .8rem;cursor:pointer}.error{color:#b91c1c;font-size:.85rem}.episode[hidden],.track[hidden],.tracks[hidden]{display:none!important}.footer-note{color:#cbd5e1;text-align:center;font-size:.82rem;padding:0 1rem 2.5rem}
+@media(max-width:720px){.sidebar{position:static;width:100%;height:auto;padding:.8rem 1rem}.sidebar-subtitle{display:none}.sidebar-nav{display:flex;flex-wrap:wrap;border:0;padding:0;margin-top:.6rem}.sidebar-nav a{padding:7px 9px;font-size:.88rem}.content{margin-left:0}.page-head{padding-top:1.4rem}.episode-inner{padding:.8rem}.track-top{padding:.7rem}.video-unit{padding:0 .7rem .7rem}.episode-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body>
+<nav class="sidebar" aria-label="Site navigation"><div class="sidebar-title"><span class="sidebar-badge"></span>Murden Cove</div><div class="sidebar-subtitle">Bainbridge Island • Washington</div><div class="sidebar-nav"><a href="index.html">Home</a><a href="kayak.html">Paddle Log</a><a href="cove-birds.html">Cove Birds</a><a href="cove-critters.html">Cove Critters</a><a href="frog-rock.html">Frog Rock</a><a href="halloween-tales.html">Halloween Tales</a><a href="favorite-movies.html">Murden Cove Cinema</a><a href="radio-tiki.html" class="current" aria-current="page">Radio Tiki</a></div></nav>
+<div class="content"><header class="page-head"><h1>Radio Tiki</h1><p>The lost playlists of the old Internet. Song-by-song selections from Chris P. and the Radio Tiki broadcast archive, February–June 2000.</p></header><main class="page">
+<section class="intro"><h2>Broadcast from the Old Internet</h2><p>Every song named in the supplied Radio Tiki episode descriptions is listed below, grouped by airdate and preserved in the order it appeared. Confirmed videos play directly on this page. Tracks without a confirmed matching upload have a YouTube search link rather than an invented embed.</p><div class="count-row"><span>21 episodes</span><span>129 song appearances</span><span>68 linked players</span><span>61 awaiting video match</span></div></section>
+<section class="index"><h2>Episode Guide</h2><div class="tools"><input class="search" id="search" type="search" placeholder="Search song, artist, or broadcast date" aria-label="Search songs"><button class="btn" id="clearSearch" type="button">Clear</button><button class="btn" id="showAll" type="button">Expand all</button><button class="btn" id="hideAll" type="button">Collapse all</button></div><nav class="episode-links" aria-label="Choose an episode">
+<a href="#episode-2000-02-11"><strong>Feb 11, 2000</strong><small>5 tracks · 5 players</small></a>
+<a href="#episode-2000-02-18"><strong>Feb 18, 2000</strong><small>6 tracks · 6 players</small></a>
+<a href="#episode-2000-02-25"><strong>Feb 25, 2000</strong><small>6 tracks · 5 players</small></a>
+<a href="#episode-2000-03-03"><strong>Mar 03, 2000</strong><small>5 tracks · 3 players</small></a>
+<a href="#episode-2000-03-10"><strong>Mar 10, 2000</strong><small>7 tracks · 5 players</small></a>
+<a href="#episode-2000-03-17"><strong>Mar 17, 2000</strong><small>6 tracks · 3 players</small></a>
+<a href="#episode-2000-03-24"><strong>Mar 24, 2000</strong><small>6 tracks · 3 players</small></a>
+<a href="#episode-2000-03-31"><strong>Mar 31, 2000</strong><small>6 tracks · 2 players</small></a>
+<a href="#episode-2000-04-07"><strong>Apr 07, 2000</strong><small>6 tracks · 1 players</small></a>
+<a href="#episode-2000-04-14"><strong>Apr 14, 2000</strong><small>6 tracks · 1 players</small></a>
+<a href="#episode-2000-04-21"><strong>Apr 21, 2000</strong><small>8 tracks · 4 players</small></a>
+<a href="#episode-2000-04-28"><strong>Apr 28, 2000</strong><small>6 tracks · 2 players</small></a>
+<a href="#episode-2000-05-05"><strong>May 05, 2000</strong><small>7 tracks · 2 players</small></a>
+<a href="#episode-2000-05-12"><strong>May 12, 2000</strong><small>6 tracks · 3 players</small></a>
+<a href="#episode-2000-05-19"><strong>May 19, 2000</strong><small>6 tracks · 2 players</small></a>
+<a href="#episode-2000-05-26"><strong>May 26, 2000</strong><small>6 tracks · 3 players</small></a>
+<a href="#episode-2000-06-02"><strong>Jun 02, 2000</strong><small>7 tracks · 4 players</small></a>
+<a href="#episode-2000-06-09"><strong>Jun 09, 2000</strong><small>6 tracks · 5 players</small></a>
+<a href="#episode-2000-06-16"><strong>Jun 16, 2000</strong><small>6 tracks · 3 players</small></a>
+<a href="#episode-2000-06-23"><strong>Jun 23, 2000</strong><small>6 tracks · 2 players</small></a>
+<a href="#episode-2000-06-30"><strong>Jun 30, 2000</strong><small>6 tracks · 4 players</small></a>
+</nav><p class="footnote">Click a date to jump to its playlist. Videos start only when clicked, so the page stays fast even with dozens of songs. A working YouTube link cannot guarantee that the uploader has enabled external embedding.</p></section>
+<section class="episode" id="episode-2000-02-11" data-date="february 11, 2000"><div class="episode-head"><h2>February 11, 2000</h2><p>Radio Tiki • 5 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>5 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-02-11" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-02-11">
+<article class="track" data-title="new order — regret"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">New Order — Regret</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="71ZHVmSuBJM" data-title="New Order — Regret"><button class="preview" type="button" aria-label="Play New Order — Regret on this page"><img loading="lazy" src="https://i.ytimg.com/vi/71ZHVmSuBJM/hqdefault.jpg" alt="YouTube thumbnail for New Order — Regret"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=71ZHVmSuBJM" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Track 2
-    </div>
-    <h2>The Cure — “Just Like Heaven”</h2>
-    <div class="track-meta">Radio Tiki Episode One selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/n3nPiBai66M" title="The Cure - Just Like Heaven" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    One of the great ecstatic pop songs — jangly, romantic, and haunted around the edges.
-  </div>
+<article class="track" data-title="the cure — just like heaven"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">The Cure — Just Like Heaven</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="n3nPiBai66M" data-title="The Cure — Just Like Heaven"><button class="preview" type="button" aria-label="Play The Cure — Just Like Heaven on this page"><img loading="lazy" src="https://i.ytimg.com/vi/n3nPiBai66M/hqdefault.jpg" alt="YouTube thumbnail for The Cure — Just Like Heaven"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=n3nPiBai66M" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Track 3
-    </div>
-    <h2>Aimee Mann — “Momentum”</h2>
-    <div class="track-meta">Radio Tiki Episode One selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/_r_RD1dJDDQ" title="Aimee Mann - Momentum" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    A sharply written, quietly devastating song from the Magnolia era.
-  </div>
+<article class="track" data-title="aimee mann — momentum"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Aimee Mann — Momentum</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="_r_RD1dJDDQ" data-title="Aimee Mann — Momentum"><button class="preview" type="button" aria-label="Play Aimee Mann — Momentum on this page"><img loading="lazy" src="https://i.ytimg.com/vi/_r_RD1dJDDQ/hqdefault.jpg" alt="YouTube thumbnail for Aimee Mann — Momentum"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=_r_RD1dJDDQ" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Track 4
-    </div>
-    <h2>Tori Amos — “Raspberry Swirl”</h2>
-    <div class="track-meta">Lip Gloss Version • Radio Tiki Episode One selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/6KnYw4EwYGc" title="Tori Amos - Raspberry Swirl" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    Glossy, restless, and strange — a club-lit burst of late-90s Tori energy.
-  </div>
+<article class="track" data-title="tori amos — raspberry swirl - lip gloss version"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Tori Amos — Raspberry Swirl - Lip Gloss Version</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="6KnYw4EwYGc" data-title="Tori Amos — Raspberry Swirl - Lip Gloss Version"><button class="preview" type="button" aria-label="Play Tori Amos — Raspberry Swirl - Lip Gloss Version on this page"><img loading="lazy" src="https://i.ytimg.com/vi/6KnYw4EwYGc/hqdefault.jpg" alt="YouTube thumbnail for Tori Amos — Raspberry Swirl - Lip Gloss Version"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=6KnYw4EwYGc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Track 5
-    </div>
-    <h2>Cocteau Twins — “Heaven or Las Vegas”</h2>
-    <div class="track-meta">Radio Tiki Episode One selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/JF6kH7YF0bY" title="Cocteau Twins - Heaven or Las Vegas" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    Dream-pop shimmer, impossible vocals, and the perfect end-credit feeling for the episode.
-  </div>
+<article class="track" data-title="cocteau twins — heaven or las vegas"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Cocteau Twins — Heaven or Las Vegas</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="JF6kH7YF0bY" data-title="Cocteau Twins — Heaven or Las Vegas"><button class="preview" type="button" aria-label="Play Cocteau Twins — Heaven or Las Vegas on this page"><img loading="lazy" src="https://i.ytimg.com/vi/JF6kH7YF0bY/hqdefault.jpg" alt="YouTube thumbnail for Cocteau Twins — Heaven or Las Vegas"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=JF6kH7YF0bY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-  <section class="intro-card">
-  <div class="intro-pill">
-    <span class="intro-dot"></span>
-    Episode Two • February 18, 2000
-  </div>
-  <h2>Down the Dial</h2>
-  <p>
-    The second Radio Tiki episode keeps the old-internet energy rolling with atomic maneuvers,
-    stupid SUV tricks, listener mail, Iron Chef, Windows 2000, and another perfect Chris P. playlist.
-  </p>
-</section>
-
-<section class="episode-card">
-  <h2>Episode Highlights</h2>
-  <ul>
-    <li>Participating in an atomic maneuver</li>
-    <li>Internet stations “Down the Dial”</li>
-    <li>Pumping the Station / Geek Alert</li>
-    <li>Car Talk / Need the Beverage</li>
-    <li>Listener Mail</li>
-    <li>Iron Chef</li>
-    <li>The Matrix as Philosophy</li>
-    <li>Windows 2000</li>
-    <li>Billy Corrigan Is Not a Spooner</li>
-  </ul>
-</section>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 1
-    </div>
-    <h2>They Might Be Giants — “New York City”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/dSS_ty5o7x4" title="They Might Be Giants - New York City" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    A bright, jangly opener for the second Radio Tiki playlist.
-  </div>
+</div></div></section>
+<section class="episode" id="episode-2000-02-18" data-date="february 18, 2000"><div class="episode-head"><h2>February 18, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-02-18" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-02-18">
+<article class="track" data-title="they might be giants — new york city"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">They Might Be Giants — New York City</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="dSS_ty5o7x4" data-title="They Might Be Giants — New York City"><button class="preview" type="button" aria-label="Play They Might Be Giants — New York City on this page"><img loading="lazy" src="https://i.ytimg.com/vi/dSS_ty5o7x4/hqdefault.jpg" alt="YouTube thumbnail for They Might Be Giants — New York City"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=dSS_ty5o7x4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 2
-    </div>
-    <h2>Garbage — “When I Grow Up”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/Je-CPZRwbh8" title="Garbage - When I Grow Up" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    Late-90s polish, pop menace, and Shirley Manson attitude in full effect.
-  </div>
+<article class="track" data-title="garbage — when i grow up"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Garbage — When I Grow Up</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="Je-CPZRwbh8" data-title="Garbage — When I Grow Up"><button class="preview" type="button" aria-label="Play Garbage — When I Grow Up on this page"><img loading="lazy" src="https://i.ytimg.com/vi/Je-CPZRwbh8/hqdefault.jpg" alt="YouTube thumbnail for Garbage — When I Grow Up"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=Je-CPZRwbh8" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 3
-    </div>
-    <h2>Jesus Jones — “Real”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/qBklIul0Rog" title="Jesus Jones - Real" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    A little alternative-rock optimism from the edge of the millennium.
-  </div>
+<article class="track" data-title="jesus jones — real"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Jesus Jones — Real</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="qBklIul0Rog" data-title="Jesus Jones — Real"><button class="preview" type="button" aria-label="Play Jesus Jones — Real on this page"><img loading="lazy" src="https://i.ytimg.com/vi/qBklIul0Rog/hqdefault.jpg" alt="YouTube thumbnail for Jesus Jones — Real"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=qBklIul0Rog" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 4
-    </div>
-    <h2>New Order — “Bizarre Love Triangle”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/tkOr12AQpnU" title="New Order - Bizarre Love Triangle" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    Synth-pop perfection — romantic confusion with a dance-floor pulse.
-  </div>
+<article class="track" data-title="new order — bizarre love triangle"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">New Order — Bizarre Love Triangle</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="tkOr12AQpnU" data-title="New Order — Bizarre Love Triangle"><button class="preview" type="button" aria-label="Play New Order — Bizarre Love Triangle on this page"><img loading="lazy" src="https://i.ytimg.com/vi/tkOr12AQpnU/hqdefault.jpg" alt="YouTube thumbnail for New Order — Bizarre Love Triangle"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=tkOr12AQpnU" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 5
-    </div>
-    <h2>Lush — “Lovelife”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/1rfgcjT_tCw" title="Lush - Lovelife" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    Britpop sparkle with shoegaze DNA — a perfect Chris P. deep-cut mood.
-  </div>
+<article class="track" data-title="lush — lovelife"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Lush — Lovelife</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="1rfgcjT_tCw" data-title="Lush — Lovelife"><button class="preview" type="button" aria-label="Play Lush — Lovelife on this page"><img loading="lazy" src="https://i.ytimg.com/vi/1rfgcjT_tCw/hqdefault.jpg" alt="YouTube thumbnail for Lush — Lovelife"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=1rfgcjT_tCw" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-
-<article class="track-card">
-  <div class="track-head">
-    <div class="track-pill">
-      <span class="track-dot"></span>
-      Episode Two • Track 6
-    </div>
-    <h2>Mira — “Cayman”</h2>
-    <div class="track-meta">Radio Tiki February 18, 2000 selection</div>
-  </div>
-
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/Df2i65v_Oh4" title="Mira - Cayman" allowfullscreen></iframe>
-  </div>
-
-  <div class="track-note">
-    A dreamy closing selection for the second episode’s trip through the old internet.
-  </div>
+<article class="track" data-title="mira — cayman"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Mira — Cayman</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="Df2i65v_Oh4" data-title="Mira — Cayman"><button class="preview" type="button" aria-label="Play Mira — Cayman on this page"><img loading="lazy" src="https://i.ytimg.com/vi/Df2i65v_Oh4/hqdefault.jpg" alt="YouTube thumbnail for Mira — Cayman"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=Df2i65v_Oh4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
 </article>
-</main>
-</div>
-
-</body>
-</html>
+</div></div></section>
+<section class="episode" id="episode-2000-02-25" data-date="february 25, 2000"><div class="episode-head"><h2>February 25, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-02-25" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-02-25">
+<article class="track" data-title="they might be giants — don&#x27;t let&#x27;s start"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">They Might Be Giants — Don&#x27;t Let&#x27;s Start</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="pAmFTmCs3IY" data-title="They Might Be Giants — Don&#x27;t Let&#x27;s Start"><button class="preview" type="button" aria-label="Play They Might Be Giants — Don&#x27;t Let&#x27;s Start on this page"><img loading="lazy" src="https://i.ytimg.com/vi/pAmFTmCs3IY/hqdefault.jpg" alt="YouTube thumbnail for They Might Be Giants — Don&#x27;t Let&#x27;s Start"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=pAmFTmCs3IY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the b-52&#x27;s — deadbeat club"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">The B-52&#x27;s — Deadbeat Club</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="JXy0XnzTQuc" data-title="The B-52&#x27;s — Deadbeat Club"><button class="preview" type="button" aria-label="Play The B-52&#x27;s — Deadbeat Club on this page"><img loading="lazy" src="https://i.ytimg.com/vi/JXy0XnzTQuc/hqdefault.jpg" alt="YouTube thumbnail for The B-52&#x27;s — Deadbeat Club"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=JXy0XnzTQuc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="ned&#x27;s atomic dustbin — grey cell green"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Ned&#x27;s Atomic Dustbin — Grey Cell Green</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="HqGzBqPnNBk" data-title="Ned&#x27;s Atomic Dustbin — Grey Cell Green"><button class="preview" type="button" aria-label="Play Ned&#x27;s Atomic Dustbin — Grey Cell Green on this page"><img loading="lazy" src="https://i.ytimg.com/vi/HqGzBqPnNBk/hqdefault.jpg" alt="YouTube thumbnail for Ned&#x27;s Atomic Dustbin — Grey Cell Green"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=HqGzBqPnNBk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="lush — de-luxe"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Lush — De-luxe</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="aKrw5wOlSng" data-title="Lush — De-luxe"><button class="preview" type="button" aria-label="Play Lush — De-luxe on this page"><img loading="lazy" src="https://i.ytimg.com/vi/aKrw5wOlSng/hqdefault.jpg" alt="YouTube thumbnail for Lush — De-luxe"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=aKrw5wOlSng" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="curve — pink girl with the blues"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Curve — Pink Girl With the Blues</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Curve+Pink+Girl+With+the+Blues+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Curve — Pink Girl With the Blues"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="10,000 maniacs — these are days"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">10,000 Maniacs — These Are Days</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="xUzBgJut8fQ" data-title="10,000 Maniacs — These Are Days"><button class="preview" type="button" aria-label="Play 10,000 Maniacs — These Are Days on this page"><img loading="lazy" src="https://i.ytimg.com/vi/xUzBgJut8fQ/hqdefault.jpg" alt="YouTube thumbnail for 10,000 Maniacs — These Are Days"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=xUzBgJut8fQ" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-03-03" data-date="march 3, 2000"><div class="episode-head"><h2>March 3, 2000</h2><p>Radio Tiki • 5 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>5 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-03-03" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-03-03">
+<article class="track" data-title="nine inch nails — sin"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Nine Inch Nails — Sin</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="5bwE5IU4pzA" data-title="Nine Inch Nails — Sin"><button class="preview" type="button" aria-label="Play Nine Inch Nails — Sin on this page"><img loading="lazy" src="https://i.ytimg.com/vi/5bwE5IU4pzA/hqdefault.jpg" alt="YouTube thumbnail for Nine Inch Nails — Sin"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=5bwE5IU4pzA" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="chumbawamba — amnesia"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Chumbawamba — Amnesia</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Chumbawamba+Amnesia+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Chumbawamba — Amnesia"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="elastica — connection"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Elastica — Connection</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="ilKcXIFi-Rc" data-title="Elastica — Connection"><button class="preview" type="button" aria-label="Play Elastica — Connection on this page"><img loading="lazy" src="https://i.ytimg.com/vi/ilKcXIFi-Rc/hqdefault.jpg" alt="YouTube thumbnail for Elastica — Connection"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=ilKcXIFi-Rc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="they might be giants — everything right is wrong again"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">They Might Be Giants — Everything Right is Wrong Again</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+Everything+Right+is+Wrong+Again+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — Everything Right is Wrong Again"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="republica — ready to go"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Republica — Ready To Go</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="JgffRW1fKDk" data-title="Republica — Ready To Go"><button class="preview" type="button" aria-label="Play Republica — Ready To Go on this page"><img loading="lazy" src="https://i.ytimg.com/vi/JgffRW1fKDk/hqdefault.jpg" alt="YouTube thumbnail for Republica — Ready To Go"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=JgffRW1fKDk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-03-10" data-date="march 10, 2000"><div class="episode-head"><h2>March 10, 2000</h2><p>Radio Tiki • 7 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>7 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-03-10" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-03-10">
+<article class="track" data-title="the farm — groovy train"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">The Farm — Groovy Train</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="Z4pWtwo0s1I" data-title="The Farm — Groovy Train"><button class="preview" type="button" aria-label="Play The Farm — Groovy Train on this page"><img loading="lazy" src="https://i.ytimg.com/vi/Z4pWtwo0s1I/hqdefault.jpg" alt="YouTube thumbnail for The Farm — Groovy Train"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=Z4pWtwo0s1I" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="they might be giants — birdhouse in your soul"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">They Might Be Giants — Birdhouse in Your Soul</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="vn_or9gEB6g" data-title="They Might Be Giants — Birdhouse in Your Soul"><button class="preview" type="button" aria-label="Play They Might Be Giants — Birdhouse in Your Soul on this page"><img loading="lazy" src="https://i.ytimg.com/vi/vn_or9gEB6g/hqdefault.jpg" alt="YouTube thumbnail for They Might Be Giants — Birdhouse in Your Soul"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=vn_or9gEB6g" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="curve — frozen"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Curve — Frozen</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Curve+Frozen+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Curve — Frozen"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="cocteau twins — iceblink luck"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Cocteau Twins — Iceblink Luck</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="zyn0PycAb4A" data-title="Cocteau Twins — Iceblink Luck"><button class="preview" type="button" aria-label="Play Cocteau Twins — Iceblink Luck on this page"><img loading="lazy" src="https://i.ytimg.com/vi/zyn0PycAb4A/hqdefault.jpg" alt="YouTube thumbnail for Cocteau Twins — Iceblink Luck"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=zyn0PycAb4A" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="garbage — only happy when it rains"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Garbage — Only Happy When It Rains</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="GpBFOJ3R0M4" data-title="Garbage — Only Happy When It Rains"><button class="preview" type="button" aria-label="Play Garbage — Only Happy When It Rains on this page"><img loading="lazy" src="https://i.ytimg.com/vi/GpBFOJ3R0M4/hqdefault.jpg" alt="YouTube thumbnail for Garbage — Only Happy When It Rains"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=GpBFOJ3R0M4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the b-52&#x27;s — roam"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">The B-52&#x27;s — Roam</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="av8Lm8N1J3A" data-title="The B-52&#x27;s — Roam"><button class="preview" type="button" aria-label="Play The B-52&#x27;s — Roam on this page"><img loading="lazy" src="https://i.ytimg.com/vi/av8Lm8N1J3A/hqdefault.jpg" alt="YouTube thumbnail for The B-52&#x27;s — Roam"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=av8Lm8N1J3A" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="bodeans — good things"><div class="track-top"><span class="track-num">Track 7</span><h3 class="track-name">BoDeans — Good Things</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=BoDeans+Good+Things+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for BoDeans — Good Things"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-03-17" data-date="march 17, 2000"><div class="episode-head"><h2>March 17, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-03-17" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-03-17">
+<article class="track" data-title="lush — ladykiller"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Lush — Ladykiller</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Lush+Ladykiller+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Lush — Ladykiller"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — sunday mornings"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">No Doubt — Sunday Mornings</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="PiBX-ESFDF0" data-title="No Doubt — Sunday Mornings"><button class="preview" type="button" aria-label="Play No Doubt — Sunday Mornings on this page"><img loading="lazy" src="https://i.ytimg.com/vi/PiBX-ESFDF0/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Sunday Mornings"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=PiBX-ESFDF0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="depeche mode — enjoy the silence"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Depeche Mode — Enjoy the Silence</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="aGSKrC7dGcY" data-title="Depeche Mode — Enjoy the Silence"><button class="preview" type="button" aria-label="Play Depeche Mode — Enjoy the Silence on this page"><img loading="lazy" src="https://i.ytimg.com/vi/aGSKrC7dGcY/hqdefault.jpg" alt="YouTube thumbnail for Depeche Mode — Enjoy the Silence"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=aGSKrC7dGcY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="erasure — l&#x27;amour"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Erasure — L&#x27;Amour</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Erasure+L%27Amour+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Erasure — L&#x27;Amour"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="they might be giants — she&#x27;s an angel"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">They Might Be Giants — She&#x27;s an Angel</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+She%27s+an+Angel+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — She&#x27;s an Angel"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="my bloody valentine — when you sleep"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">My Bloody Valentine — When You Sleep</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="hcOhXThqh_0" data-title="My Bloody Valentine — When You Sleep"><button class="preview" type="button" aria-label="Play My Bloody Valentine — When You Sleep on this page"><img loading="lazy" src="https://i.ytimg.com/vi/hcOhXThqh_0/hqdefault.jpg" alt="YouTube thumbnail for My Bloody Valentine — When You Sleep"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=hcOhXThqh_0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-03-24" data-date="march 24, 2000"><div class="episode-head"><h2>March 24, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-03-24" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-03-24">
+<article class="track" data-title="jane&#x27;s addiction — been caught stealing"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Jane&#x27;s Addiction — Been Caught Stealing</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="jrwjiO1MCVs" data-title="Jane&#x27;s Addiction — Been Caught Stealing"><button class="preview" type="button" aria-label="Play Jane&#x27;s Addiction — Been Caught Stealing on this page"><img loading="lazy" src="https://i.ytimg.com/vi/jrwjiO1MCVs/hqdefault.jpg" alt="YouTube thumbnail for Jane&#x27;s Addiction — Been Caught Stealing"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=jrwjiO1MCVs" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="emf — unbelievable"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">EMF — Unbelievable</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=EMF+Unbelievable+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for EMF — Unbelievable"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="garbage — i think i&#x27;m paranoid"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Garbage — I Think I&#x27;m Paranoid</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="ypr18UmxOas" data-title="Garbage — I Think I&#x27;m Paranoid"><button class="preview" type="button" aria-label="Play Garbage — I Think I&#x27;m Paranoid on this page"><img loading="lazy" src="https://i.ytimg.com/vi/ypr18UmxOas/hqdefault.jpg" alt="YouTube thumbnail for Garbage — I Think I&#x27;m Paranoid"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=ypr18UmxOas" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="no doubt — spiderwebs"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">No Doubt — Spiderwebs</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="6ZktNItwexo" data-title="No Doubt — Spiderwebs"><button class="preview" type="button" aria-label="Play No Doubt — Spiderwebs on this page"><img loading="lazy" src="https://i.ytimg.com/vi/6ZktNItwexo/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Spiderwebs"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=6ZktNItwexo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="veruca salt — number one blind"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Veruca Salt — Number One Blind</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Veruca+Salt+Number+One+Blind+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Veruca Salt — Number One Blind"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the b-52&#x27;s — topaz"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">The B-52&#x27;s — Topaz</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+B-52%27s+Topaz+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The B-52&#x27;s — Topaz"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-03-31" data-date="march 31, 2000"><div class="episode-head"><h2>March 31, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-03-31" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-03-31">
+<article class="track" data-title="lush — heavenly nobodies"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Lush — Heavenly Nobodies</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Lush+Heavenly+Nobodies+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Lush — Heavenly Nobodies"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="cracker — teen angst (what the world needs now)"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Cracker — Teen Angst (What the World Needs Now)</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Cracker+Teen+Angst+%28What+the+World+Needs+Now%29+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Cracker — Teen Angst (What the World Needs Now)"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="lush — nothing natural"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Lush — Nothing Natural</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Lush+Nothing+Natural+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Lush — Nothing Natural"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="smashing pumpkins — today"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Smashing Pumpkins — Today</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="xmUZ6nCFNoU" data-title="Smashing Pumpkins — Today"><button class="preview" type="button" aria-label="Play Smashing Pumpkins — Today on this page"><img loading="lazy" src="https://i.ytimg.com/vi/xmUZ6nCFNoU/hqdefault.jpg" alt="YouTube thumbnail for Smashing Pumpkins — Today"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=xmUZ6nCFNoU" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="lush — 500 (shake baby shake)"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Lush — 500 (Shake Baby Shake)</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="ODdZ4QhnXJI" data-title="Lush — 500 (Shake Baby Shake)"><button class="preview" type="button" aria-label="Play Lush — 500 (Shake Baby Shake) on this page"><img loading="lazy" src="https://i.ytimg.com/vi/ODdZ4QhnXJI/hqdefault.jpg" alt="YouTube thumbnail for Lush — 500 (Shake Baby Shake)"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=ODdZ4QhnXJI" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="veruca salt — spiderman"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Veruca Salt — Spiderman</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Veruca+Salt+Spiderman+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Veruca Salt — Spiderman"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-04-07" data-date="april 7, 2000"><div class="episode-head"><h2>April 7, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-04-07" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-04-07">
+<article class="track" data-title="run lola run soundtrack — i believe"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Run Lola Run Soundtrack — I Believe</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Run+Lola+Run+Soundtrack+I+Believe+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Run Lola Run Soundtrack — I Believe"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="lush — sweetness and light (orange squash mix)"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Lush — Sweetness and Light (Orange Squash Mix)</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Lush+Sweetness+and+Light+%28Orange+Squash+Mix%29+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Lush — Sweetness and Light (Orange Squash Mix)"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — just a girl"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">No Doubt — Just a Girl</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="PHzOOQfhPFg" data-title="No Doubt — Just a Girl"><button class="preview" type="button" aria-label="Play No Doubt — Just a Girl on this page"><img loading="lazy" src="https://i.ytimg.com/vi/PHzOOQfhPFg/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Just a Girl"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=PHzOOQfhPFg" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="smashing pumpkins — rocket"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Smashing Pumpkins — Rocket</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Smashing+Pumpkins+Rocket+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Smashing Pumpkins — Rocket"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="cowboy junkies — miles from our home"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Cowboy Junkies — Miles From Our Home</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Cowboy+Junkies+Miles+From+Our+Home+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Cowboy Junkies — Miles From Our Home"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="garbage — the trick is to keep breathing"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Garbage — The Trick Is To Keep Breathing</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Garbage+The+Trick+Is+To+Keep+Breathing+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Garbage — The Trick Is To Keep Breathing"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-04-14" data-date="april 14, 2000"><div class="episode-head"><h2>April 14, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-04-14" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-04-14">
+<article class="track" data-title="the b-52&#x27;s — channel z"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">The B-52&#x27;s — Channel Z</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+B-52%27s+Channel+Z+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The B-52&#x27;s — Channel Z"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="cracker — don&#x27;t fuck me up with peace and love"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Cracker — Don&#x27;t Fuck Me Up With Peace and Love</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Cracker+Don%27t+Fuck+Me+Up+With+Peace+and+Love+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Cracker — Don&#x27;t Fuck Me Up With Peace and Love"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — excuse me mr."><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">No Doubt — Excuse Me Mr.</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="it1aZBPuH4w" data-title="No Doubt — Excuse Me Mr."><button class="preview" type="button" aria-label="Play No Doubt — Excuse Me Mr. on this page"><img loading="lazy" src="https://i.ytimg.com/vi/it1aZBPuH4w/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Excuse Me Mr."><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=it1aZBPuH4w" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="peter gabriel — we do what we&#x27;re told"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Peter Gabriel — We Do What We&#x27;re Told</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Peter+Gabriel+We+Do+What+We%27re+Told+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Peter Gabriel — We Do What We&#x27;re Told"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="sugar — gee angel"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Sugar — Gee Angel</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Sugar+Gee+Angel+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Sugar — Gee Angel"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="curve — zoo"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Curve — Zoo</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Curve+Zoo+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Curve — Zoo"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-04-21" data-date="april 21, 2000"><div class="episode-head"><h2>April 21, 2000</h2><p>Radio Tiki • 8 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>8 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-04-21" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-04-21">
+<article class="track" data-title="no doubt — ex-girlfriend"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">No Doubt — Ex-Girlfriend</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="8Yqru5UXWGY" data-title="No Doubt — Ex-Girlfriend"><button class="preview" type="button" aria-label="Play No Doubt — Ex-Girlfriend on this page"><img loading="lazy" src="https://i.ytimg.com/vi/8Yqru5UXWGY/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Ex-Girlfriend"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=8Yqru5UXWGY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="breeders — cannonball"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Breeders — Cannonball</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Breeders+Cannonball+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Breeders — Cannonball"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="they might be giants — meet james ensore"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">They Might Be Giants — Meet James Ensore</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+Meet+James+Ensore+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — Meet James Ensore"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — simple kind of life"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">No Doubt — Simple Kind of Life</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="kRpZJ9EgJho" data-title="No Doubt — Simple Kind of Life"><button class="preview" type="button" aria-label="Play No Doubt — Simple Kind of Life on this page"><img loading="lazy" src="https://i.ytimg.com/vi/kRpZJ9EgJho/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Simple Kind of Life"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=kRpZJ9EgJho" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="sting — burn for you"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Sting — Burn For You</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Sting+Burn+For+You+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Sting — Burn For You"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="veruca salt — seether"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Veruca Salt — Seether</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="jC9AUR-iTo0" data-title="Veruca Salt — Seether"><button class="preview" type="button" aria-label="Play Veruca Salt — Seether on this page"><img loading="lazy" src="https://i.ytimg.com/vi/jC9AUR-iTo0/hqdefault.jpg" alt="YouTube thumbnail for Veruca Salt — Seether"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=jC9AUR-iTo0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="smashing pumpkins — disarm"><div class="track-top"><span class="track-num">Track 7</span><h3 class="track-name">Smashing Pumpkins — Disarm</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="d1acEVmnVhI" data-title="Smashing Pumpkins — Disarm"><button class="preview" type="button" aria-label="Play Smashing Pumpkins — Disarm on this page"><img loading="lazy" src="https://i.ytimg.com/vi/d1acEVmnVhI/hqdefault.jpg" alt="YouTube thumbnail for Smashing Pumpkins — Disarm"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=d1acEVmnVhI" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="garbage — fix me now"><div class="track-top"><span class="track-num">Track 8</span><h3 class="track-name">Garbage — Fix Me Now</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Garbage+Fix+Me+Now+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Garbage — Fix Me Now"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-04-28" data-date="april 28, 2000"><div class="episode-head"><h2>April 28, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-04-28" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-04-28">
+<article class="track" data-title="no doubt — new"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">No Doubt — New</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=No+Doubt+New+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for No Doubt — New"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="hole — miss world"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Hole — Miss World</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="mS1Ckczz0LQ" data-title="Hole — Miss World"><button class="preview" type="button" aria-label="Play Hole — Miss World on this page"><img loading="lazy" src="https://i.ytimg.com/vi/mS1Ckczz0LQ/hqdefault.jpg" alt="YouTube thumbnail for Hole — Miss World"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=mS1Ckczz0LQ" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the presidents of the united states of america — peaches"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">The Presidents of the United States of America — Peaches</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Presidents+of+the+United+States+of+America+Peaches+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Presidents of the United States of America — Peaches"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the jesus and mary chain — far gone and out"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">The Jesus and Mary Chain — Far Gone and Out</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Jesus+and+Mary+Chain+Far+Gone+and+Out+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Jesus and Mary Chain — Far Gone and Out"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the future sound of london — papa new guinea"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">The Future Sound of London — Papa New Guinea</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Future+Sound+of+London+Papa+New+Guinea+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Future Sound of London — Papa New Guinea"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="r.e.m. — shiny happy people"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">R.E.M. — Shiny Happy People</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="YYOKMUTTDdA" data-title="R.E.M. — Shiny Happy People"><button class="preview" type="button" aria-label="Play R.E.M. — Shiny Happy People on this page"><img loading="lazy" src="https://i.ytimg.com/vi/YYOKMUTTDdA/hqdefault.jpg" alt="YouTube thumbnail for R.E.M. — Shiny Happy People"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=YYOKMUTTDdA" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-05-05" data-date="may 5, 2000"><div class="episode-head"><h2>May 5, 2000</h2><p>Radio Tiki • 7 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>7 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-05-05" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-05-05">
+<article class="track" data-title="the juliana hatfield three — spin the bottle"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">The Juliana Hatfield Three — Spin the Bottle</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Juliana+Hatfield+Three+Spin+the+Bottle+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Juliana Hatfield Three — Spin the Bottle"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — bathwater"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">No Doubt — Bathwater</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="8k_g9hDeOic" data-title="No Doubt — Bathwater"><button class="preview" type="button" aria-label="Play No Doubt — Bathwater on this page"><img loading="lazy" src="https://i.ytimg.com/vi/8k_g9hDeOic/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Bathwater"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=8k_g9hDeOic" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="cracker — this is cracker soul"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Cracker — This is Cracker Soul</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Cracker+This+is+Cracker+Soul+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Cracker — This is Cracker Soul"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="sugarcubes — regina"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Sugarcubes — Regina</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Sugarcubes+Regina+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Sugarcubes — Regina"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="beth orton — she cries your name"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Beth Orton — She Cries Your Name</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Beth+Orton+She+Cries+Your+Name+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Beth Orton — She Cries Your Name"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="hole — doll parts"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Hole — Doll Parts</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="RD9xK9smth4" data-title="Hole — Doll Parts"><button class="preview" type="button" aria-label="Play Hole — Doll Parts on this page"><img loading="lazy" src="https://i.ytimg.com/vi/RD9xK9smth4/hqdefault.jpg" alt="YouTube thumbnail for Hole — Doll Parts"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=RD9xK9smth4" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="mira — when you sleep"><div class="track-top"><span class="track-num">Track 7</span><h3 class="track-name">Mira — When You Sleep</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Mira+When+You+Sleep+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Mira — When You Sleep"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-05-12" data-date="may 12, 2000"><div class="episode-head"><h2>May 12, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-05-12" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-05-12">
+<article class="track" data-title="the juliana hatfield three — supermodel"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">The Juliana Hatfield Three — Supermodel</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Juliana+Hatfield+Three+Supermodel+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Juliana Hatfield Three — Supermodel"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="they might be giants — the statue got me high"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">They Might Be Giants — The Statue Got Me High</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="nb6CDTkUfbY" data-title="They Might Be Giants — The Statue Got Me High"><button class="preview" type="button" aria-label="Play They Might Be Giants — The Statue Got Me High on this page"><img loading="lazy" src="https://i.ytimg.com/vi/nb6CDTkUfbY/hqdefault.jpg" alt="YouTube thumbnail for They Might Be Giants — The Statue Got Me High"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=nb6CDTkUfbY" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="r.e.m. — losing my religion"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">R.E.M. — Losing My Religion</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="Efa6BAWPm9o" data-title="R.E.M. — Losing My Religion"><button class="preview" type="button" aria-label="Play R.E.M. — Losing My Religion on this page"><img loading="lazy" src="https://i.ytimg.com/vi/Efa6BAWPm9o/hqdefault.jpg" alt="YouTube thumbnail for R.E.M. — Losing My Religion"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=Efa6BAWPm9o" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="my life with the thrill kill kult — sex on wheelz"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">My Life With the Thrill Kill Kult — Sex on Wheelz</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=My+Life+With+the+Thrill+Kill+Kult+Sex+on+Wheelz+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for My Life With the Thrill Kill Kult — Sex on Wheelz"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="garbage — special"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Garbage — Special</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="raRGnueg8Lo" data-title="Garbage — Special"><button class="preview" type="button" aria-label="Play Garbage — Special on this page"><img loading="lazy" src="https://i.ytimg.com/vi/raRGnueg8Lo/hqdefault.jpg" alt="YouTube thumbnail for Garbage — Special"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=raRGnueg8Lo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="curve — zoo"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Curve — Zoo</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Curve+Zoo+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Curve — Zoo"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-05-19" data-date="may 19, 2000"><div class="episode-head"><h2>May 19, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-05-19" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-05-19">
+<article class="track" data-title="no doubt — six feet under"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">No Doubt — Six Feet Under</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=No+Doubt+Six+Feet+Under+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for No Doubt — Six Feet Under"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the juliana hatfield three — my sister"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">The Juliana Hatfield Three — My Sister</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Juliana+Hatfield+Three+My+Sister+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Juliana Hatfield Three — My Sister"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the presidents of the united states of america — lump"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">The Presidents of the United States of America — Lump</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="4uDDdxDKmNA" data-title="The Presidents of the United States of America — Lump"><button class="preview" type="button" aria-label="Play The Presidents of the United States of America — Lump on this page"><img loading="lazy" src="https://i.ytimg.com/vi/4uDDdxDKmNA/hqdefault.jpg" alt="YouTube thumbnail for The Presidents of the United States of America — Lump"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=4uDDdxDKmNA" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="fountains of wayne — sink to the bottom"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Fountains of Wayne — Sink to the Bottom</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="iA1-TZKguv8" data-title="Fountains of Wayne — Sink to the Bottom"><button class="preview" type="button" aria-label="Play Fountains of Wayne — Sink to the Bottom on this page"><img loading="lazy" src="https://i.ytimg.com/vi/iA1-TZKguv8/hqdefault.jpg" alt="YouTube thumbnail for Fountains of Wayne — Sink to the Bottom"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=iA1-TZKguv8" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="they might be giants — the guitar"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">They Might Be Giants — The Guitar</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+The+Guitar+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — The Guitar"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="my bloody valentine — to here knows when"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">My Bloody Valentine — To Here Knows When</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=My+Bloody+Valentine+To+Here+Knows+When+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for My Bloody Valentine — To Here Knows When"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-05-26" data-date="may 26, 2000"><div class="episode-head"><h2>May 26, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-05-26" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-05-26">
+<article class="track" data-title="r.e.m. — losing my religion"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">R.E.M. — Losing My Religion</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="Efa6BAWPm9o" data-title="R.E.M. — Losing My Religion"><button class="preview" type="button" aria-label="Play R.E.M. — Losing My Religion on this page"><img loading="lazy" src="https://i.ytimg.com/vi/Efa6BAWPm9o/hqdefault.jpg" alt="YouTube thumbnail for R.E.M. — Losing My Religion"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=Efa6BAWPm9o" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="whale — hobo humpin&#x27; slobo babe"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Whale — Hobo Humpin&#x27; Slobo Babe</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Whale+Hobo+Humpin%27+Slobo+Babe+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Whale — Hobo Humpin&#x27; Slobo Babe"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="veruca salt — all hail me"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Veruca Salt — All Hail Me</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Veruca+Salt+All+Hail+Me+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Veruca Salt — All Hail Me"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="mighty mighty bosstones — the impression that i get"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Mighty Mighty Bosstones — The Impression That I Get</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="NIGMUAMevH0" data-title="Mighty Mighty Bosstones — The Impression That I Get"><button class="preview" type="button" aria-label="Play Mighty Mighty Bosstones — The Impression That I Get on this page"><img loading="lazy" src="https://i.ytimg.com/vi/NIGMUAMevH0/hqdefault.jpg" alt="YouTube thumbnail for Mighty Mighty Bosstones — The Impression That I Get"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=NIGMUAMevH0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="curve — pink girl with the blues"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Curve — Pink Girl With the Blues</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Curve+Pink+Girl+With+the+Blues+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Curve — Pink Girl With the Blues"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the cure — just like heaven"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">The Cure — Just Like Heaven</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="n3nPiBai66M" data-title="The Cure — Just Like Heaven"><button class="preview" type="button" aria-label="Play The Cure — Just Like Heaven on this page"><img loading="lazy" src="https://i.ytimg.com/vi/n3nPiBai66M/hqdefault.jpg" alt="YouTube thumbnail for The Cure — Just Like Heaven"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=n3nPiBai66M" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-06-02" data-date="june 2, 2000"><div class="episode-head"><h2>June 2, 2000</h2><p>Radio Tiki • 7 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>7 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-06-02" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-06-02">
+<article class="track" data-title="sheryl crow — all i wanna do"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Sheryl Crow — All I Wanna Do</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="TN3jwRLZQmw" data-title="Sheryl Crow — All I Wanna Do"><button class="preview" type="button" aria-label="Play Sheryl Crow — All I Wanna Do on this page"><img loading="lazy" src="https://i.ytimg.com/vi/TN3jwRLZQmw/hqdefault.jpg" alt="YouTube thumbnail for Sheryl Crow — All I Wanna Do"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=TN3jwRLZQmw" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="big audio dynamite — rush"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">Big Audio Dynamite — Rush</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Big+Audio+Dynamite+Rush+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Big Audio Dynamite — Rush"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="smash mouth — all star"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Smash Mouth — All Star</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="L_jWHffIx5E" data-title="Smash Mouth — All Star"><button class="preview" type="button" aria-label="Play Smash Mouth — All Star on this page"><img loading="lazy" src="https://i.ytimg.com/vi/L_jWHffIx5E/hqdefault.jpg" alt="YouTube thumbnail for Smash Mouth — All Star"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=L_jWHffIx5E" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="alanis morissette — you oughta know"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Alanis Morissette — You Oughta Know</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Alanis+Morissette+You+Oughta+Know+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Alanis Morissette — You Oughta Know"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="the dambuilders — shrine"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">The Dambuilders — Shrine</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Dambuilders+Shrine+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Dambuilders — Shrine"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="no doubt — bathwater"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">No Doubt — Bathwater</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="8k_g9hDeOic" data-title="No Doubt — Bathwater"><button class="preview" type="button" aria-label="Play No Doubt — Bathwater on this page"><img loading="lazy" src="https://i.ytimg.com/vi/8k_g9hDeOic/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Bathwater"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=8k_g9hDeOic" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="bjork — big time sensuality"><div class="track-top"><span class="track-num">Track 7</span><h3 class="track-name">Bjork — Big Time Sensuality</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="wHuXpWSNa-8" data-title="Bjork — Big Time Sensuality"><button class="preview" type="button" aria-label="Play Bjork — Big Time Sensuality on this page"><img loading="lazy" src="https://i.ytimg.com/vi/wHuXpWSNa-8/hqdefault.jpg" alt="YouTube thumbnail for Bjork — Big Time Sensuality"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=wHuXpWSNa-8" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-06-09" data-date="june 9, 2000"><div class="episode-head"><h2>June 9, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-06-09" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-06-09">
+<article class="track" data-title="hole — celebrity skin"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Hole — Celebrity Skin</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="O3dWBLoU--E" data-title="Hole — Celebrity Skin"><button class="preview" type="button" aria-label="Play Hole — Celebrity Skin on this page"><img loading="lazy" src="https://i.ytimg.com/vi/O3dWBLoU--E/hqdefault.jpg" alt="YouTube thumbnail for Hole — Celebrity Skin"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=O3dWBLoU--E" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the b-52&#x27;s — dry county"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">The B-52&#x27;s — Dry County</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+B-52%27s+Dry+County+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The B-52&#x27;s — Dry County"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="belly — feed the tree"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Belly — Feed the Tree</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="RQJjUbMrt8w" data-title="Belly — Feed the Tree"><button class="preview" type="button" aria-label="Play Belly — Feed the Tree on this page"><img loading="lazy" src="https://i.ytimg.com/vi/RQJjUbMrt8w/hqdefault.jpg" alt="YouTube thumbnail for Belly — Feed the Tree"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=RQJjUbMrt8w" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="r.e.m. — what&#x27;s the frequency, kenneth?"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">R.E.M. — What&#x27;s the Frequency, Kenneth?</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="EpcV5gQC1Z8" data-title="R.E.M. — What&#x27;s the Frequency, Kenneth?"><button class="preview" type="button" aria-label="Play R.E.M. — What&#x27;s the Frequency, Kenneth? on this page"><img loading="lazy" src="https://i.ytimg.com/vi/EpcV5gQC1Z8/hqdefault.jpg" alt="YouTube thumbnail for R.E.M. — What&#x27;s the Frequency, Kenneth?"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=EpcV5gQC1Z8" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="spin doctors — two princes"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Spin Doctors — Two Princes</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="wsdy_rct6uo" data-title="Spin Doctors — Two Princes"><button class="preview" type="button" aria-label="Play Spin Doctors — Two Princes on this page"><img loading="lazy" src="https://i.ytimg.com/vi/wsdy_rct6uo/hqdefault.jpg" alt="YouTube thumbnail for Spin Doctors — Two Princes"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=wsdy_rct6uo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="semisonic — closing time"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Semisonic — Closing Time</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="xGytDsqkQY8" data-title="Semisonic — Closing Time"><button class="preview" type="button" aria-label="Play Semisonic — Closing Time on this page"><img loading="lazy" src="https://i.ytimg.com/vi/xGytDsqkQY8/hqdefault.jpg" alt="YouTube thumbnail for Semisonic — Closing Time"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=xGytDsqkQY8" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-06-16" data-date="june 16, 2000"><div class="episode-head"><h2>June 16, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-06-16" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-06-16">
+<article class="track" data-title="sublime — santaria"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Sublime — Santaria</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="VNmhYLZxGMo" data-title="Sublime — Santaria"><button class="preview" type="button" aria-label="Play Sublime — Santaria on this page"><img loading="lazy" src="https://i.ytimg.com/vi/VNmhYLZxGMo/hqdefault.jpg" alt="YouTube thumbnail for Sublime — Santaria"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=VNmhYLZxGMo" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the presidents of the united states of america — dune buggy"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">The Presidents of the United States of America — Dune Buggy</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=The+Presidents+of+the+United+States+of+America+Dune+Buggy+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for The Presidents of the United States of America — Dune Buggy"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="r.e.m. — superman"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">R.E.M. — Superman</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=R.E.M.+Superman+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for R.E.M. — Superman"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="shakespear&#x27;s sister — i don&#x27;t care"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Shakespear&#x27;s Sister — I Don&#x27;t Care</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Shakespear%27s+Sister+I+Don%27t+Care+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Shakespear&#x27;s Sister — I Don&#x27;t Care"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="spin doctors — little miss can&#x27;t be wrong"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">Spin Doctors — Little Miss Can&#x27;t Be Wrong</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="cXWbMu4PtpE" data-title="Spin Doctors — Little Miss Can&#x27;t Be Wrong"><button class="preview" type="button" aria-label="Play Spin Doctors — Little Miss Can&#x27;t Be Wrong on this page"><img loading="lazy" src="https://i.ytimg.com/vi/cXWbMu4PtpE/hqdefault.jpg" alt="YouTube thumbnail for Spin Doctors — Little Miss Can&#x27;t Be Wrong"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=cXWbMu4PtpE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="edie brickell &amp; new bohemians — what i am"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Edie Brickell &amp; New Bohemians — What I Am</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="tDl3bdE3YQA" data-title="Edie Brickell &amp; New Bohemians — What I Am"><button class="preview" type="button" aria-label="Play Edie Brickell &amp; New Bohemians — What I Am on this page"><img loading="lazy" src="https://i.ytimg.com/vi/tDl3bdE3YQA/hqdefault.jpg" alt="YouTube thumbnail for Edie Brickell &amp; New Bohemians — What I Am"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=tDl3bdE3YQA" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-06-23" data-date="june 23, 2000"><div class="episode-head"><h2>June 23, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-06-23" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-06-23">
+<article class="track" data-title="suzanne vega — when heroes go down"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Suzanne Vega — When Heroes Go Down</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Suzanne+Vega+When+Heroes+Go+Down+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Suzanne Vega — When Heroes Go Down"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="xtc — king for a day"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">XTC — King for a Day</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=XTC+King+for+a+Day+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for XTC — King for a Day"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="they might be giants — pet name"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">They Might Be Giants — Pet Name</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+Pet+Name+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — Pet Name"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="matthew sweet — girlfriend"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Matthew Sweet — Girlfriend</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="n12OBlcHx9E" data-title="Matthew Sweet — Girlfriend"><button class="preview" type="button" aria-label="Play Matthew Sweet — Girlfriend on this page"><img loading="lazy" src="https://i.ytimg.com/vi/n12OBlcHx9E/hqdefault.jpg" alt="YouTube thumbnail for Matthew Sweet — Girlfriend"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=n12OBlcHx9E" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="r.e.m. — driver 8"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">R.E.M. — Driver 8</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=R.E.M.+Driver+8+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for R.E.M. — Driver 8"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="cranberries — linger"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">Cranberries — Linger</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="G6Kspj3OO0s" data-title="Cranberries — Linger"><button class="preview" type="button" aria-label="Play Cranberries — Linger on this page"><img loading="lazy" src="https://i.ytimg.com/vi/G6Kspj3OO0s/hqdefault.jpg" alt="YouTube thumbnail for Cranberries — Linger"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=G6Kspj3OO0s" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+<section class="episode" id="episode-2000-06-30" data-date="june 30, 2000"><div class="episode-head"><h2>June 30, 2000</h2><p>Radio Tiki • 6 songs listed in the show archive</p></div><div class="episode-inner">
+<div class="episode-actions"><strong>6 songs in broadcast order</strong><button type="button" class="toggle" data-toggle="2000-06-30" aria-expanded="true">Hide tracks</button></div><div class="tracks" id="tracks-2000-06-30">
+<article class="track" data-title="bjork — human behavior"><div class="track-top"><span class="track-num">Track 1</span><h3 class="track-name">Bjork — Human Behavior</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=Bjork+Human+Behavior+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for Bjork — Human Behavior"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="they might be giants — i palindrome i"><div class="track-top"><span class="track-num">Track 2</span><h3 class="track-name">They Might Be Giants — I Palindrome I</h3><span class="track-kind pending">Video to confirm</span></div>
+<div class="unverified"><p>No confidently identified YouTube video yet. The search below is prefilled with the exact artist and song.</p><div class="video-actions"><a href="https://www.youtube.com/results?search_query=They+Might+Be+Giants+I+Palindrome+I+music+video" target="_blank" rel="noopener noreferrer">Find on YouTube ↗</a></div><details class="paste"><summary>Have a YouTube link? Play it on this page</summary><div><input type="url" placeholder="Paste a YouTube watch or youtu.be link" aria-label="YouTube URL for They Might Be Giants — I Palindrome I"><button type="button" class="add-vid">Play here</button></div><p class="footnote">This plays the pasted video immediately, but does not change the published HTML file.</p><p class="error" aria-live="polite"></p></details></div>
+</article>
+<article class="track" data-title="lush — 500 (shake baby shake)"><div class="track-top"><span class="track-num">Track 3</span><h3 class="track-name">Lush — 500 (Shake Baby Shake)</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="ODdZ4QhnXJI" data-title="Lush — 500 (Shake Baby Shake)"><button class="preview" type="button" aria-label="Play Lush — 500 (Shake Baby Shake) on this page"><img loading="lazy" src="https://i.ytimg.com/vi/ODdZ4QhnXJI/hqdefault.jpg" alt="YouTube thumbnail for Lush — 500 (Shake Baby Shake)"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=ODdZ4QhnXJI" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="ned&#x27;s atomic dustbin — grey cell green"><div class="track-top"><span class="track-num">Track 4</span><h3 class="track-name">Ned&#x27;s Atomic Dustbin — Grey Cell Green</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="HqGzBqPnNBk" data-title="Ned&#x27;s Atomic Dustbin — Grey Cell Green"><button class="preview" type="button" aria-label="Play Ned&#x27;s Atomic Dustbin — Grey Cell Green on this page"><img loading="lazy" src="https://i.ytimg.com/vi/HqGzBqPnNBk/hqdefault.jpg" alt="YouTube thumbnail for Ned&#x27;s Atomic Dustbin — Grey Cell Green"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=HqGzBqPnNBk" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="the b-52&#x27;s — roam"><div class="track-top"><span class="track-num">Track 5</span><h3 class="track-name">The B-52&#x27;s — Roam</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="av8Lm8N1J3A" data-title="The B-52&#x27;s — Roam"><button class="preview" type="button" aria-label="Play The B-52&#x27;s — Roam on this page"><img loading="lazy" src="https://i.ytimg.com/vi/av8Lm8N1J3A/hqdefault.jpg" alt="YouTube thumbnail for The B-52&#x27;s — Roam"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=av8Lm8N1J3A" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+<article class="track" data-title="no doubt — sunday mornings"><div class="track-top"><span class="track-num">Track 6</span><h3 class="track-name">No Doubt — Sunday Mornings</h3><span class="track-kind">Embedded video</span></div>
+<div class="video-unit"><div class="video-slot" data-video="PiBX-ESFDF0" data-title="No Doubt — Sunday Mornings"><button class="preview" type="button" aria-label="Play No Doubt — Sunday Mornings on this page"><img loading="lazy" src="https://i.ytimg.com/vi/PiBX-ESFDF0/hqdefault.jpg" alt="YouTube thumbnail for No Doubt — Sunday Mornings"><span class="play-icon">▶ Play here</span></button></div><div class="video-actions"><a href="https://www.youtube.com/watch?v=PiBX-ESFDF0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div></div>
+</article>
+</div></div></section>
+</main><footer class="footer-note">Murden Cove • Independent fan archive • Radio Tiki song listings transcribed from the supplied past-show notes. Videos remain hosted by YouTube.</footer></div>
+<script>
+(function(){
+ const $=(s,e=document)=>e.querySelector(s);const $$=(s,e=document)=>Array.from(e.querySelectorAll(s));
+ const episodes=$$('.episode');
+ function setExpanded(ep,yes){const tracks=$('.tracks',ep);const btn=$('.toggle',ep);tracks.hidden=!yes;btn.textContent=yes?'Hide tracks':'Show tracks';btn.setAttribute('aria-expanded',String(yes));}
+ $$('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{let ep=btn.closest('.episode');setExpanded(ep,$('.tracks',ep).hidden)}));
+ $('#showAll').addEventListener('click',()=>episodes.forEach(e=>setExpanded(e,true)));
+ $('#hideAll').addEventListener('click',()=>episodes.forEach(e=>setExpanded(e,false)));
+ const search=$('#search');function filter(){const q=search.value.trim().toLowerCase();episodes.forEach(ep=>{let shown=0;$$('.track',ep).forEach(t=>{let ok=!q||t.dataset.title.includes(q)||ep.dataset.date.includes(q);t.hidden=!ok;if(ok)shown++});ep.hidden=!shown;if(q&&shown)setExpanded(ep,true);});}
+ search.addEventListener('input',filter);
+ $('#clearSearch').addEventListener('click',()=>{search.value='';filter()});
+ function makePlayer(id,title){const fr=document.createElement('iframe');fr.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?rel=0';fr.title=title;fr.loading='lazy';fr.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';fr.referrerPolicy='strict-origin-when-cross-origin';fr.allowFullscreen=true;return fr;}
+ document.addEventListener('click',function(e){const play=e.target.closest('.preview');if(play){const slot=play.closest('.video-slot');const player=makePlayer(slot.dataset.video,slot.dataset.title);slot.replaceChildren(player);return;}
+ const add=e.target.closest('.add-vid');if(!add)return;const details=add.closest('.paste');const url=$('input',details).value.trim();let id='';try{const u=new URL(url);if(['youtu.be','www.youtu.be'].includes(u.hostname))id=u.pathname.slice(1).split('/')[0];else if(['youtube.com','www.youtube.com','m.youtube.com','music.youtube.com','www.youtube-nocookie.com'].includes(u.hostname)){if(u.pathname.startsWith('/shorts/')||u.pathname.startsWith('/embed/'))id=u.pathname.split('/')[2];else id=u.searchParams.get('v')||'';}}catch(err){}if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){$('.error',details).textContent='Please paste a valid YouTube video link.';return;}const track=add.closest('.track');const name=$('.track-name',track).textContent;const wrap=document.createElement('div');wrap.className='video-unit';wrap.appendChild(makePlayer(id,name));wrap.appendChild(Object.assign(document.createElement('div'),{className:'video-actions'}));const link=document.createElement('a');link.href='https://www.youtube.com/watch?v='+id;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Watch on YouTube ↗';$('.video-actions',wrap).appendChild(link);$('.unverified',track).replaceWith(wrap);$('.track-kind',track).textContent='Playing selected video';$('.track-kind',track).classList.remove('pending');
+ });
+})();
+</script></body></html>
